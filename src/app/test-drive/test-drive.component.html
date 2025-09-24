@@ -1,0 +1,313 @@
+<!-- <div class="widget_back_icon_section" *ngIf="showIframe == true">
+    <a  > <img src="../../assets/images/icons/formkit_arrowleft.svg" class="widget_back_icon" /></a>
+</div> -->
+<button mat-button class="testdrive_startover_btn" *ngIf="showIframe == true" (click)="gotoform()"><span class="material-icons">
+        keyboard_arrow_left </span> Start Over </button>
+<div class="widget_testdrive_form_container" *ngIf="showthankyou == false && !showIframe && showForm">
+    <h3 class="widget_prequalify_text" style="text-align: center;">Take A Test Drive <br> {{display_vehicle_name}}</h3>
+    <div class="widget_image-slider" style="margin-left: auto;margin-right: auto; ">
+        <img src={{heroImage}} onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" alt="image" class="widget_slider_image">
+    </div>
+    <br>
+    <span>
+        <p class="testDriveSubHeading"> Enter your information to have a <strong>{{dealername}} </strong> Representative
+            reach out about your test drive </p>
+    </span>
+    <br>
+    <br>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="widget-row">
+            <div class="widget_inputs_container widget-col-md-4 widget-col-12 ">
+                <mat-label>First Name *</mat-label>
+                <mat-form-field class="widget_accesories_search" appearance="outline">
+                    <input type="text" formControlName="firstName" (keypress)="validateInput($event);" (keyup)="initialevent();" placeholder="Enter your first name" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" matInput>
+                    <mat-error *ngIf="submitted && f.firstName.errors && f.firstName.errors?.required" class="invalid-feedback">First Name is required</mat-error>
+                    <mat-error *ngIf="(f.firstName.errors?.pattern || f.firstName.errors?.atLeastOneAlphabet) &&  f.firstName.errors?.required != true" class="invalid-feedback">Enter a valid
+                        First
+                        Name
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class=" widget_inputs_container widget-col-md-4 widget-col-12">
+                <mat-label>Last Name *</mat-label>
+                <mat-form-field class="widget_accesories_search" appearance="outline">
+                    <input formControlName="lastName" (keypress)="validateInput($event);" (keyup)="initialevent();" placeholder="Enter your last name" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" matInput />
+                    <mat-error *ngIf="submitted && f.lastName.errors && f.lastName.errors?.required" class="invalid-feedback">Last Name is required</mat-error>
+                    <mat-error *ngIf="(f.lastName.errors?.pattern || f.lastName.errors?.atLeastOneAlphabet) &&  f.lastName.errors?.required != true" class="invalid-feedback">Enter a valid
+                        Last
+                        Name
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class=" widget_inputs_container widget-col-md-4 widget-col-12">
+                <mat-label>Date *</mat-label>
+                <mat-form-field class="widget_accesories_search testDrive__date" appearance="outline">
+                    <input formControlName="date" class="textbox-n" type="text" readonly placeholder="Select a Date" onfocus="(this.type='')" onblur="(this.type='text')" (dateChange)="initialevent(); dateChange($event)" id="date" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [matDatepickerFilter]="showroomTimingFilter" />
+                    <mat-error *ngIf="submitted && f.date.errors && f.date.errors?.required" class="invalid-feedback">Date is
+                        required</mat-error>
+
+                    <mat-datepicker-toggle matSuffix [for]="picker" (click)="shiftdigitaldate()"></mat-datepicker-toggle>
+                    <mat-datepicker panelClass="in-widget-datepicker" #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class=" widget_inputs_container widget-col-md-4 widget-col-12">
+                <mat-label>ZIP Code *</mat-label>
+                <mat-form-field class="widget_accesories_search" appearance="outline">
+                    <input formControlName="zipCode" maxlength="5" minlength="5" (keyup)="initialevent();" placeholder="ZIP Code" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.zipCode.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                    <mat-error *ngIf="submitted && f.zipCode.errors && f.zipCode.errors?.required" class="invalid-feedback">ZIP Code is required</mat-error>
+                    <mat-error *ngIf="f.zipCode.errors?.pattern || f.zipCode.errors?.maxlength || f.zipCode.errors?.minlength" class="invalid-feedback">
+                        Enter a valid ZIP Code </mat-error>
+                </mat-form-field>
+            </div>
+            <div class=" widget_inputs_container widget-col-md-4 widget-col-12">
+                <mat-label>Phone</mat-label>
+                <mat-form-field class="widget_accesories_search" appearance="outline">
+                    <input (keyup)="keyPress($event)" maxlength="14" formControlName="phonenumber" class="inputField" placeholder="Phone" [ngClass]="{ 'is-invalid': submitted && f.phonenumber.errors }" matInput />
+                      <mat-error *ngIf="submitted && f['phonenumber'].errors?.['required']" class="invalid-feedback">
+                            Enter a valid phone number.
+                        </mat-error>
+                        <mat-error class="invalid-feedback" *ngIf="f.phonenumber.hasError('exactLength')">
+                            Phone number must be 10 numbers
+                        </mat-error>
+                        <mat-error *ngIf="f['phonenumber']?.errors?.['invalidFirstDigit']" class="invalid-feedback">
+                            Phone number must not start with 0 or 1.
+                        </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class=" widget_inputs_container widget-col-md-4 widget-col-12">
+                <mat-label>Time *</mat-label>
+                <mat-form-field class="widget_accesories_search testdriveTime_select" appearance="outline">
+                    <mat-select formControlName="time" id="time" placeholder="Select a Time" (selectionChange)="grabtime($event.value,'time')">
+
+                        <mat-option>Select a Time</mat-option>
+                        <mat-option *ngFor="let time of times" value="{{time}}">
+                            {{time}} </mat-option>
+                    </mat-select>
+                    <mat-select-trigger>
+                        <mat-icon>schedule</mat-icon>
+                    </mat-select-trigger>
+                    <mat-error *ngIf="submitted && f.time.errors && f.time.errors?.required" class="invalid-feedback">Time is required</mat-error>
+                </mat-form-field>
+
+                <!-- <mat-form-field class="widget_accesories_search" appearance="outline"  >
+                         <input type="text" formControlName="time" class="textbox-n" id="time" class="inputField" readonly
+                            [ngClass]="{ 'is-invalid': submitted && f.time.errors }" placeholder="Select a Time" matInput />
+                        <div class="selectTime_dropdown" *ngIf="timeEnable == 1">
+                            <div class="selectTime_dropdown_list" *ngFor="let time of times" (click)="grabtime($event,'time')">
+                                {{time}}</div>
+                        </div>
+                        
+            
+                        <span class="testDrive__time__button" for="testDrive__time" (click)="enabletime(1)">
+                            <mat-icon>schedule</mat-icon>
+                        </span>
+                    </mat-form-field>                 -->
+            </div>
+            <div class=" widget_inputs_container widget-col-md-4 widget-col-12">
+                <mat-label>Email *</mat-label>
+                <mat-form-field class="widget_accesories_search" appearance="outline">
+                    <input formControlName="email" class="inputField" (keyup)="initialevent();" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" matInput />
+                    <mat-error *ngIf="submitted && f.email.errors && f.email.errors?.required" class="invalid-feedback">
+                        Enter a valid email
+                    </mat-error>
+                    <mat-error *ngIf="f.email.errors?.pattern" class="invalid-feedback">Enter a valid email
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="widget-row">
+            <div class="widget_inputs_container  widget-col-12 widget-pl-o" *ngIf="is_dealer_enable_dms == 'Y'">
+                <!-- Mat Checkbox for Upload Document -->
+                <mat-checkbox disableRipple formControlName="driver_license" [ngClass]="{ 'is-invalid': submitted }" (change)="onUploadDocument($event)">
+                    <label class="form-check-label">Upload Driver's License (Optional)</label>
+                </mat-checkbox>
+            </div>
+        </div>
+
+        <div class="widget-row">
+            <h3>Test Drive Location</h3>
+            <div class="widget-col-12 widget_inputs_container" [ngClass]="{'testDriveLocation': !isMobileScreen}">
+                <div class="form-check-widget-options" *ngIf="fnCustomizeTestDrive('P')">
+                    <input id="dealership" class="form-check-input" type="radio" value="dealership" [(ngModel)]="selectedLocationTest" (change)="atDealership()" name="location" formControlName="location">
+                    <label class="form-check-label" for="dealership">
+                        Pick up at Dealership
+                    </label>
+                </div>
+                <div class="form-check-widget-options" *ngIf="fnCustomizeTestDrive('H')">
+                    <input id="myhome" class="form-check-input" type="radio" [(ngModel)]="selectedLocationTest" value="myhome" (change)="homeAddress()" name="location" formControlName="location">
+                    <label class="form-check-label" for="myhome">
+                        My Home
+                    </label>
+                </div>
+
+                <div class="form-check-widget-options" *ngIf="fnCustomizeTestDrive('O')">
+                    <input id="otherlocation" class="form-check-input" type="radio" [(ngModel)]="selectedLocationTest" value="otherlocation" (change)="otherAddress()" name="location" formControlName="location">
+                    <label class="form-check-label" for="otherlocation">
+                        Other Location (No extra charge)
+                    </label>
+                </div>
+            </div>
+            <div *ngIf="submitted && myForm?.errors?.required">
+                <p class="text-danger">Test Drive Location is required</p>
+            </div>
+            <i *ngIf="selectedLocationTest === 'myhome' || selectedLocationTest === 'otherlocation'" class="miles italic">*{{showdeliveryText}}</i>
+            <div class="widget-col-12" *ngIf="showHomeAddress">
+                <div class="widget-row">
+                    <div class=" widget-col-md-4 widget-col-12 WidgetInputElement">
+                        <mat-label>Home Address *</mat-label>
+                        <mat-form-field class="widget_accesories_search" appearance="outline">
+                            <input type="text" formControlName="hlhomeAddress" placeholder="Home Address" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlhomeAddress.errors }" matInput (keyup)="populateaddress($event)" autocomplete=”off” />
+                            <div class="autoCompleteAddress" *ngIf="autoEnable == 1">
+                                <div class="autoCompleteAddress_list" *ngFor="let add of address">
+                                    <span (click)="selectaddress($event,'hlhomeAddress','hlcity','hlstate','hlzipcode')">{{add}}</span>
+                                </div>
+                            </div>
+                            <mat-error *ngIf="submitted && f.hlhomeAddress.errors && f.hlhomeAddress.errors?.required" class="invalid-feedback">Home Address is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class=" widget_inputs_container widget-col-md-4 widget-col-12 WidgetInputElement1">
+                        <mat-label>City *</mat-label>
+                        <mat-form-field class="widget_accesories_search" appearance="outline">
+                            <input type="text" formControlName="hlcity" placeholder="City" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlcity.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                            <mat-error *ngIf="submitted && f.hlcity.errors && f.hlcity.errors?.required" class="invalid-feedback">
+                                Enter a valid city</mat-error>
+
+                        </mat-form-field>
+                    </div>
+                    <div class=" widget_inputs_container widget-col-md-4 widget-col-12 WidgetInputElement1">
+                        <mat-label>State *</mat-label>
+                        <mat-form-field class="widget_accesories_search" appearance="outline">
+                            <input type="text" formControlName="hlstate" placeholder="State" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlstate.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                            <mat-error *ngIf="submitted && f.hlstate.errors && f.hlstate.errors?.required" class="invalid-feedback">
+                                Enter a valid state</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class=" widget_inputs_container widget-col-md-4 widget-col-12 WidgetInputElement1">
+                        <mat-label>ZIP Code </mat-label>
+                        <mat-form-field class="widget_accesories_search" appearance="outline">
+                            <input type="text" formControlName="hlzipcode" maxlength="5" placeholder="ZIP Code" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlzipcode.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                            <mat-error *ngIf="submitted && f.hlzipcode.errors && f.hlzipcode.errors?.required" class="invalid-feedback">
+                                Enter a valid ZIP Code </mat-error>
+
+                            <mat-error *ngIf="f.hlzipcode.errors?.pattern || f.hlzipcode.errors?.maxlength || f.hlzipcode.errors?.minlength" class="invalid-feedback">
+                                Invalid ZIP Code </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-col-12" *ngIf="showOtherAddress">
+                <div class="widget-row">
+                    <div class=" widget_inputs_container widget-col-md-4 widget-col-12 WidgetInputElement">
+                        <mat-label>Other Address *</mat-label>
+                        <mat-form-field class="widget_accesories_search" appearance="outline">
+                            <input type="text" formControlName="olhomeAddress" placeholder="Other Address" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olhomeAddress.errors }" matInput (keyup)="populateaddress($event)" autocomplete=”off” />
+                            <div class="autoCompleteAddress" *ngIf="autoEnable == 1">
+                                <div class="autoCompleteAddress_list" *ngFor="let add of address">
+                                    <span (click)="selectaddress($event,'olhomeAddress','olcity','olstate','olzipcode')">{{add}}</span>
+                                </div>
+                            </div>
+                            <mat-error *ngIf="submitted && f.olhomeAddress.errors && f.olhomeAddress.errors?.required" class="invalid-feedback">Other Address is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class=" widget_inputs_container widget-col-md-4 widget-col-12 WidgetInputElement1">
+                        <mat-label>City *</mat-label>
+                        <mat-form-field class="widget_accesories_search" appearance="outline">
+                            <input type="text" formControlName="olcity" placeholder="City" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olcity.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                            <mat-error *ngIf="submitted && f.olcity.errors && f.olcity.errors?.required" class="invalid-feedback">
+                                Enter a valid city</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class=" widget_inputs_container widget-col-md-4 widget-col-12 WidgetInputElement1">
+                        <mat-label>State *</mat-label>
+                        <mat-form-field class="widget_accesories_search" appearance="outline">
+                            <input type="text" formControlName="olstate" placeholder="State" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olstate.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                            <mat-error *ngIf="submitted && f.olstate.errors && f.olstate.errors?.required" class="invalid-feedback">
+                                Enter a valid state</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class=" widget_inputs_container widget-col-md-4 widget-col-12 WidgetInputElement1">
+                        <mat-label>ZIP Code </mat-label>
+                        <mat-form-field class="widget_accesories_search" appearance="outline">
+                            <input type="text" formControlName="olzipcode" maxlength="5" placeholder="ZIP Code" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olzipcode.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                            <mat-error *ngIf="submitted && f.olzipcode.errors && f.olzipcode.errors?.required" class="invalid-feedback">
+                                Enter a valid ZIP Code </mat-error>
+                            <mat-error *ngIf="f.olzipcode.errors?.pattern || f.olzipcode.errors?.maxlength || f.olzipcode.errors?.minlength" class="invalid-feedback">
+                                Invalid ZIP Code </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button mat-button class="testdrive_submit_btn">Proceed</button>
+    </form>
+</div>
+<div class="widget_testdrive_form_container" *ngIf="showIframe == true && upload_document == true ">
+    <div class="preloadImage" *ngIf="loaded == 0">
+        <img src="https://d1jougtdqdwy1v.cloudfront.net/images/ajax-loader.gif" alt="Pre loader Image" /> Please Wait
+    </div>
+
+    <iframe width="100%" id="dms_iframe" height="900" frameborder="0" *ngIf="showIframe == true && upload_document == true && loaded == 1" [src]="iFrameUrl"></iframe>
+</div>
+<div class="widget_testdrive_form_container" id="initialSuccess" *ngIf="initialSuccess == true && showthankyou == true && !showIframe "> 
+    <div class="test_drive_thankyou_container">
+        <div class="widget-row test_drive_thankyou_row_center">
+            <div class="widget-col-md-12">
+                <svg class="test_drive_thankyou_success_check" xmlns="http://www.w3.org/2000/svg" width="82" height="81" viewBox="0 0 82 81" fill="none">
+                    <path d="M41 74.25C50.3197 74.25 58.7572 70.4724 64.8648 64.3648C70.9724 58.2572 74.75 49.8197 74.75 40.5C74.75 31.1803 70.9724 22.7428 64.8648 16.6351C58.7572 10.5276 50.3197 6.75 41 6.75C31.6803 6.75 23.2428 10.5276 17.1351 16.6351C11.0276 22.7428 7.25 31.1803 7.25 40.5C7.25 49.8197 11.0276 58.2572 17.1351 64.3648C23.2428 70.4724 31.6803 74.25 41 74.25Z" fill="#3FBF68" />
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M59.469 27.2059C61.3435 29.0804 61.3435 32.1196 59.469 33.9941L39.219 54.2441C37.3445 56.1186 34.3053 56.1186 32.4308 54.2441L22.3058 44.1191C20.4313 42.2446 20.4313 39.2054 22.3058 37.3309C24.1803 35.4564 27.2195 35.4564 29.094 37.3309L35.8249 44.0618L52.6808 27.2059C54.5553 25.3314 57.5945 25.3314 59.469 27.2059Z" fill="white" />
+                </svg>
+                <h3 class="test_drive_thankyou_title">Thank You!</h3>
+                <p class="test_drive_thankyou_text">We’ve submitted your request for a test drive. We will be in contact with you soon and look forward to helping you become part of the {{make}} family.
+                <p class="test_drive_thankyou_text_bold">You will receive an email confirmation from a <strong>{{dealername}}</strong>  representative to confirmyour test drive.</p>
+            </div>
+        </div>
+        <div class="widget-row test_drive_thankyou_image_row">
+            <div class="widget-col-md-12">
+                <div class="widget-row">
+                    <div class="widget-col-md-5">
+                        <img style="float:left" src={{heroImage}} alt="vehicle image" onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" class="widget-img-fluid initial-lead-img desktop-none" style="margin-bottom: 10px;" />
+                    </div>
+                    <div class="widget-col-md-7 test_drive_thankyou_request_column">
+                        <h4 class="test_drive_thankyou_request_heading">Requested Date and Time</h4>
+                        <p class="test_drive_thankyou_request_model">Model : {{display_vehicle_name}}</p>
+                        <p class="test_drive_thankyou_request_date">Date : {{currentdate}}</p>
+                        <p class="test_drive_thankyou_request_time">Time : {{currenttime}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-row">
+            <div class="widget-col-md-12">
+                <button type="button" mat-button class="test_drive_thankyou_close_btn" (click)="closeTestDrive();closepop()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="widget-row">
+        <div class="widget-col-md-5">
+            <img style="float:left" src={{heroImage}} alt="vehicle image" onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" class="widget-img-fluid initial-lead-img desktop-none" style="margin-bottom: 10px;" />
+        </div>
+        <div class="widget-col-md-7">
+            <h6 class="widget-title1" style="text-align: start;">Thank you!</h6>
+            <p class="widget-text-left">We've submitted your request for a test drive. We will be in contact with you soon and
+                look forward to helping you became part of the jeep family.
+                <span class="strong_red">You will receive an email confirmation from a <strong>{{dealername}}</strong>
+                    representative to confirm
+                    your test drive.</span>
+            </p>
+            <h4 class="widget-title2" style="text-align: start;">Requested Date and Time:</h4>
+            <p class="date_time_title" style="text-align: start;">{{currentdate}} &#64; {{currenttime}}</p>
+            <button type="button" mat-button class="testDriveCloseBtn " (click)="closeTestDrive();closepop_thankyou()">
+                Close
+            </button>
+        </div>
+
+
+         <button mat-button="" class="testDriveCloseBtn " (click)="closepop()">Close</button>
+    </div> -->
+ 
+</div>

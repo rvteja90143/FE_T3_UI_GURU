@@ -1,0 +1,38 @@
+<div class="widget-row">
+    <div class="widget-col-12">
+        <div class="vehicleDtls_empty" *ngIf="detailspresent == 0">
+            <p>Detailed vehicle specs are currently not available, please call us for more information</p>
+            <div class="dealers_info--contact" (click)="adobe_sdg_event('call-vehicle-detail-empty')">
+                <mat-icon>call</mat-icon>
+                <a href="tel:{{phoneNumber}}" title="{{phoneNumber}}" target="_blank">{{phoneNumber}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="widget-row" *ngIf="detailspresent > 0">
+    <mat-tab-group class="widget-col-md-4 d-md-block vehicleDtls">
+        <mat-tab *ngFor="let item of specs; let i = index">
+            <ng-template mat-tab-label>
+                <div class="vehicleDtls_tab" (click)="changeStep(i,item['@attributes'].name)">
+                    <mat-icon class="">navigate_next</mat-icon>
+                    {{item['@attributes'].name}}
+                </div>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+    <mat-accordion class="widget-col-md-8 vd_exPanel">
+        <ng-container *ngFor="let item of specs; let i = index">
+            <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)">
+                <ng-template matExpansionPanelContent>
+                    <div id="" class="vd_specDetails" *ngFor="let subitem of item.line">
+                        <div class="vd_specRow">
+                            <div class="vd_specTitle">{{subitem['@attributes'].name}}</div>
+                            <div class="text-right vd_specVal">{{subitem.value}}</div>
+                        </div>
+                    </div>
+                </ng-template>
+            </mat-expansion-panel>
+        </ng-container>
+    </mat-accordion>
+</div>

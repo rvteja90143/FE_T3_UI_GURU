@@ -1,0 +1,296 @@
+<!-- <button mat-button mat-dialog-close class="mD__close" (click)="release_vin_lock()">&times;</button> -->
+<!-- <button mat-button mat-dialog-close type="button" class="mD__close" aria-label="Close"
+    (click)="release_vin_lock()">Close<span aria-hidden="true" class="mat-button-wrapper">&times;</span></button> -->
+<div class="reserve_popup" id="reservePopup">
+    <div class="widget-container">
+        <div class="widget-row">
+            <div class="widget-col-lg-6 mb-order-2 widget_pdl0" style="min-height: 300px;">
+                <div class="reserve-primary-contact" *ngIf="pageName == ''">
+                    Loading...
+                </div>
+
+                <!-- Reserve form starts -->
+                <div class="reserve-primary-contact" *ngIf="pageName == 'orderForm'">
+                    <h1 class="widget-title1 mobile-title"><span *ngIf="dealercode != '69418' ">Reserve</span><span *ngIf="dealercode == '69418' ">Order</span>
+                        My Vehicle</h1>
+                    <hr class="dk-hid mb-25">
+                    <h5 class="widget-title2 mb-hid"><span>Primary Contact</span></h5>
+                    <div class="initial_form">
+                        <form action="" class="inWidgetForm" [formGroup]="registerForm">
+                            <div class="widget-row">
+                                <div class="widget-col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>First Name</mat-label>
+                                        <input formControlName="firstName" (keypress)="validateInput($event);" (keyup)="saveReserveForm($event, 'firstName');" placeholder="First Name" class=" " [ngClass]="{ 'is-invalid': f.firstName.errors }" matInput (blur)="validateInputField('firstName')">
+                                        <mat-error *ngIf="f.firstName.errors && f.firstName.errors?.required" class="invalid-feedback">
+                                            First Name is required</mat-error>
+                                        <mat-error *ngIf="(f.firstName.errors?.pattern || f.firstName.errors?.atLeastOneAlphabet) &&  f.firstName.errors?.required != true" class="invalid-feedback">Enter a valid
+                                            First
+                                            Name
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="widget-col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Last Name</mat-label>
+                                        <input formControlName="lastName" (keypress)="validateInput($event);" (keyup)="saveReserveForm($event, 'lastName');" placeholder="Last Name" class=" " [ngClass]="{ 'is-invalid': f.lastName.errors }" matInput (blur)="validateInputField('lastName')" />
+                                        <mat-error *ngIf="f.lastName.errors && f.lastName.errors?.required" class="invalid-feedback">Last
+                                            Name is required</mat-error>
+                                        <mat-error *ngIf="(f.lastName.errors?.pattern || f.lastName.errors?.atLeastOneAlphabet) &&  f.lastName.errors?.required != true" class="invalid-feedback">Enter a valid
+                                            Last
+                                            Name
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="widget-row">
+                                <div class="widget-col-md-12">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Phone Number</mat-label>
+                                        <input [ngClass]="{ 'is-invalid': f['phonenumber'].errors }" maxlength="14" formControlName="phonenumber" class=" " (keyup)="saveReserveForm($event, 'phonenumber')" (blur)="validateInputField('phonenumber')" matInput>
+                                        <mat-error *ngIf="f['phonenumber'].errors && f['phonenumber'].errors?.['required']" class="invalid-feedback">
+                                            Phone number is required
+                                        </mat-error>
+                                        <mat-error class="invalid-feedback" *ngIf="f['phonenumber'].errors?.['pattern'] && f['phonenumber'].hasError('exactLength')
+                                    && !f['phonenumber'].hasError('invalidFirstDigit')">
+                                            Phone number must be 10 numbers</mat-error>
+                                        <mat-error *ngIf="f['phonenumber']?.errors?.['invalidFirstDigit']" class="invalid-feedback">
+                                            Phone number must not be start with 0 and 1</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="widget-row">
+                                <div class="widget-col-md-12">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Email</mat-label>
+                                        <input formControlName="email" (keyup)="saveReserveForm($event, 'email');" class=" " placeholder="Email" [ngClass]="{ 'is-invalid': f.email.errors }" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" matInput (blur)="validateInputField('email')" />
+                                        <mat-error *ngIf="f.email.errors && f.email.errors?.required" class="invalid-feedback">
+                                            Email is required
+                                        </mat-error>
+                                        <mat-error *ngIf="f.email.errors?.pattern" class="invalid-feedback">Email must be a valid
+                                            email address
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="widget-row">
+                                <div class="widget-col-md-12 reserve-terms-col">
+                                    <mat-checkbox disableRipple formControlName="acceptTerms" (change)="saveReserveForm($event, 'terms');" class="reserve-terms" matInput>
+                                        <a class="reserve-disclaimer-terms" href="{{reservationTermLink}}" target="_blank" (click)="interactionClick()">Terms and
+                                            Conditions</a>
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                            <div class="reserve-disclaimer" [innerHTML]="displayText">
+                                <!-- <p>{{displayPara}}</p> -->
+                                <a href="javascript:void(0)" *ngIf="isCollapsed" (click)="isCollapsed = false">See more</a>
+                                <a href="javascript:void(0)" *ngIf="!isCollapsed" (click)="isCollapsed = true">See less</a>
+
+                            </div>
+
+
+
+                            <div class="phone-disclaimer" *ngIf="dealercode === '60978'">
+                                <p>
+                                    By entering your phone number, you agree to be contested by
+                                    either phone call or text message. We will discuss your
+                                    questions that you have asked in this form, which includes
+                                    questions about vehicles we may have in our inventory. We may
+                                    also send reminders about upcoming service appointments, if any.
+                                    You may unsubscribe from these conversations at any time.
+                                </p>
+                            </div>
+                        </form>
+                        <h5 class="widget-title2"><span>Payment</span></h5>
+                        <div [ngClass]="{ 'disabled': !paypalButtonStatus }" class="reserveNowPayPalButton" #paypal></div>
+                        <div class="reserve-paypal-cards">
+                            <img src="https://d1jougtdqdwy1v.cloudfront.net/images/payment/paypal_cards.png" alt="Paypal Cards">
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Reserve form ends -->
+
+                <!-- Order confirmation starts -->
+                <form id="" class="orderConfirmSection" *ngIf="pageName == 'orderConfirmation'">
+                    <h3>Order Confirmation</h3>
+                    <div class="form-group">
+                        <label class="control-label">{{fullName}}</label>
+                        <address>
+                            <div id="">{{address_line_1}}</div>
+                            <div id="">{{admin_area_2}}, {{admin_area_1}} - {{postal_code}}</div>
+                            <div id="">{{country_code}}</div>
+                        </address>
+                    </div>
+                    <hr>
+                    <button mat-button class="btn btn-primary confirmBtn" (click)="confirmPayment()" id="">Confirm Payment
+                        &amp;
+                        Reservation</button>
+                </form>
+                <!-- Order confirmation ends -->
+
+                <!-- Error message starts -->
+                <div id="" class="refreshPage_error" *ngIf="pageName == 'orderError'">
+                    <span>Looks like you have refreshed the page.<br>Your payment may not have processed
+                        correctly. Please
+                        contact dealer to enquire about your reservation status.</span>
+
+                </div>
+                <!-- Error message ends -->
+
+                <div id="" class="refreshPage_error" *ngIf="pageName == 'orderNotPlaced'">
+                    <span>Order could not be placed!</span>
+
+                </div>
+
+                <!-- Error message starts -->
+                <div id="" class="refreshPage_error" *ngIf="pageName == 'orderErrorLock'">
+                    <span>{{reserveNowLockedMessage}}</span>
+                </div>
+                <!-- Error message ends -->
+
+                <!-- Thank you page success message starts -->
+                <div class="reserve-primary-contact" id="" *ngIf="pageName == 'orderSuccess'">
+                    <h1 class="thankyou-title">Thank You <span id="">{{firstname}} {{lastname}}</span></h1>
+                    <p><b>Your reservation is complete!</b> We will keep you updated about your <b>{{make}}
+                            {{display_vehicle_name}}</b> via email or you can always contact:</p>
+
+                    <div class="orderConfirmSection">
+                        <address>
+                            <div><b>{{dealerinfo.dealerName}}</b></div>
+                            <div>{{dealerinfo.dealerAddress1}}</div>
+                            <div *ngIf="dealerinfo.dealerAddress2 !=''">{{dealerinfo.dealerAddress2}}</div>
+                            <div>{{dealerinfo.dealerCity}}, {{dealerinfo.dealerState}} {{dealerinfo.dealerZip}}</div>
+                            <div>{{formatDealerPhone(dealerinfo.phoneNumber)}}</div>
+                        </address>
+                    </div>
+                    <h4>Transaction Number: <span id="">{{transactionId}}</span></h4>
+                    <p>An email receipt has been sent to you with this number as well.<br /><b>Please keep it for your
+                            reference.</b></p>
+                    <div *ngIf="private_Offer_Status == true">
+                        <h4 *ngIf="private_Offer_Status">Incentive Added</h4>
+                        <div class="e-shop" *ngIf="private_Offer_Status">
+                            <div class="widget-row">
+                                <div class="widget-col-md-5">
+                                    <div class="eshop-logo"><img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/e-shop-logo.svg" class="img-responsive" />
+                                        <div class="eshop-price">{{privateofferamount|currency:'USD':'symbol':'1.0-0'}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-col-md-7">
+                                    <div class="private_offer"><strong>Eshop Private Offer </strong></div>
+                                    <div class="certificate">Certificate Code: <span>{{certificatecode}}</span></div>
+                                    <div class="offer_Expires">Offer Expires: <span>{{privateofferexpire}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reserve-printpage-backbtn-desktop noPrint" style="margin-bottom: 150px;">
+                        <button class="widget-btn-print-page" (click)="printThisPage()">
+                            PRINT THIS PAGE
+                        </button>
+                        <button class="widget-btn-close-window" (click)="release_vin_lock(); closeReservePage();">
+                            <span>CLOSE WINDOW</span>
+                        </button>
+                    </div>
+                </div>
+                <h2 *ngIf="pageName == 'orderForm'" class="faq-title">Frequently Asked Questions</h2>
+                <mat-accordion class="faq-accordion" *ngIf="pageName == 'orderForm'">
+                    <mat-expansion-panel *ngFor="let faq of faqs;let indexOfelement=index;" [expanded]="indexOfelement==0" (opened)="callFAQheaderOpen(indexOfelement,faq[0])" (click)="faqHeader(faq[0], indexOfelement)" (closed)="callFAQheaderClose(indexOfelement,faq[0])">
+                        <mat-expansion-panel-header class="merkle_faqhead_{{indexOfelement}}">
+                            <mat-panel-title> {{faq[0]}}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        {{faq[1]}}
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+            <div class="widget-col-lg-5 reserve-product_price mobile-padding-30 mb-order-1">
+                <h1 *ngIf="makeurl !='ALFA'" class="widget-title3"> {{display_vehicle_name}}</h1>
+                <h1 *ngIf="makeurl =='ALFA'" class="widget-title3"><span>{{vehicle_model}}</span> {{makemodle}}</h1>
+                <div class="reserve-lead-img">
+                    <img alt="{{model}}" src="{{heroImage}}" onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'">
+                </div>
+                <div class="reserveorder-description">
+                    <h4 class="widget-title2">Order Description</h4>
+                    <hr>
+                    <div class="reserve-order-desc"><label>Model</label>
+                        <span>{{display_vehicle_name}}</span>
+                    </div>
+
+                    <div class="reserve-order-desc"><label>
+                            <div class="disclaimerTooltip__trigger">
+                                <span *ngIf="list_upfit_flag == 0">Base MSRP</span>
+                                <span *ngIf="list_upfit_flag == 1">List Price</span>
+                                <span class="disclaimerTooltip__star">*</span>
+                                <!-- <mat-icon [matTooltip]="msrp_disclaimer" matTooltipTouchGestures="on" matTooltipPosition="below"
+                            matTooltipShowDelay="500"
+                            matTooltipHideDelay="200"
+                            class="info-icon disclaimerInfo">info</mat-icon> -->
+                                <i *ngIf="msrp_disclaimer && msrp_disclaimer.trim() !== ''" class="disclaimer_bubble" attr.data-title="{{msrp_disclaimer}}">i</i>
+                            </div>
+                        </label>
+                        <span>{{msrp | currency:'USD':'symbol':'1.0-0'}}</span>
+                    </div>
+                    <div class="reserve-order-desc"> <label>Total Reservation Deposit</label>
+                        <span>{{reserveAmount | currency:'USD':'symbol':'1.0-0'}}</span>
+                    </div>
+                    <hr>
+                    <div class="reserve-order-desc"> <label><b>Total Payment Today</b></label>
+                        <span>{{reserveAmount | currency:'USD':'symbol':'1.0-0'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display:none;" *ngIf="pageName == 'orderSuccess'">
+    <div #forPrint>
+        <div style="font-family: arial;font-size: 16px;line-height: 1.3;">
+
+            <h1 class="thankyou-title" style="text-transform: uppercase;">THANK YOU <span id="" style="font-weight: normal;">{{firstname | uppercase}} {{lastname | uppercase}}</span></h1>
+            <p><b>Your reservation is complete!</b> We will keep you updated about your <b> {{make}}
+                    {{display_vehicle_name}}</b> via email or you can always contact:</p>
+            <address style="color: #15255D;font-style: normal;line-height: 1.2;">
+                <div style="font-weight: bold;">{{dealerinfo.dealerName}}</div>
+                <div>{{dealerinfo.dealerAddress1}}</div>
+                <div *ngIf="dealerinfo.dealerAddress2 !=''">{{dealerinfo.dealerAddress2}}</div>
+                <div>{{dealerinfo.dealerCity}}, {{dealerinfo.dealerState}} {{dealerinfo.dealerZip}}</div>
+                <div>{{formatDealerPhone(dealerinfo.phoneNumber)}}</div>
+            </address>
+            <h4 style="font-size: 18px;margin: 10px 0;">Transaction Number: <span id="">{{transactionId}}</span></h4>
+            <p style="margin-bottom: 40px;">An email receipt has been sent to you with this number as well. <b>Please
+                    keep it for your reference.</b></p>
+            <div>
+                <h1 style="text-align: center;margin-bottom: 10px;"> {{display_vehicle_name}}</h1>
+                <div>
+                    <img alt="{{model}}" src="{{heroImage}}" style="max-width: 70%;width: 100%;margin: 0 auto;display: block;">
+                </div>
+                <div style="">
+                    <h4 style="border-bottom: 1px solid #333;font-size: 20px;margin-bottom: 15px;padding-bottom: 5px;text-align: right;">
+                        Order Description</h4>
+                    <ul style="list-style: none;margin: 0;padding: 0;">
+                        <li style="margin-bottom: 5px;">
+                            <label>Model</label>
+                            <span style="float: right;">{{display_vehicle_name}}</span>
+                        </li>
+                        <li style="margin-bottom: 5px;">
+                            <label *ngIf="list_upfit_flag == 0">Base MSRP</label>
+                            <label *ngIf="list_upfit_flag == 1">List Price</label>
+                            <span style="float: right;">{{msrp | currency:'USD':'symbol':'1.0-0'}}</span>
+                        </li>
+                        <li style="margin-bottom: 5px;">
+                            <label>Total Reservation Deposit</label>
+                            <span style="float: right;">${{reserveAmount}}</span>
+                        </li>
+                        <li style="border-top: 1px solid #333;margin-top: 8px;padding-top: 10px;">
+                            <label><b>Total Payment Today</b></label>
+                            <span style="float: right;font-weight: bold;">${{reserveAmount}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

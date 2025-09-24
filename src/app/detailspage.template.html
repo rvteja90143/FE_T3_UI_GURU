@@ -1,0 +1,95 @@
+<!-- Mobile code start Here-->
+<app-payment-options />
+<div class="widget_vehicle_info_section">
+    <div class="widget-row">
+        <div class="widget-col-12 widget_vehicle_info_bar">
+            <div>
+                <p class="widget_vehicle_info_label">Vehicle Info</p>
+            </div>
+        </div>
+    </div>
+    <div class="widget-row">
+        <div class="widget-col-12">
+            <div class="widget_vehicle_info_details" *ngFor="let info of vehicleInfo ">
+                <p class="widget_vehicle_info_details_label">{{info.caption}}</p>
+                <p class="widget_vehicle_info_details_value">{{info.value}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="widget_vehicle_detailed_specs_section">
+    <div class="widget-row">
+        <div class="widget-col-12">
+            <div class="widget-accordion">
+                <div class="widget-accordion-item">
+                    <input type="checkbox" id="accordion-toggle-1" class="accordion-toggle">
+                    <label for="accordion-toggle-1" class="accordion-header" (click)="detailedSpecClick()">
+                        <span class="widget-accord-header-text">Detailed Specs</span>
+                        <svg *ngIf="!toggleDetailedSpecs" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="plus_icon">
+                            <g id="ic:baseline-plus">
+                                <path id="Vector" d="M19.7917 13.5396H13.5417V19.7896H11.4584V13.5396H5.20837V11.4563H11.4584V5.20625H13.5417V11.4563H19.7917V13.5396Z" fill="black" />
+                            </g>
+                        </svg>
+                        <svg *ngIf="toggleDetailedSpecs" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="minus_icon">
+                            <g id="ic:baseline-minus">
+                                <path id="Vector" d="M41.9587 13.5394H11.042V11.4561H41.9587V13.5394Z" fill="#0A0A0A" />
+                            </g>
+                        </svg>
+
+                    </label>
+
+                    <div class="accordion-content">
+                        <div class="widget-row">
+                            <div class="widget-col-12">
+                                <div class="vehicleDtls_empty" *ngIf="specs == ''">
+                                    <p>Detailed vehicle specs are currently not available, please call us for more information
+                                    </p>
+                                    <div class="dealers_info--contact" (click)="adobe_sdg_event('call-vehicle-detail-empty')">
+                                        <mat-icon>call</mat-icon>
+                                        <a href="tel:{{phoneNumber}}" title="{{phoneNumber}}" target="_blank">{{phoneNumber}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <mat-accordion>
+                            <ng-container *ngFor="let item of specs; let i = index">
+                                <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i); accordionExpanding.emit(true)" (closed)="accordionExpanding.emit(false)">
+                                    <mat-expansion-panel-header (click)="changeStep(i,item['@attributes'].name)">
+                                        {{item['@attributes'].name}}
+                                    </mat-expansion-panel-header>
+                                    <ng-template matExpansionPanelContent *ngIf="item.line !== undefined">
+                                        <div id="" class="vd_specDetails" *ngFor="let subitem of item.line">
+                                            <div class="content-row">
+                                                <div class="vehicle-info-label-text">{{subitem['@attributes'].name}}
+                                                </div>
+                                                <div class="vehicle-info-value">{{subitem.value}}</div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template matExpansionPanelContent *ngIf="item.line === undefined">
+                                        <div id="" class="vd_specDetails">
+                                            <div class="content-row">
+                                                <div class=" vd_specVal">{{item['@attributes'].name}} is not
+                                                    available</div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </mat-expansion-panel>
+                            </ng-container>
+                        </mat-accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- <div class="widget_bottom_payment_section">
+    <div class="widget-row">
+        <div class="widget-col-12 widget_bottom_payment_bar">
+            <p class="widget_payment_label">Payment</p>
+            <p class="widget_payment_value">$xxx/mo</p>
+        </div>
+    </div>
+</div>-->
+<!-- Mobile code end Here-->

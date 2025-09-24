@@ -1,0 +1,60 @@
+<div id="initialSuccess">
+    <div class="test_drive_thankyou_container">
+        <div class="widget-row test_drive_thankyou_row_center">
+            <div class="widget-col-md-12">
+                <svg class="test_drive_thankyou_success_check" xmlns="http://www.w3.org/2000/svg" width="82" height="81" viewBox="0 0 82 81" fill="none">
+                    <path d="M41 74.25C50.3197 74.25 58.7572 70.4724 64.8648 64.3648C70.9724 58.2572 74.75 49.8197 74.75 40.5C74.75 31.1803 70.9724 22.7428 64.8648 16.6351C58.7572 10.5276 50.3197 6.75 41 6.75C31.6803 6.75 23.2428 10.5276 17.1351 16.6351C11.0276 22.7428 7.25 31.1803 7.25 40.5C7.25 49.8197 11.0276 58.2572 17.1351 64.3648C23.2428 70.4724 31.6803 74.25 41 74.25Z" fill="#3FBF68" />
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M59.469 27.2059C61.3435 29.0804 61.3435 32.1196 59.469 33.9941L39.219 54.2441C37.3445 56.1186 34.3053 56.1186 32.4308 54.2441L22.3058 44.1191C20.4313 42.2446 20.4313 39.2054 22.3058 37.3309C24.1803 35.4564 27.2195 35.4564 29.094 37.3309L35.8249 44.0618L52.6808 27.2059C54.5553 25.3314 57.5945 25.3314 59.469 27.2059Z" fill="white" />
+                </svg>
+                <h3 class="test_drive_thankyou_title">Thank You!</h3>
+                <p class="test_drive_thankyou_text">We’ve submitted your request for a test drive. We will be in contact with you soon and look forward to helping you become part of the Jeep family.
+                <p class="test_drive_thankyou_text_bold">You will receive an email confirmation from a Garden City Jeep Chrysler Dodge, LLC representative to confirmyour test drive.</p>
+            </div>
+        </div>
+        <div class="widget-row test_drive_thankyou_image_row">
+            <div class="widget-col-md-12">
+                <div class="widget-row">
+                    <div class="widget-col-md-5">
+                        <img style="float:left" src={{heroImage}} alt="vehicle image" onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" class="widget-img-fluid initial-lead-img desktop-none" style="margin-bottom: 10px;" />
+                    </div>
+                    <div class="widget-col-md-7 test_drive_thankyou_request_column">
+                        <h4 class="test_drive_thankyou_request_heading">Requested Date and Time</h4>
+                        <p class="test_drive_thankyou_request_model">Model : {{display_vehicle_name}}</p>
+                        <p class="test_drive_thankyou_request_date">Date : {{currentdate}}</p>
+                        <p class="test_drive_thankyou_request_time">Time : {{currenttime}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-row">
+            <div class="widget-col-md-12 test_drive_thankyou_close_btn_col" style="padding: 0px !important;">
+                <button type="button" mat-button class="test_drive_thankyou_close_btn" (click)="closeTestDrive();closepop_thankyou()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="widget-row">
+        <div class="widget-col-md-5">
+            <img style="float:left" src={{heroImage}} alt="vehicle image" onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" class="widget-img-fluid initial-lead-img desktop-none" style="margin-bottom: 10px;" />
+        </div>
+        <div class="widget-col-md-7">
+            <h6 class="widget-title1" style="text-align: start;">Thank you!</h6>
+            <p class="widget-text-left">We've submitted your request for a test drive. We will be in contact with you soon and
+                look forward to helping you became part of the jeep family.
+                <span class="strong_red">You will receive an email confirmation from a <strong>{{dealername}}</strong>
+                    representative to confirm
+                    your test drive.</span>
+            </p>
+            <h4 class="widget-title2" style="text-align: start;">Requested Date and Time:</h4>
+            <p class="date_time_title" style="text-align: start;">{{currentdate}} &#64; {{currenttime}}</p>
+            <button type="button" mat-button class="testDriveCloseBtn " (click)="closeTestDrive();closepop_thankyou()">
+                Close
+            </button>
+        </div>
+
+
+         <button mat-button="" class="testDriveCloseBtn " (click)="closepop()">Close</button>
+    </div> -->
+</div>

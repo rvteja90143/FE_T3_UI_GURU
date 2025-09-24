@@ -1,0 +1,2313 @@
+/* Calculator Pop up starts VDP page*/
+.payOpt__annual {
+    .mdc-radio__background {
+        display: none !important;
+    }
+}
+
+.widget-payment-heading-row {
+    margin-bottom: 44px;
+}
+
+
+.payment-heading {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    margin-bottom: 20px;
+
+    @media (min-width:786px) {
+        margin-left: 13px;
+    }
+
+    .options-tab {
+        border: 1px #000;
+        background: #F3F3F3;
+        border-radius: 20px;
+        font-family: Montserrat;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        /* 111.111% */
+        width: 300px;
+        display: inline-block;
+        margin-left: 170px;
+
+        span {
+            width: calc(50% - 3px);
+            display: inline-block;
+            text-align: center;
+            padding: 8px 0px;
+            color: #000;
+
+            .active {
+                color: #FFF;
+                background: #000;
+                border-radius: 20px;
+            }
+        }
+    }
+}
+
+.payOpt__bill__listprice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+    .calc-label {
+        font-size: 12px;
+        color: #676767;
+        position: absolute;
+        left: 16px;
+        top: 8px;
+    }
+
+    .dropdown-calc {
+        width: 90%;
+        border: 1px solid #000000;
+        padding: 24px 16px 12px 12px;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+}
+
+.sub-heading {
+    color: #565656;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.right-gap {
+    padding-right: 145px;
+}
+
+.CalculatorBtns {
+    border-radius: 5px;
+    // border: 1px solid #000;
+    width: 175px;
+    height: 65px;
+    padding: 15px 16px;
+    color: #000;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
+    display: inline-block;
+    margin-right: 12px;
+
+    .active {
+        color: #ffffff;
+        background: #000000;
+    }
+}
+
+.btns-container div:last-child {
+    margin: 0;
+}
+
+.price-breakdown {
+    color: #565656;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    margin-top: 12px;
+    padding-bottom: 29px;
+
+
+    span {
+        color: #000000;
+
+    }
+}
+
+.widget_price_calculations_section {
+    border-bottom: 3px solid #000000;
+    padding-bottom: 10px;
+}
+
+.widget-form-check-input:checked {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.estText {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 21px 0px 12px 0px;
+
+    span {
+        float: right;
+    }
+}
+
+.exclude-text {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.total-price-container {
+    border: 1px solid #CBCBCB;
+    height: 95px;
+    width: 100%;
+    padding: 20px 29px;
+
+    .total-price {
+        color: #000;
+        font-family: Montserrat;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+
+        span {
+            font-size: 20px;
+        }
+    }
+
+    .pricedetails {
+        color: #000;
+        font-family: Montserrat;
+        font-size: 16px;
+        line-height: 20px;
+        font-style: normal;
+        font-weight: 400;
+    }
+}
+
+/* Calculator Pop up Ends*/
+/*Variables*/
+$color-white: #ffffff;
+$color-black: #000000;
+$color-grey: #414141;
+$color-primary: #F2B54A;
+
+$font-rr: 'Roboto', sans-serif;
+$font-rift: rift-soft, sans-serif;
+
+/*Variables*/
+$color-white: #ffffff;
+$color-black: #000000;
+$color-grey: #414141;
+$color-primary: #F2B54A;
+
+$font-rr: 'Roboto', sans-serif;
+$font-rift: rift-soft, sans-serif;
+
+
+.discountbold {
+    color: #F2B54A !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-underline::before {
+    display: none !important;
+}
+
+.mat-form-field-underline {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+.payment-input-fields {
+    width: 100%;
+
+
+    .mat-form-field {
+        .mat-form-field-flex {
+            width: 100%;
+            float: right;
+            border: 0 !important;
+
+            .mat-form-field-infix {
+                display: flex;
+                flex-direction: row-reverse;
+                min-width: 200px !important;
+
+                .mat-input-element {
+                    border: 1px solid #707070 !important;
+                    border-radius: 0 !important;
+                    width: 30% !important;
+                    font-size: 12px !important;
+                    padding-right: 5px !important;
+                }
+
+                .mat-form-field-label-wrapper {
+                    width: 70%;
+                    display: block !important;
+                    overflow: visible !important;
+
+                    .mat-form-field-label {
+                        padding: 0 !important;
+                        transform: translateY(0px);
+                    }
+                }
+            }
+
+        }
+    }
+
+}
+
+.paymentTab {
+
+
+    .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination,
+    .mat-ink-bar {
+        display: none !important;
+    }
+
+    .mat-tab-label {
+        background: #f6f6f6 !important;
+        border: 1px solid $color-primary !important;
+        border-radius: 4px 4px 0 0 !important;
+        text-transform: uppercase !important;
+        height: 50px !important;
+        opacity: 1 !important;
+        padding: 5px 8px 3px !important;
+        min-width: 0 !important;
+
+        .mat-tab-label-content {
+            display: block !important;
+            font-family: $font-rift !important;
+            font-weight: 500 !important;
+            font-size: 18px !important;
+
+            .paymentTab_months {
+                display: none !important;
+                line-height: 8px !important;
+
+                span {
+                    font-size: 9px !important;
+                    text-transform: none;
+
+                    &+span {
+                        border-left: 1px solid #fff !important;
+                        margin-left: 3px !important;
+                        padding-left: 3px !important;
+                    }
+                }
+            }
+        }
+
+        .mat-tab-label-active {
+            background: $color-primary !important;
+
+            .mat-tab-label-content {
+                color: $color-white !important;
+
+                span {
+                    color: #fff !important;
+                }
+
+                .paymentTab_months {
+                    display: block !important;
+                }
+            }
+        }
+    }
+
+    .mat-tab-body-wrapper {
+        background: #f6f6f6 !important;
+        color: $color-grey !important;
+        height: auto !important;
+    }
+
+    .mat-tab-body-content {
+        overflow: hidden !important;
+    }
+}
+
+// .mat-select-placeholder {
+//     position: absolute;
+//     top: -7px;
+//     left: 4px;
+// }
+.widget_mb_20 {
+    margin-bottom: 20px;
+}
+
+.payOpt {
+    &__head {
+        background: $color-primary !important;
+        color: $color-white !important;
+        padding: 5px 10px !important;
+    }
+
+    &__modelname {
+        color: #fff !important;
+        font-family: $font-rift !important;
+        font-weight: 500 !important;
+        font-size: 19px !important;
+        line-height: 1.1 !important;
+        margin-bottom: 0 !important;
+    }
+
+    &__vin {
+        letter-spacing: -1px !important;
+        color: #fff !important;
+        font-size: 11px !important;
+    }
+
+    &__content {
+        overflow: hidden auto !important;
+        padding: 10px !important;
+
+        &--lease {
+            .payOpt__leaseFor__price .disclaimer_bubble:before {
+                left: -85px !important;
+            }
+        }
+
+        &--finance {
+            .payOpt__leaseFor__price .disclaimer_bubble:before {
+                left: -70px !important;
+            }
+        }
+    }
+
+    &__title {
+        position: relative !important;
+
+        span {
+            background: #f6f6f6 !important;
+            color: $color-primary !important;
+            font-family: $font-rift !important;
+            font-size: 19px !important;
+            font-weight: 500 !important;
+            padding-right: 10px !important;
+            position: relative !important;
+            text-transform: uppercase !important;
+        }
+
+        &:before {
+            border-bottom: 1px solid #777 !important;
+            content: "" !important;
+            position: absolute !important;
+            top: 50% !important;
+            width: 100% !important;
+        }
+    }
+
+    &__form label {
+        margin-bottom: 0 !important;
+    }
+
+    &__bill {
+        align-items: center !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        font-size: 12px !important;
+        line-height: 16px !important;
+        margin-top: 10px !important;
+
+
+        &__label--msrp .disclaimer_bubble {
+            &:before {
+                bottom: auto !important;
+                top: 22px !important;
+            }
+
+            &:after {
+                border-bottom-color: #f7f7f7 !important;
+                border-top-color: transparent !important;
+                bottom: -6px !important;
+            }
+        }
+
+        .payOpt__bill__listprice {
+            align-items: flex-start !important;
+
+            .payOpt__bill__label {
+                display: flex !important;
+                padding-right: 10px !important;
+                text-decoration: none !important;
+                width: 100% !important;
+            }
+
+            .material-icons {
+                top: -3px !important;
+            }
+        }
+
+        .payOpt__bill__adjusted {
+            align-items: flex-start !important;
+            width: 100% !important;
+
+            .payOpt__bill__label {
+                h6 {
+                    font-weight: 700 !important;
+                    font-size: 12px !important;
+                    margin-bottom: 0 !important;
+                }
+            }
+        }
+
+        .payOpt__bill__due {
+            align-items: flex-start !important;
+
+            .payOpt__bill__label {
+                text-decoration: none !important;
+
+                span {
+                    text-decoration: underline !important;
+
+                    +span {
+                        display: block !important;
+                        text-decoration: none !important;
+                    }
+                }
+            }
+
+            .material-icons {
+                top: -3px !important;
+            }
+        }
+
+        &__label {
+            margin-bottom: 0 !important;
+            position: relative !important;
+
+            .payOpt__bill__label--unavailable {
+                font-size: 13px !important;
+                line-height: 1.2 !important;
+            }
+
+            span {
+                display: inline-block !important;
+            }
+        }
+
+        &__includes {
+            color: #909090 !important;
+            font-size: 10px !important;
+            line-height: 1.2 !important;
+            margin-left: 8px !important;
+            max-width: calc(100% - 70px) !important;
+        }
+
+        &__value {
+            font-weight: 400 !important;
+            font-size: 12px !important;
+            margin-bottom: 0 !important;
+
+            &__minus {
+                color: #347F49 !important;
+                font-size: 14px !important;
+            }
+        }
+
+        &__value input {
+            height: 28px !important;
+            max-width: 75px !important;
+            text-align: right !important;
+        }
+
+        &__selectrow {
+
+            .form-group {
+                margin-bottom: 0 !important;
+
+                label {
+                    font-size: 12px !important;
+                    font-weight: 500 !important;
+                    margin-bottom: 2px !important;
+                    position: relative !important;
+
+                    .disclaimer_bubble {
+                        margin-left: 0 !important;
+                    }
+                }
+
+                .term-duration-finance,
+                .choose-credit {
+                    height: 45px !important;
+                }
+
+            }
+
+            .form-control {
+                padding: 0 3px !important;
+                font-size: 12px !important;
+
+                &:focus {
+                    border-color: #ced4da !important;
+                    box-shadow: none !important;
+                }
+            }
+        }
+
+        span.small-font {
+            font-size: 0.01px !important;
+        }
+    }
+
+    &__annual {
+        &__label {
+            font-size: 12px !important;
+            line-height: 1.4 !important;
+        }
+
+        &__rate {
+            font-weight: 500 !important;
+            font-size: 12px !important;
+            position: relative !important;
+        }
+    }
+
+    &__betterEstimate.btn.btn-primary {
+        background-color: #3F834E !important;
+        height: 32px !important;
+        padding: 6px 6px 3px !important;
+        position: relative !important;
+        text-align: left !important;
+        white-space: nowrap !important;
+        width: calc(100% - 13px) !important;
+
+        &:before {
+            border: 16px solid transparent !important;
+            border-left-color: #3F834E !important;
+            content: "" !important;
+            left: 100% !important;
+            top: 0 !important;
+            transform: none !important;
+            position: absolute !important;
+        }
+
+        &:focus,
+        &:active,
+        &:focus:active {
+            background-color: #51AA65 !important;
+
+            &:before {
+                border-left-color: #51AA65 !important;
+            }
+        }
+
+        span {
+            color: #fff !important;
+            font-weight: normal !important;
+            margin-right: 8px !important;
+            margin-top: -2px !important;
+            vertical-align: middle !important;
+        }
+    }
+
+    &__viewOffer.btn.btn-primary {
+        font-size: 10px !important;
+        height: 26px !important;
+        padding: 5px 8px !important;
+        position: relative !important;
+        margin-bottom: 10px !important;
+        margin-top: 10px !important;
+        text-transform: uppercase !important;
+        white-space: nowrap !important;
+
+        &::before {
+            border: 13px solid transparent !important;
+            border-left-color: #F2B54A !important;
+            content: "" !important;
+            left: 100% !important;
+            top: 0 !important;
+            transform: none !important;
+            position: absolute !important;
+        }
+    }
+
+    &__creditLink.btn.btn-primary {
+        background-color: #666 !important;
+        color: #fff !important;
+        font-size: 12px !important;
+        line-height: 1.1 !important;
+        height: 34px !important;
+        margin-top: 5px !important;
+        padding: 5px 8px 3px 10px !important;
+        position: relative !important;
+        text-align: left !important;
+        width: calc(100% - 15px);
+        white-space: normal !important;
+
+        &:focus,
+        &:active,
+        &:focus:active {
+            background-color: #666 !important;
+        }
+
+        &::before {
+            border: 17px solid transparent !important;
+            border-left-color: #666 !important;
+            content: "" !important;
+            left: 100% !important;
+            top: 0 !important;
+            transform: none !important;
+            position: absolute !important;
+        }
+    }
+
+    &__leaseFor {
+        margin-bottom: 10px !important;
+
+        &__label {
+            font-weight: 400 !important;
+            margin-bottom: 0 !important;
+            margin-right: 10px !important;
+            text-transform: uppercase !important;
+        }
+
+        &__price {
+            color: $color-primary !important;
+            font-weight: 400 !important;
+            font-size: 30px !important;
+            line-height: 1.4 !important;
+            margin-bottom: 0 !important;
+            position: relative !important;
+
+            .disclaimer_bubble {
+                color: #000 !important;
+                font-weight: 800;
+                margin-left: 3px !important;
+
+                &:before {
+                    bottom: 28px !important;
+                }
+
+                &:after {
+                    bottom: 19px !important;
+                }
+            }
+        }
+
+        &__months {
+            display: block !important;
+            font-size: 12px !important;
+        }
+    }
+
+    &__disclaimer {
+        p {
+            color: #707070 !important;
+            font-size: 11px !important;
+            line-height: 14px !important;
+            margin-bottom: 8px !important;
+            text-align: justify !important;
+        }
+
+        .disclaimer_bubble {
+            color: #000;
+            font-weight: 800;
+            position: relative;
+
+            &:before {
+                left: -142px !important;
+            }
+        }
+    }
+}
+
+.payOpt__bill__label {
+    color: #565656;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 20px;
+    text-decoration: none !important;
+}
+
+.payOpt__bill__value {
+    color: #565656;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 700 !important;
+    line-height: 20px;
+    text-decoration: none !important;
+}
+
+.payOpt__bill--dropdown {
+    cursor: pointer !important;
+    //padding-right: 20px !important;
+    position: relative !important;
+    width: 100% !important;
+
+    .payOpt__bill__label {
+        cursor: pointer !important;
+        color: #565656;
+        font-size: 14px;
+        font-family: Montserrat;
+        font-weight: 400 !important;
+        line-height: 20px;
+        text-decoration: none !important;
+    }
+
+    .payOpt__bill__value {
+        cursor: pointer !important;
+        color: #565656;
+        font-size: 14px;
+        font-family: Montserrat;
+        font-weight: 700 !important;
+        line-height: 20px;
+        text-decoration: none !important;
+    }
+
+    .payOpt__bill__label {
+        color: #565656;
+        font-size: 14px;
+        font-family: Montserrat;
+        font-weight: 400;
+        line-height: 20px;
+        text-decoration: none !important;
+        width: 100% !important;
+
+        .disclaimer_bubble.monthly_taxes:before {
+            left: 0px !important;
+        }
+    }
+}
+
+.payOpt__bill--dropdown .material-icons {
+    color: #F2B54A !important;
+    //position: absolute !important;
+    // right: -6px !important;
+    width: 20px !important;
+}
+
+.payOpt__bill--dropdown--open .down_arrow_svg {
+    transform: rotate(180deg);
+}
+
+.payOpt__bill__taxesfee {
+    align-items: flex-start !important;
+    //margin-bottom: 20px !important;
+
+    .payOpt__bill__label {
+        text-decoration: none !important;
+
+        span {
+            margin-right: 2px !important;
+        }
+    }
+}
+
+.payOpt__dropContent_wrap {
+    margin: 0 -5px 10px !important;
+    position: relative !important;
+    transition: all 0.3s linear !important;
+
+    &.incentiveLease,
+    &.incentiveFinance,
+    &.incentiveCash {
+        .payOpt__checkItem__content .customCheckbox::before {
+            background: url(https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/cash-bag.png) !important;
+            background-size: 100% !important;
+            border: none !important;
+            height: 20px !important;
+            top: -4px !important;
+            width: 20px !important;
+            content: "" !important;
+            left: 0 !important;
+            position: absolute !important;
+        }
+    }
+}
+
+.payOpt__dropContent_wrap.closeIt {
+    height: 0 !important;
+    margin-bottom: 0 !important;
+    overflow: hidden !important;
+}
+
+.payOpt__dropContent {
+    background: #f1f1f1 !important;
+    display: block !important;
+    padding: 15px 5px !important;
+    font-size: 12px !important;
+
+    &_due .payOpt__dropContent {
+        // padding-right: 30px !important;
+    }
+
+    &.hideThis {
+        display: none !important;
+    }
+
+    .Checkbox-heading {
+        padding-left: 25px !important;
+        padding-bottom: 5px;
+    }
+}
+
+.payOpt__checkItem+.payOpt__checkItem {
+    margin-top: 10px !important;
+}
+
+.payOpt__checkItem__title {
+    color: #000 !important;
+    font-size: 12px !important;
+    margin-bottom: 4px !important;
+    padding-left: 24px !important;
+}
+
+
+.payOpt__checkItem__content .customCheckbox {
+    font-size: 12px !important;
+    padding-left: 24px !important;
+    line-height: 1.4 !important;
+    width: 70% !important;
+    display: block !important;
+
+    &_name {
+        word-break: break-word;
+        text-transform: capitalize;
+        font-weight: normal !important;
+        max-width: 85%;
+    }
+
+    &.noCheckbox {
+        cursor: auto !important;
+
+        .customCheckbox_name {
+
+            &:before,
+            &:after {
+                display: none !important;
+            }
+        }
+    }
+}
+
+.payOpt__checkItem__content {
+    display: flex !important;
+    justify-content: space-between !important;
+
+    // .customCheckbox {
+    //     display: flex !important;
+    // }
+
+    +.payOpt__checkItem__content {
+        margin-top: 4px !important;
+    }
+
+    &.hideThis {
+        display: none !important;
+    }
+}
+
+.payOpt__checkItem__content .disclaimer_bubble {
+    cursor: pointer !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    height: 16px !important;
+    line-height: 1.2 !important;
+    margin: 0 4px !important;
+    // position: absolute !important;
+    // right: 56px !important;
+    width: 16px !important;
+    display: inline-block !important;
+    color: #000;
+    font-weight: 800;
+}
+
+.payOpt__checkItem__content .disclaimer_bubble:before {
+    left: auto !important;
+    right: -90px !important;
+}
+
+.payOpt__checkItem__content .disclaimer_bubble:hover:before,
+.payOpt__checkItem__content .disclaimer_bubble:hover:after {
+    display: block !important;
+}
+
+.payOpt__checkItem__content .disclaimer_bubble:after {
+    content: '' !important;
+    display: none !important;
+    position: absolute !important;
+    height: 10px !important;
+    width: 10px !important;
+    border: 5px solid transparent !important;
+    border-top-color: #f7f7f7 !important;
+    bottom: 11px !important;
+    right: 4px !important;
+}
+
+.payOpt__checkItem__content .customCheckbox_name_sub {
+    display: block !important;
+    font-size: 10px !important;
+}
+
+.payOpt__checkItem__content .customCheckbox_name_sub:before {
+    display: none !important;
+}
+
+.payOpt__checkItem__content .customCheckbox_name.hideIncentive:before {
+    display: none !important;
+}
+
+.payOpt__checkItem__content .customCheckbox_name:before {
+    background: #e9e9e9 !important;
+    height: 16px !important;
+    width: 16px !important;
+
+}
+
+.payOpt__checkItem__content .customCheckbox_name:after {
+    font-size: 14px !important;
+}
+
+.payOpt__dropContent_discount,
+.payOpt__dropContent_upfit,
+.payOpt__dropContent_due,
+.payOpt__dropContent_taxfee {
+    .payOpt__checkItem__content .customCheckbox {
+        cursor: default !important;
+        padding-left: 20px !important;
+        // display: flex !important;
+        // justify-content: flex-start;
+
+        &_name:before {
+            background: url('https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/cash-bag.png') !important;
+            background-size: 100% !important;
+            border: none !important;
+            height: 20px !important;
+            top: -3px !important;
+            width: 20px !important;
+        }
+
+        &_name:after {
+            display: none !important;
+        }
+    }
+}
+
+.payOpt__dropContent_upfit {
+    .payOpt__checkItem__title {
+        display: flex !important;
+        justify-content: space-between !important;
+
+        span {
+            color: #000 !important;
+            font-weight: 700 !important;
+        }
+    }
+
+    .payOpt__checkItem__content {
+        +.payOpt__checkItem__content {
+            margin-top: 5px !important;
+        }
+    }
+}
+
+.payOpt__dropContent_taxfee {
+    >.payOpt__dropContent {
+        padding-bottom: 5px !important;
+
+        .payOpt__bill--dropdown {
+            margin-bottom: 5px !important;
+        }
+
+        .payOpt__bill__label {
+
+            span {
+                margin-right: 2px !important;
+                text-decoration: underline !important;
+            }
+        }
+
+        .payOpt__dropContent {
+            padding-right: 30px !important;
+
+            .disclaimer_bubble {
+                // right: 91px !important;
+
+                &:before {
+                    right: -60px !important;
+                }
+            }
+
+            &_wrap {
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+}
+
+.lease-total-price {
+    border: 1px #CBCBCB solid;
+    border-radius: 0px !important;
+    background-color: #FFFFFF;
+    padding: 23px 29px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+.widget_calc_final_price {
+    color: black;
+    font-size: 26px;
+    font-family: Montserrat;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.widget_calc_final_sub {
+    display: block;
+    color: black;
+    font-size: 16px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 20px;
+    word-wrap: break-word
+}
+
+.customCheckboxStrike {
+    text-decoration: line-through !important;
+    color: #ff0000 !important;
+}
+
+.payOpt__checkItem__price {
+    font: {
+        size: 12px !important;
+        weight: 400 !important;
+    }
+
+    min-width:20% !important;
+    text-align: right !important;
+}
+
+.zipcode {
+    &-edit {
+        height: 0 !important;
+
+        span {
+            font-size: 12px !important;
+        }
+
+        >span {
+            position: relative !important;
+            top: -25px !important;
+            z-index: 1 !important;
+        }
+
+        .material-icons {
+            cursor: pointer !important;
+            font-size: 14px !important;
+            margin-left: 10px !important;
+            position: relative !important;
+            top: 2px !important;
+        }
+    }
+
+    &-dummy {
+        visibility: hidden !important;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 575px) {
+    .paymentTab .mat-tab-label .mat-tab-label-content {
+        font-size: 16px !important;
+    }
+
+    .payOpt__content--lease .payOpt__leaseFor__price .disclaimer_bubble:before {
+        left: -85px !important;
+    }
+
+    body .inWidget .payOpt__content--finace .payOpt__leaseFor__price .disclaimer_bubble:before {
+        left: -75px !important;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+
+    .payOpt__bill__includes {
+        font-size: 11px !important;
+        max-width: calc(100% - 70px) !important;
+    }
+
+}
+
+
+
+.mat-tab-body-wrapper {
+    width: 100%;
+}
+
+.showmore {
+    color: #000000 !important;
+    display: none !important;
+    font-size: 12px !important;
+    font-weight: 400;
+    margin-top: -10px !important;
+    text-decoration: underline !important;
+    float: right !important;
+    cursor: pointer !important;
+    margin-bottom: 50px;
+}
+
+.lease-wrapper {
+    border: 2px solid #831e2e !important;
+    border-radius: 20px 20px 0 0 !important;
+    min-height: 930px !important;
+    cursor: pointer !important;
+    margin-top: 1rem !important;
+    width: 95% !important;
+    margin-bottom: 1rem !important;
+
+    .disclaimer_bubble {
+        &::before {
+            width: 195px !important;
+            color: #000 !important;
+            max-width: max-content;
+        }
+    }
+
+    @media screen and (min-width:1100px) and (max-width: 1600px) {
+        min-height: 900px !important;
+    }
+
+    &.last-child {
+        padding-bottom: 8rem !important;
+    }
+
+    @media screen and (min-width: 769px) {
+        margin-top: 0;
+        width: 100%;
+    }
+
+    @media screen and (min-width:900px) {
+        min-height: 56rem;
+        height: 95.8% !important;
+        padding-bottom: 80px !important;
+    }
+
+    .disclaimerTooltip {
+        width: 195px !important;
+    }
+
+    .payactive-icon {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        right: 5px;
+        top: -3px;
+
+        @media screen and (min-width: 769px) {
+            right: -3px;
+        }
+    }
+
+    .payment-type-info {
+        background-color: #831e2e !important;
+        color: #fff !important;
+        text-align: center;
+        padding: 0.8rem !important;
+        font-size: 22px !important;
+        text-transform: uppercase;
+        font-family: 'nobel' !important;
+        font-weight: 300 !important;
+        border-radius: 15px 15px 0 0;
+        width: 101%;
+        margin-left: -1px !important;
+
+        @media screen and (min-width: 1900px) {
+            font-size: 2rem !important;
+        }
+
+        strong {
+            font-weight: 200 !important;
+        }
+    }
+
+    .content-section {
+        padding: 10px !important;
+
+        .mat-form-field-wrapper {
+            padding-bottom: 0px !important;
+        }
+
+
+
+
+        .payment-form-row {
+            display: flex;
+            align-items: flex-start !important;
+            font-size: 12px !important;
+            margin-top: 5px !important;
+
+            &.mileage-outer {
+                width: 111% !important;
+            }
+
+            &.disp-block {
+                display: block !important;
+                margin-bottom: 0 !important;
+            }
+
+            .mat-select {
+                height: 25px;
+
+                .mat-select-trigger {
+                    width: 100% !important;
+
+                    .mat-select-value {
+                        line-height: 25px !important;
+
+                        .mat-select-value-text,
+                        .mat-select-placeholder {
+                            padding: 0 5px !important;
+                            margin-top: 10px !important;
+                            display: block !important;
+                        }
+
+                    }
+                }
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    width: 6px;
+                    height: 6px;
+                    border-top: 1px solid #831e2e !important;
+                    border-left: 1px solid #831e2e !important;
+                    right: 6px;
+                    transform: rotate(225deg);
+                    top: 8px;
+                }
+
+            }
+
+            .mat-form-field-label {
+                line-height: 25px !important;
+
+                mat-label {
+                    font-size: 12px !important;
+                }
+            }
+
+            .msrp-tooltip {
+                display: none;
+            }
+
+            .msrp-hover {
+                &:hover {
+                    .msrp-tooltip {
+                        display: block;
+                        position: absolute;
+                        background: #fff;
+                        width: 83%;
+                        border: 2px solid #831e2e !important;
+                        z-index: 1;
+                        padding: 6px !important;
+                        border-radius: 10px;
+                    }
+                }
+            }
+
+            .mat-input-element {
+                height: 25px !important;
+
+            }
+
+            .select-box {
+                border: 1px solid #707070 !important;
+                margin: 10px 0 0 !important;
+                font-size: 12px !important;
+                padding: 0 0 0 5px !important;
+            }
+
+            .demo-full-width.select-parent .mat-form-field-flex {
+                border: 0 !important;
+
+                .mat-form-field-infix::after {
+                    margin-top: -2px;
+                    content: "";
+                    position: absolute;
+                    width: 6px;
+                    height: 6px;
+                    border-top: 1px solid #831e2e !important;
+                    border-left: 1px solid #831e2e !important;
+                    right: 6px;
+                    transform: rotate(225deg);
+                    top: 8px;
+                    border-right: 0 !important;
+                }
+            }
+
+
+            &.annual-perc-rate {
+                flex-direction: column;
+
+                div.form-fields {
+                    width: 100% !important;
+                }
+
+                .mat-form-field-appearance-fill {
+                    width: 100% !important;
+                }
+            }
+
+            .form-fields {
+                width: 50%;
+                position: relative;
+
+                &:first-child {
+                    width: 70% !important;
+                }
+
+                &:nth-child(2) {
+                    width: 30% !important;
+                }
+
+                &.form-fields-50 {
+                    width: 50% !important;
+                }
+
+                &.capilize-text {
+                    width: 65% !important;
+                    font-size: 12px !important;
+                    //margin-top: 0.5rem !important;
+                }
+
+                &.capitalize-value {
+                    width: 35% !important;
+                    font-size: 12px !important;
+                    font-weight: 400 !important;
+                }
+
+                &.mileage-info {
+                    margin: 0 0.5rem 0 0 !important;
+                    height: 45px !important;
+                    // select {
+                    //     height: 25px !important;
+                    //     -webkit-appearance: none !important;
+                    //     font-size: 12px !important;
+                    //     padding: 0 !important;
+                    // }
+                }
+
+                &.duration-info {
+                    margin: 0 0.8rem 0 0 !important;
+                    height: 45px !important;
+
+                    .mat-form-field-appearance-fill {
+                        width: 75% !important;
+                    }
+                }
+            }
+
+            &.annual-perc-rate {
+                .perc-info {
+                    font-size: 0.8rem !important;
+                }
+            }
+        }
+
+        .price-details-heading {
+            font-size: 0.5rem !important;
+            font-size: 0.9rem !important;
+            position: relative !important;
+            display: flex !important;
+            align-items: center !important;
+
+            span {
+                background: #fff !important;
+                font-size: 16px !important;
+                position: relative !important;
+                z-index: 1 !important;
+                color: #831e2e !important;
+                padding-right: 5px !important;
+                font-family: nobel, sans-serif !important;
+            }
+
+            @media screen and (min-width: 1900px) {
+                font-size: 1.3rem !important;
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                width: 100% !important;
+                height: 1px !important;
+                background: #333 !important;
+            }
+        }
+
+        input {
+            text-align: right;
+        }
+
+        .sns_lable {
+            margin-left: 5px !important;
+            margin-bottom: 0 !important;
+            line-height: 24px !important;
+            vertical-align: top !important;
+
+        }
+
+        .row {
+            align-items: center;
+
+            &.term-duration {
+                display: block !important;
+
+                .term-row {
+                    float: left !important;
+                }
+
+                .term-option-section {
+                    float: right !important;
+                }
+            }
+        }
+
+        .payOpt__bill__selectrow {
+            padding-top: 10px !important;
+            width: 100% !important;
+            display: flex !important;
+
+            &.term-label {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+        }
+
+        .msrp-value {
+            font-weight: bold !important;
+        }
+
+        .button-green {
+            background: #418130;
+            font-size: 10px !important;
+            padding: 6px 5px !important;
+            cursor: pointer;
+            position: relative;
+            width: 105%;
+            text-align: left !important;
+
+            &.button-disable {
+                background: #ccc;
+                cursor: no-drop !important;
+            }
+
+            &[disabled] {
+                background: #ccc;
+                cursor: no-drop !important;
+            }
+
+            &:after {
+                content: "";
+                position: absolute;
+                border-left: 1px solid #fff;
+                border-top: 1px solid #fff;
+                transform: rotate(135deg);
+                width: 9px;
+                height: 9px;
+                right: 6px;
+                top: 9px;
+            }
+
+            span {
+                color: #fff !important;
+            }
+
+        }
+
+        .incentives-offer-value {
+            color: #418130 !important;
+            font-weight: bold !important;
+        }
+
+        .disclaimer-content {
+            border-top: 1px solid #333 !important;
+            padding-top: 0.8rem !important;
+            width: 100%;
+            margin-top: 1rem !important;
+
+            .lease-total-price {
+                font-size: 13px !important;
+                position: relative;
+
+
+                span,
+                div {
+                    font-weight: bold !important;
+                }
+
+                b {
+                    color: #F2B54A !important;
+                    font-size: 25px !important;
+                    padding-left: 0px !important;
+                }
+            }
+
+            .downpaymenterror {
+                color: #e71131 !important;
+                font-size: 12px !important;
+                font-weight: 400;
+                line-height: 1.6;
+
+                b {
+                    font-weight: bold !important;
+                }
+            }
+
+            .disclaimer-text {
+                color: #333 !important;
+                font-size: 11px !important;
+                margin-top: 1rem !important;
+                //max-height: 130px !important;
+                //overflow-y: auto !important;
+                padding-right: 5px !important;
+                width: calc(100% + 7px);
+
+
+            }
+        }
+
+    }
+
+}
+
+.downpaymenterror {
+    color: #e71131 !important;
+    font-size: 12px !important;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.estimator-pricing {
+    color: #e71131 !important;
+    font-size: 23px !important;
+    font-weight: 600 !important;
+    line-height: 28px;
+}
+
+.incentivesDialog-container {
+    position: relative !important;
+}
+
+.mat-tab-body.mat-tab-body-active {
+    overflow: hidden !important;
+
+    .mat-tab-body-content {
+        // overflow-x: hidden !important;
+    }
+}
+
+.payment-type-wrapper {
+    /* position: relative;
+        left: 1rem !important;
+        width: 94%;
+        top: 1rem; */
+    padding: 10px 18px 0 20px !important;
+
+    div.col-md-4 {
+        margin-right: 0 !important;
+        padding-right: 0 !important;
+        padding-left: 5px !important;
+    }
+
+    .button-wrapper {
+        position: absolute;
+        width: calc(100% - 15px);
+        bottom: 55px;
+        font-family: nobel, sans-serif !important;
+        margin-left: -26px !important;
+
+        .view-offer {
+            position: relative;
+
+            .btn-shadow {
+                width: 1rem;
+                height: 30%;
+                background: #3b0711 !important;
+                left: 0;
+                bottom: -2px;
+                content: '';
+                position: absolute;
+                transform: skewY(34deg);
+                z-index: 1;
+            }
+        }
+
+        .view-offers-btn {
+            background: #641725 !important;
+            width: 100%;
+            color: #fff;
+            border: none;
+            padding: 0;
+            font-size: 0.8rem !important;
+            text-transform: uppercase !important;
+            outline: none;
+            position: relative;
+            z-index: 2;
+            height: 38px !important;
+
+            .material-icons {
+                float: right !important;
+                margin-right: 30px !important;
+            }
+
+            @media screen and (min-width: 769px) {
+                font-size: 17px !important;
+            }
+
+            span {
+                color: #fff !important;
+                padding-left: 10px !important;
+            }
+
+
+
+            &:after {
+                content: '';
+                position: absolute;
+                width: 24px;
+                height: 24px;
+                background: #641725 !important;
+                transform: rotate(45deg);
+                right: -12px;
+                top: 5px;
+
+                @media screen and (min-width: 769px) {
+                    width: 27px;
+                    height: 27px;
+                    right: -14px;
+                    top: 5px;
+                }
+            }
+
+        }
+
+        .better-estimate {
+            .btn-shadow {
+                background: #132816 !important;
+                width: 30px;
+                height: 30px;
+                position: absolute;
+                bottom: 2px;
+                left: -12px;
+                transform: skewY(39deg);
+            }
+
+            .get-better-estimate {
+                margin-top: 1rem !important;
+                background: #418130 !important;
+
+                img {
+                    display: inline !important;
+                }
+
+
+                &:after {
+                    background: #418130 !important;
+                }
+            }
+        }
+    }
+}
+
+.incentivesDialog-container,
+.conditionoffersDialog-container {
+    .mat-dialog-container {
+        width: 95%;
+        margin: 0px auto;
+        padding: 0 !important;
+
+        @media screen and (min-width: 769px) {
+            width: 75%;
+            padding: 0px !important;
+        }
+    }
+}
+
+.incentive-outer {
+
+    .incentive-content {
+
+        width: 100%;
+        border: 3px solid #F2B54A !important;
+        padding: 24px !important;
+        border-radius: 20px !important;
+
+
+        h1 {
+            font-size: 32px !important;
+            border-bottom: 1px solid #000 !important;
+            font-family: nobel, sans-serif !important;
+        }
+
+        .incentive-list-loop {
+            display: flex;
+            margin: 15px 0 0 0 !important;
+            font-size: 15px !important;
+            width: 100%;
+
+            &.incentive-popup-box .mat-checkbox-layout {
+                display: flex !important;
+            }
+
+            .mat-radio-label-content,
+            .mat-checkbox-label {
+                span {
+                    font-size: 13px !important;
+                }
+            }
+
+            @media screen and (min-width: 769px) {
+                width: 50%;
+            }
+
+            .list-content {
+
+                flex-direction: column;
+                margin: 0 !important;
+                min-width: 32%;
+
+                .incentive-box {
+                    display: flex !important;
+                    margin-top: 5px !important;
+                }
+
+                .mat-checkbox-disabled {
+                    label.mat-checkbox-layout {
+                        .mat-checkbox-inner-container {
+                            display: none !important;
+                        }
+                    }
+                }
+            }
+
+            .mat-checkbox-layout {
+
+                //display: flex !important;
+                span.mat-checkbox-inner-container {
+                    float: left !important;
+                    margin-top: 5px !important;
+                }
+            }
+
+            .mat-radio-label-content,
+            .mat-checkbox-label {
+                b {
+                    width: 100%;
+                    //display: flex;
+                    display: block !important;
+                    margin-top: -4px !important;
+                }
+            }
+
+            .info {
+                margin: 0 5px !important;
+                //display: flex;
+                justify-content: center;
+                align-items: center;
+
+                i {
+                    background: #F2B54A;
+                    border-radius: 50%;
+                    color: #fff;
+                    padding: 1px 10px !important;
+                    width: 23px !important;
+                    display: block !important;
+                    cursor: pointer !important;
+                }
+            }
+
+            .incentive-price {
+                justify-content: center;
+                align-items: center;
+                font-size: 20px !important;
+                line-height: 24px !important;
+            }
+
+            .hideIncentive {
+                .mat-checkbox-inner-container {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.conditional-offer-outer {
+    top: 15rem !important;
+
+    .incentive-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-right: 15px !important;
+    }
+
+    .incentive-list-loop {
+        width: 100% !important;
+        margin-right: 21px !important;
+        padding: 0px 10px 0 0px !important;
+
+        @media screen and (min-width: 769px) {
+            width: 50% !important;
+        }
+
+        .list-content {
+            min-width: 78% !important;
+
+            .mat-checkbox-label {
+                white-space: normal;
+                float: left !important;
+                width: calc(100% - 35px) !important;
+
+            }
+        }
+    }
+}
+
+.quickrating-outer {
+
+    top: 36rem !important;
+
+    .quickrating-content {
+        h1 {
+            text-align: center;
+            font-size: 24px !important;
+
+            b {
+                width: 100%;
+                display: inline-block;
+            }
+        }
+
+        h2 {
+            margin: 20px 0 !important;
+            font-size: 20px !important;
+            font-family: nobel, sans-serif !important;
+            text-align: center;
+        }
+
+        .rating-outer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px !important;
+
+            .rating-loop {
+                width: 30%;
+                margin: 10px !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+
+                .mat-radio-label-content {
+                    position: absolute;
+                    width: 100%;
+                    left: 0;
+                    bottom: -15px;
+                }
+
+                @media screen and (min-width: 769px) {
+                    width: 15%;
+                    margin: 0 10px !important;
+                }
+
+
+            }
+
+        }
+
+        .rating-content {
+            font-family: nobel, sans-serif !important;
+            text-align: center;
+            margin: 20px 0px !important;
+            font-size: 18px !important;
+
+            span {
+                color: #F2B54A !important;
+            }
+
+            textarea {
+                border: 1px solid #F2B54A !important;
+                padding: 10px;
+                height: 150px;
+                width: 100%;
+                margin: 20px 0 !important;
+                outline: none;
+            }
+        }
+
+    }
+}
+
+.incentivesDialog-container,
+.conditionoffersDialog-container {
+    height: auto !important;
+    max-height: calc(100% - 60px) !important;
+    max-width: 900px !important;
+    overflow: auto !important;
+
+    .mat-dialog-container {
+        background: #fff !important;
+        border-radius: 20px !important;
+        border: none !important;
+        height: auto !important;
+        max-height: 100% !important;
+        position: relative !important;
+        padding: 0;
+    }
+}
+
+.payment-input-fields .cash-trade .mat-form-field .mat-form-field-flex .mat-form-field-infix .mat-form-field-label-wrapper {
+    overflow: visible !important;
+
+    .mat-form-field-label {
+        line-height: 1.2 !important;
+    }
+}
+
+.mat-form-field-appearance-fill:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-underline .mat-form-field-ripple {
+    display: none !important;
+}
+
+
+
+.cdk-overlay-pane {
+    .mat-tooltip {
+        border-radius: 4px;
+        margin: 8px;
+        max-width: 250px;
+        padding-left: 8px;
+        padding-right: 8px;
+
+        text-overflow: ellipsis;
+        transform: scale(0);
+        border: 2px solid #63111e !important;
+        background: #fff !important;
+        color: #000 !important;
+        overflow: visible !important;
+
+        &::before {
+            position: absolute !important;
+            height: 0px !important;
+            width: 0px !important;
+            border: 7px solid transparent !important;
+            border-bottom-color: #63111e !important;
+            z-index: 1 !important;
+            content: '' !important;
+            top: -16px;
+            left: 47% !important;
+        }
+    }
+}
+
+.lease-wrapper .content-section .mat-button-toggle-label-content {
+    padding: 4px 24px !important
+}
+
+.payOpt__bill--dropdown .payOpt__bill__label {
+    text-decoration: none !important;
+    width: 100% !important;
+}
+
+.payOpt__bill__label {
+    width: 70% !important;
+}
+
+.disclimerfont {
+    font-size: 12px !important;
+    line-height: 16px;
+    font-weight: 400;
+    margin-top: 20px !important;
+    margin-bottom: 180px !important;
+
+}
+
+.disclimerfont p {
+    font-size: 12px !important;
+    line-height: 16px;
+    font-weight: 400;
+    margin-top: 20px !important;
+}
+
+.disclaimer_bubble {
+    background: #d4d4d4 !important;
+    cursor: pointer !important;
+    border-radius: 50% !important;
+    display: inline-block !important;
+    font-style: normal !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    height: 16px !important;
+    line-height: 1.2 !important;
+    padding: 3px !important;
+    text-align: center !important;
+    text-transform: none !important;
+    width: 16px !important;
+    position: relative !important;
+    color: #000 !important;
+}
+
+// .mat-mdc-form-field-infix {
+//     flex: auto;
+//     position: relative;
+//     box-sizing: border-box;
+//     width: 500px !important;
+//     border: 1px solid #000000;
+//     padding: 24px 16px 12px 12px;
+//     border-radius: 5px;
+//     font-size: 16px;
+// }
+.mdc-text-field {
+    padding: 0px !important;
+}
+
+.disclaimerTooltip__trigger {
+    cursor: pointer !important;
+    display: inline-block !important;
+    position: relative !important;
+    text-decoration: underline !important;
+}
+
+.disclaimerTooltip {
+    background: #fff !important;
+    border: 1px solid #525252 !important;
+    border-radius: 5px !important;
+    color: #000 !important;
+    cursor: default !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    left: -2px !important;
+    opacity: 0;
+    padding: 5px 8px !important;
+    position: absolute !important;
+    top: calc(100% + 4px) !important;
+    visibility: hidden;
+    width: 240px !important;
+    z-index: 2 !important;
+}
+
+.disclaimerTooltip__trigger:hover {
+    .disclaimerTooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.disclaimerTooltip__star {
+    color: #F2B54A !important;
+    display: inline-block !important;
+}
+
+.price-details {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+
+.mat-mdc-chip-set .mdc-evolution-chip {
+    width: 83px;
+    border-radius: 11px;
+    padding: 15px 16px;
+
+    .mdc-evolution-chip__text-label {
+        text-align: center;
+
+        span {
+            display: block;
+        }
+    }
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__action--primary::before {
+    border-radius: 5px !important;
+}
+
+
+.mat-mdc-chip.mat-mdc-standard-chip {
+
+    --mdc-chip-container-height: 70px;
+
+    --mdc-chip-container-shape-radius: 11px;
+
+}
+
+.mdc-evolution-chip__cell {
+    color: #fff;
+    background: #000 !important;
+}
+
+.mD__close {
+    background: transparent;
+    opacity: .90;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    border: none;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    svg {
+        display: block;
+        margin: auto;
+        align-items: center;
+        justify-content: center;
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (min-width:996px) {
+    .payOpt__bill__selectrow {
+        margin-bottom: 50px;
+    }
+}
+
+@media (max-width:575px) {
+    .lease-total-price .disclaimer_bubble:before {
+        right: -50px !important;
+        left: -50px !important;
+        width: 150px !important;
+    }
+
+    .tax_fees_bubble.disclaimer_bubble:before {
+        right: -60px !important;
+    }
+
+    .widget_calc_final_price {
+        display: block;
+        width: 100%;
+        line-height: 1.2 !important;
+        text-transform: uppercase;
+    }
+
+    .widget_mt_23 {
+        margin-top: -5px;
+    }
+}
+
+@media (min-width:575px) {
+    .lease-total-price .disclaimer_bubble:before {
+        left: -110px !important;
+    }
+
+    .widget_mt_23 {
+        margin-top: -23px;
+    }
+}
+
+.custom-form-margin-0 .mat-mdc-form-field-subscript-wrapper {
+    margin: 0;
+    padding: 0;
+}
+
+// .custom-form-margin-0 .mat-mdc-form-field-subscript-wrapper
+// {
+//     display: none !important;
+// }
+
+// ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+//     display: none !important;
+// }
+.error-zip {
+    color: red;
+    font-size: 12px;
+    display: block;
+    margin-top: -25px;
+    margin-bottom: 10px
+}
+
+#widget_popup_payment_tabs_lease .error-zip {
+    margin-top: -25px;
+    margin-bottom: 14px
+}
+
+.mat-button-toggle-button {
+    font-size: 14px;
+}
+
+span.mdc-evolution-chip__text-label.mat-mdc-chip-action-label {
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+label.widget-form-check-label.sns_lable {
+    font-weight: 400;
+    font-family: 'Montserrat';
+}
+
+.payOpt__checkItem.payOpt__dropContent_due {
+    position: relative;
+}
+
+.chip-background-color {
+    background-color: var(--widget-primary-color) !important;
+}
+
+.payOpt__payment__selectrow .widget-form-check {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px !important;
+
+    label {
+        padding-left: 10px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (max-width:996px) {
+
+
+    .widget_popup_payment_tabs {
+        position: relative;
+        top: 40px;
+    }
+
+    .widget_pay_calc_header {
+        position: fixed;
+        top: 0px;
+        margin-left: -1px;
+        padding: 20px 0px;
+        height: 50px;
+        width: 94%;
+        background: #FFFFFF;
+        z-index: 99999999;
+    }
+}
+
+.payOpt__annual__label b,
+.payOpt__annual__label strong {
+    font-weight: 600 !important;
+}

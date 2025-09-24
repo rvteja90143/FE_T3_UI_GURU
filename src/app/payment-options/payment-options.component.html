@@ -1,0 +1,249 @@
+@if(isMobileScreen){
+<!--Mobile Code starts here -- Details page  -->
+<div class="widget_car_specs_section">
+    <div class="widget-row">
+        <div class="widget-col-12">
+            <ul *ngIf="vehicleInfo !=undefined">
+                <li *ngIf="drive != '' && drive!= null && drive != undefined">
+                    <p class="widget_car_specs_value">{{drive}} <span class="widget_car_specs_measure"></span>
+                    </p>
+                    <p class="widget_car_specs_parameter">Drive</p>
+                </li>
+                <li *ngIf="horsepower != '' && horsepower!= null && horsepower != undefined && horsepower!= 'hp'">
+                    <p class="widget_car_specs_value">{{horsepower}} <span class="widget_car_specs_measure"></span>
+                    </p>
+                    <p class="widget_car_specs_parameter">Horsepower</p>
+                </li>
+                <li *ngIf="seating != '' && seating!= null && seating != undefined">
+                    <p class="widget_car_specs_value">{{seating}} <span class="widget_car_specs_measure"></span>
+                    </p>
+                    <p class="widget_car_specs_parameter">Seating</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="widget_payment_type_selection_section">
+    <div class="widget-row">
+        <div class="widget-col-12">
+            <div class="widget_purchase-options">
+                <mat-button-toggle-group [value]="activeTab" (click)="paymentSelectionClicked()" (valueChange)="paymentSelctionChange($event)" (click)="adobe_sdg_event('payment-option-click')" name="payType" aria-label="payType">
+                    <mat-button-toggle *ngIf="vehicle_type == 'new'&& leaseResponseAvailable " value="lease">Lease</mat-button-toggle>
+                    <mat-button-toggle [disabled]="hidePaymentCalculator" value="finance" *ngIf="finaceResponseAvailable">Finance</mat-button-toggle>
+                    <mat-button-toggle [disabled]="hidePaymentCalculator" value="cash">Cash</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+
+            <mat-progress-bar *ngIf="!paymentValue" mode="indeterminate"></mat-progress-bar>
+            <div *ngIf="paymentValue && !hidePaymentCalculator" class="widget_estimated_monthly_payment_section">
+                <div class="widget-row">
+                    <div class="widget-col-12 widget_estimated_monthly_payment_bar">
+                        <div>
+                            <p class="widget_est_payment_label" *ngIf="activeTab != 'cash'">Est. Monthly payment</p>
+                            <p class="widget_est_payment_label" *ngIf="activeTab == 'cash'">Estimated Net Price</p>
+
+                            <p *ngIf="activeTab == 'lease'" class="widget_est_payment_amount">{{monthlyPayment|
+                                currency:'USD':'symbol':'1.0-0'}}*</p>
+                            <p *ngIf="activeTab == 'finance'" class="widget_est_payment_amount">{{financemonthlyPayment|
+                                currency:'USD':'symbol':'1.0-0'}}*</p>
+                            <p *ngIf="activeTab == 'cash' " class="widget_est_payment_amount">{{cashPayment|
+                                currency:'USD':'symbol':'1.0-0'}}*</p>
+                        </div>
+                        <button id="paymentCalculatorBtn" (click)="openPaymentCalculator()" class="widget_popup_icon_btn" data-toggle="modal" data-target="#widgetPaymentCalculator">
+                            <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/icons/bxs_calculator.svg" class="widget_pay_calc_icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="widget_estimated_due_today_section" *ngIf="((activeTab=='lease' && leasedueatsigningval != '' && leasedueatsigningval != undefined) || (activeTab=='finance' && cashdown != '' && cashdown != undefined )) && paymentValue">
+    <div class="widget-row">
+        <div class="widget-col-12 widget_estimated_due_today_bar">
+            <div *ngIf="activeTab=='lease' && leasedueatsigningval != '' && leasedueatsigningval != undefined">
+                <p class="widget_est_due_today_label">Due At Signing</p>
+                <p class="widget_est_due_today_amount"><span>{{leasedueatsigningval|
+                        currency:'USD':'symbol':'1.0-0'}}</span></p>
+            </div>
+            <div *ngIf="activeTab=='finance' && cashdown != '' && cashdown != undefined " (click)="adobe_sdg_event('view-disclaimer')">
+                <p class="widget_est_due_today_label">Cash Down</p>
+                <p class="widget_est_due_today_amount"><span> ${{cashdown}}</span></p>
+            </div>
+            <!-- <button class="widget_popup_icon_btn">
+        <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/icons/symbols-light_info.svg" class="widget_due_today_icon">
+      </button> -->
+
+            <!-- mobile due at signing  start-->
+            <button *ngIf="(leasedueatsigningval != '' && leasedueatsigningval != undefined)  && activeTab== 'lease' " class="widget_popup_icon_btn  disclaimerTooltip__trigger disclaimerTooltip--status" (click)="adobe_sdg_event('view-disclaimer')"><img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/redesign/images/material-symbols-light_info.svg" alt="image" class="widget_pay_calc_icon"><span class="disclaimerTooltip__star in_stock_disclaimer"> </span>
+                <div class="vTheme__bColor disclaimerTooltip" style="float:right">
+                    <p class="disclaimerTooltip__msg">
+                        <span>Down Payment <span style="float:right">{{leasedownpayment|
+                                currency:'USD':'symbol':'1.0-0'}}</span></span><br>
+                        <span>Taxes and Fees<span style="float:right"> {{(convertToNumber(leaseTotalTaxesFees))|
+                                currency:'USD':'symbol':'1.0-0'}}</span></span><br>
+                        <span>First Month Payment<span style="float:right"> {{leasemonthlycost|
+                                currency:'USD':'symbol':'1.0-0'}}</span></span>
+                        <!-- <br><span *ngIf="leaseServiceValue>0">Service Protection<span style="float:right">{{leaseServiceValue|
+                                currency:'USD':'symbol':'1.0-0'}}</span></span> -->
+                    </p>
+                </div>
+            </button>
+            <button *ngIf="(cashdown !='' && cashdown != undefined) && activeTab == 'finance' " class="widget_popup_icon_btn  disclaimerTooltip__trigger disclaimerTooltip--status" (click)="adobe_sdg_event('view-disclaimer')"><img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/redesign/images/material-symbols-light_info.svg" alt="image" class="widget_pay_calc_icon"><span class="disclaimerTooltip__star in_stock_disclaimer"> </span>
+                <div class="vTheme__bColor disclaimerTooltip" style="float:right">
+                    <p class="disclaimerTooltip__msg">
+                        <span>Down Payment <span style="float:right">{{financedownpayment|
+                                currency:'USD':'symbol':'1.0-0'}}</span></span><br>
+                        <span>Taxes and Fees<span style="float:right"> {{financeTotalTaxesFees|
+                                currency:'USD':'symbol':'1.0-0'}}</span></span><br>
+                        <span *ngIf="vehicle_type == 'used'">First Month Payment <span style="float:right">{{financemonthlyPayment|
+                                currency:'USD':'symbol':'1.0-0'}}</span></span><br>
+                    </p>
+                </div>
+            </button>
+            <!-- mobile due at signing end-->
+        </div>
+    </div>
+</div>
+<div class="widget_better_estimate">
+    <div class="widget_better_estimate_wrapper">
+        <p class="widget_better_estimate_text">Get a better estimate</p>
+        <span class="widget_credit_impact_text">No impact on your credit score!</span>
+    </div>
+    <button (click)="openPrequalDialog()" class="widget_pre_qual"><span>Get pre-qualified</span><img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/arrow_right.svg" alt="image" class=""></button>
+</div>
+<!--Mobile Code Ends-->
+}@else{
+<!-- Desktop Code starts Here -- Details page right section-->
+<div class="widget_right_part">
+    <div class="widget_item-for">
+        <div class="widget_purchase-options">
+            <mat-button-toggle-group [value]="activeTab" (click)="paymentSelectionClicked()" (valueChange)="paymentSelctionChange($event)" name="payType" (click)="adobe_sdg_event('payment-option-click')" aria-label="Pay Type">
+                <mat-button-toggle *ngIf="vehicle_type == 'new' && leaseResponseAvailable" value="lease">Lease</mat-button-toggle>
+                <mat-button-toggle [disabled]="hidePaymentCalculator" value="finance" *ngIf="finaceResponseAvailable">Finance</mat-button-toggle>
+                <mat-button-toggle [disabled]="hidePaymentCalculator" value="cash">Cash</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <div class="widget_purchase-carImage">
+            <img src="{{heroImage}}" alt="image" onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" class="" width="310" height="152">
+        </div>
+        <p class="widget_car-title">{{display_vehicle_name}}</p>
+        <p class="widget_car-title"> <span style="font-weight: normal;">VIN:</span>{{vin}}<a href='{{redirectionURL}}' target="_blank"><img   src="https://d1jougtdqdwy1v.cloudfront.net/images/window_sticker.svg"></a></p>
+        <div class="widget_button-group" *ngIf="showTestDriveBtn !== 'N'">
+            <button class="widget_payment-btn widget_applyCredit-button"  id="testDriveBtn"  (click)="invokeTestDrive()">
+                <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_2325_3147)">
+                        <path
+                            d="M8.90215 0C9.30054 0 9.69893 0 10.0973 0C10.1477 0.0112719 10.1977 0.0292365 10.2488 0.0331112C11.2199 0.103913 12.1608 0.319136 13.0421 0.728095C16.2719 2.22655 18.1042 4.74265 18.4646 8.29683C18.6034 9.6646 18.3913 10.9947 17.8859 12.2712C16.3405 16.1734 12.4334 18.4701 8.27268 17.9188C6.77211 17.7198 5.40187 17.1692 4.18732 16.2632C2.19994 14.7806 1.00054 12.8116 0.603561 10.3599C0.5627 10.107 0.534168 9.852 0.5 9.59767C0.5 9.19928 0.5 8.80089 0.5 8.4025C0.527828 8.18305 0.551428 7.96325 0.583483 7.7445C0.800467 6.26013 1.33483 4.90116 2.23129 3.69648C3.71425 1.70276 5.68543 0.500895 8.14165 0.103561C8.39421 0.0627 8.64853 0.034168 8.90215 0ZM3.18201 6.73848L15.8178 6.73848C14.9467 4.24739 12.5352 2.25473 9.49991 2.25473C6.46178 2.25473 4.05171 4.25056 3.18236 6.73848H3.18201ZM2.76002 9.00907C2.76072 10.8577 3.51805 12.7735 5.19299 14.1681C6.11024 14.9317 7.15993 15.4203 8.353 15.6211C8.3456 14.8166 8.22548 14.0628 7.98419 13.3304C7.4523 11.715 6.52589 10.4071 5.00594 9.57689C4.31237 9.19823 3.56349 9.014 2.76002 9.00872V9.00907ZM10.6475 15.6292C12.3774 15.2967 13.7772 14.4636 14.8449 13.0895C15.7759 11.8912 16.2268 10.5248 16.2433 8.99392C15.9844 9.01999 15.7449 9.03337 15.5085 9.07036C14.5589 9.2183 13.7318 9.63043 13.0048 10.2525C12.1206 11.0088 11.5116 11.9542 11.1136 13.0384C10.8113 13.8616 10.6525 14.7141 10.6475 15.6292ZM10.6225 9.02527C10.6503 8.43244 10.1547 7.91182 9.5295 7.87765C8.93949 7.84524 8.4171 8.33874 8.378 8.96609C8.34102 9.56104 8.85248 10.0986 9.47913 10.1232C10.0744 10.1465 10.5936 9.6484 10.6229 9.02563L10.6225 9.02527Z"
+                            fill="black" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_2325_3147">
+                            <rect width="18" height="18" fill="white" transform="translate(0.5)" />
+                        </clipPath>
+                    </defs>
+                </svg>
+                Test Drive
+            </button>
+        </div>
+
+        <mat-progress-bar *ngIf="!paymentValue" mode="indeterminate"></mat-progress-bar>
+        <div *ngIf="paymentValue && !hidePaymentCalculator">
+            <div class="widget_price-details">
+                <div class="widget_price-details-text"><span *ngIf="activeTab != 'cash'">Est. Monthly payment</span><span *ngIf="activeTab == 'cash'">Estimated Net Price</span><br><span *ngIf="activeTab == 'lease' ">{{monthlyPayment|
+                        currency:'USD':'symbol':'1.0-0'}}*</span>
+                    <span *ngIf="activeTab== 'finance' ">{{financemonthlyPayment|
+                        currency:'USD':'symbol':'1.0-0'}}*</span>
+                    <span *ngIf="activeTab == 'cash' ">{{cashPayment|
+                        currency:'USD':'symbol':'1.0-0'}}*</span>
+                    <!--<br><span class="widget_info-text">Est. due at signing $xxxx</span>-->
+                </div>
+                <button (click)="openPaymentCalculator()"><img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/widget_calculator_icon.svg" alt="image" class=""></button>
+            </div>
+            <div class="widget_price-details" *ngIf="activeTab=='lease' &&  leasedueatsigningval !='' &&  leasedueatsigningval !=undefined ">
+                <div class="widget_price-details-text">Due At Signing<br><span>{{leasedueatsigningval|
+                        currency:'USD':'symbol':'1.0-0'}}</span></div>
+                <div class="disclaimerTooltip__trigger disclaimerTooltip--status" (mouseenter)="adobe_sdg_event('view-disclaimer')" (click)="adobe_sdg_event('view-disclaimer')">
+                    <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/widget_info_icon.svg" alt="image" class=""><span class="disclaimerTooltip__star in_stock_disclaimer"> </span>
+                    <div class="vTheme__bColor disclaimerTooltip" style="float:right">
+                        <p class="disclaimerTooltip__msg">
+                            <span>Down Payment <span style="float:right">{{leasedownpayment|
+                                    currency:'USD':'symbol':'1.0-0'}}</span></span><br>
+                            <span>Taxes and Fees<span style="float:right"> {{(convertToNumber(leaseTotalTaxesFees))|
+                                    currency:'USD':'symbol':'1.0-0'}}</span></span><br>
+                            <span>First Month Payment<span style="float:right"> {{leasemonthlycost|
+                                    currency:'USD':'symbol':'1.0-0'}}</span></span>
+                            <br><span *ngIf="leaseServiceValue>0">Service Protection<span style="float:right">{{leaseServiceValue|
+                                    currency:'USD':'symbol':'1.0-0'}}</span></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="widget_price-details" *ngIf="activeTab=='finance' && cashdown != '' && cashdown != undefined ">
+                <div class="widget_price-details-text">Cash Down<br><span>${{cashdown}}</span></div>
+                <div class="disclaimerTooltip__trigger disclaimerTooltip--status" (mouseenter)="adobe_sdg_event('view-disclaimer')" (click)="adobe_sdg_event('view-disclaimer')">
+                    <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/widget_info_icon.svg" alt="image" class=""><span class="disclaimerTooltip__star in_stock_disclaimer"> </span>
+                    <div class="vTheme__bColor disclaimerTooltip" style="float:right">
+                        <p class="disclaimerTooltip__msg">
+                            <span>Down Payment <span style="float:right">{{financedownpayment|
+                                    currency:'USD':'symbol':'1.0-0'}}</span></span><br>
+                            <span>Taxes and Fees <span style="float:right">{{financeTotalTaxesFees|
+                                    currency:'USD':'symbol':'1.0-0'}}</span></span><br>
+                            <span *ngIf="vehicle_type == 'used'">First Month Payment <span style="float:right">{{financemonthlyPayment|
+                                    currency:'USD':'symbol':'1.0-0'}}</span></span><br>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <!--   <div class="widget_total-payable-price" *ngIf="vehicle_type == 'new'" >
+              <div class="widget_payment-text">Payment</div>
+              <span>$xxx/mo</span>
+            </div>
+            -->
+            <div class="widget_better_estimate">
+                <div class="widget_better_estimate_wrapper">
+                    <div class="widget_better_content">
+                        <div class="widget_better_dollor_sign">
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
+                                <path d="M17.88 25.1068V27.6535H14.32V25.0802C12.04 24.6001 10.1066 23.1335 9.95998 20.5468H12.5733C12.7066 21.9468 13.6666 23.0402 16.1066 23.0402C18.72 23.0402 19.3066 21.7335 19.3066 20.9202C19.3066 19.8135 18.72 18.7735 15.7466 18.0668C12.44 17.2668 10.1733 15.9068 10.1733 13.1735C10.1733 10.8801 12.0266 9.38682 14.32 8.89348V6.32015H17.88V8.92015C20.36 9.52015 21.6 11.4002 21.68 13.4402H19.0666C19 11.9601 18.2133 10.9468 16.1066 10.9468C14.1066 10.9468 12.9066 11.8535 12.9066 13.1335C12.9066 14.2535 13.7733 14.9868 16.4667 15.6802C19.16 16.3735 22.04 17.5335 22.04 20.8935C22.0266 23.3335 20.2 24.6668 17.88 25.1068Z" fill="#F2B54A" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M32 16.9868C32 25.8234 24.8366 32.9868 16 32.9868C7.16344 32.9868 0 25.8234 0 16.9868C0 8.15026 7.16344 0.986816 16 0.986816C24.8366 0.986816 32 8.15026 32 16.9868ZM29.3333 16.9868C29.3333 24.3506 23.3638 30.3202 16 30.3202C8.6362 30.3202 2.66667 24.3506 2.66667 16.9868C2.66667 9.62302 8.6362 3.65348 16 3.65348C23.3638 3.65348 29.3333 9.62302 29.3333 16.9868Z" fill="#F2B54A" />
+                            </svg> -->
+                        </div>
+                        <div class="widget_better_content_text">
+                            <p class="widget_better_estimate_text">Get a better estimate</p>
+                            <span class="widget_credit_impact_text">No impact on your credit score!</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="widget_pre_qual" (click)="openPrequalDialog()"><span>Get pre-qualified <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/arrow_right.svg" alt="image" class=""></span></button>
+
+            </div>
+        </div>
+        <div class="widget_button-group">
+            <button class="widget_payment-btn widget_submit-button" (click)="!formSubmitted && openSubmitToDealerDialog()" [disabled]="formSubmitted">Submit to Dealer</button>
+            <div class="widget-row">
+                <div class="widget-col-12">
+                    <!-- <div class="widget-col-md-12">
+            <button id="preQualifyBtn" type="button" class="widget_payment-btn widget_applyCredit-button" mat-button (click)="openQualifyDialog()">Get Prequalify</button>
+          </div> -->
+                    <div class="widget-col-6 widget-col-sm-6 widget-col-md-12">
+                        <!-- <button *ngIf="creditAppState=='not-open' && autofiEnable === 'autoFi'" class="widget_payment-btn widget_applyCredit-button" (click)="onApplyCreditClick()" style="display: none;" mat-button>Apply for Credit</button>
+            <button *ngIf="creditAppState=='open' && autofiEnable == 'autoFi'" class="widget_payment-btn widget_reserve-button mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base btn btn-success btn-lg stepApplyCredit" style="display: none;" (click)="onApplyCreditClick()">Back to credit
+            </button> -->
+                        <button  id="applyForCredit" *ngIf="((autofiEnable === 'rone' || autofiEnable == 'dt') && (activeTab != 'cash')) " class="widget_payment-btn widget_applyCredit-button" (click)="onApplyCreditClick();applyCreditDialog()" mat-button>Apply for Credit</button>
+                        <!-- <button *ngIf="creditAppState=='open' && (autofiEnable === 'rone' || autofiEnable == 'dt')" class="widget_payment-btn widget_reserve-button mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base btn btn-success btn-lg stepApplyCredit" (click)="onApplyCreditClick();applyCreditDialog()" mat-button>Back to credit</button> -->
+                    </div>
+                    <div class="widget-col-6 widget-col-sm-6 widget-col-md-12" *ngIf="vehicle_type == 'new' && customize_reservation === 'Y'  && paypal_onboarding_status === '1' && is_reserve_button_enable ==='Y'">
+                        <button id="reserveNowBtn" class="widget_payment-btn widget_reserve-button" (click)="openReserveNow()" [disabled]="reserveNowButtonStatus == 'disable'" mat-button>{{reserveNowButtonText}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Desktop Code Ends-->
+}
+
+<!-- Added just for payment calculator initialization-->
+<app-payment-calculator style="display: none;" />

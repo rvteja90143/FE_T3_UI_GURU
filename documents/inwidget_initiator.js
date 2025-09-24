@@ -1,0 +1,431 @@
+(async APILoader => {
+	const API = await APILoader.create(document.currentScript || 'stellantis-eshop');
+	const config = await API.utils.getConfig();
+	let inwidgetDealerType = '';
+	let loadedJs = false;
+	let loadedJsEprice = false;
+	const integrationId = API.init.integrationId; console.log(integrationId);
+	let parentStyle = 'html:is(.srp, .vdp) div[data-web-api-id="' + integrationId + '"] ';
+
+	let modelCode = ['WDEE75', 'DS6T98', 'LDDE48', 'LDEE48'];
+	function isValidVin(vin) {
+		var vList1 = null;
+		if (window.DDC.dataLayer.page.pageInfo.isVlp) {
+			vList1 = DDC.InvData.inventory.inventory;
+			//console.log(vList1);
+			if (vList1 === undefined) return true;
+			for (i = 0; i < vList1.length; i++) {
+				if (vList1[i].vin === vin && modelCode.includes(vList1[i].modelCode)) {
+					console.log("Blocked modelCode:" + vin + ":" + vList1[i].modelCode);
+					return false;
+				}
+			}
+		}
+		else if (window.DDC.dataLayer.page.pageInfo.isVdp) {
+			vList1 = window.DDC.dataLayer.vehicles[0];
+			if (modelCode.includes(vList1.modelCode)) return false;
+		}
+		return true;
+	}
+
+	function delayedloading(vin, dealerCode, zipCode, url, wclass, type,t3_new_inwidget,vehicle_type) {
+		if (wclass == 'inwidgetimage') {
+			if (!loadedJs) {
+				if (inwidgetDealerType != 'DDC') {
+					hideClass(wclass, dealerCode);
+				}
+				if(t3_new_inwidget == 'N'){
+					if (isInwidgetMobile()) {
+						url = "https://dealeradmin.drivefca.com/js/app-element-mobile.js";
+					} else {
+						url = "https://dealeradmin.drivefca.com/js/app-element-web.js";
+					}
+			    }else{
+					url = 'https://dealeradmin.drivefca.com/js/app-element-redesign-stage.js';
+				}
+				//const attributeMap = new Map([['type', 'module']]);
+				API.loadJS(url).then(() => {
+					loadedJs = true;
+					//hide all the image instances 
+					setTimeout(() => {
+						window["angularComponentReference"].zone.run(() => { window.angularComponentReference.loadAngularFunction(vin, dealerCode, zipCode,vehicle_type, '', '', '', '', '', 'DDC'); });
+					}, 1000);
+				});
+			} else {
+				window["angularComponentReference"].zone.run(() => { window.angularComponentReference.loadAngularFunction(vin, dealerCode, zipCode,vehicle_type, '', '', '', '', '', 'DDC'); });
+			}
+		} else if (wclass == 'eshop-eprice') {
+			if (!loadedJsEprice) {
+				API.loadJS(url).then(() => {
+					loadedJsEprice = true;
+					setTimeout(() => {
+						window["angularEpriceComponentReference"].zone.run(() => { window.angularEpriceComponentReference.loadAngularFunction(vin, dealerCode, zipCode); });
+						if (!loadedJs) {
+							if (inwidgetDealerType != 'DDC') {
+								hideClass('inwidgetimage', dealerCode);
+							}
+							if(t3_new_inwidget == 'N'){
+								if (isInwidgetMobile()) {
+									API.loadJS('https://dealeradmin.drivefca.com/js/app-element-mobile.js').then(() => {
+										loadedJs = true;
+									});
+								} else {
+									API.loadJS('https://dealeradmin.drivefca.com/js/app-element-web.js').then(() => {
+										loadedJs = true;
+									});
+								}
+						    }else{
+								API.loadJS('https://dealeradmin.drivefca.com/js/app-element-redesign-stage.js').then(() => {
+									loadedJs = true;
+								});
+							}
+						}
+					}, 2000);
+				});
+			} else {
+				window["angularEpriceComponentReference"].zone.run(() => { window.angularEpriceComponentReference.loadAngularFunction(vin, dealerCode, zipCode); });
+				if (!loadedJs) {
+					hideClass('inwidgetimage', dealerCode);
+					if(t3_new_inwidget == 'N'){
+						if (isInwidgetMobile()) {
+							API.loadJS('https://dealeradmin.drivefca.com/js/app-element-mobile.js').then(() => {
+								loadedJs = true;
+							});
+						} else {
+							API.loadJS('https://dealeradmin.drivefca.com/js/app-element-web.js').then(() => {
+								loadedJs = true;
+							});
+						}
+				    }else{
+						API.loadJS('https://dealeradmin.drivefca.com/js/app-element-redesign-stage.js').then(() => {
+							loadedJs = true;
+						});
+					}
+				}
+			}
+		}
+	}
+
+	function isInwidgetMobile() {
+		return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+	}
+
+	function invokePopup(vin, dealerCode, zipCode, url, wclass, type = 'image',t3_new_inwidget,vehicle_type) {
+		if (wclass == 'inwidgetimage') {
+			delayedloading(vin, dealerCode, zipCode, url, wclass, type,t3_new_inwidget,vehicle_type);
+		} else if (wclass == 'eshop-eprice') {
+			delayedloading(vin, dealerCode, zipCode, url, wclass, type,t3_new_inwidget,vehicle_type);
+		}
+	}
+
+	function createClass(prClass, dealerCode) {
+		if (prClass == 'inwidgetimage') {
+			parentStyle = '';
+		}
+		const style = document.createElement('style');
+		style.type = 'text/css';
+		document.getElementsByTagName('head')[0].appendChild(style);
+		if (!(style.sheet || {}).insertRule)
+			(style.styleSheet || style.sheet).addRule(parentStyle + '.' + prClass, 'cursor: pointer; display:show; width:100%');
+		else
+			style.sheet.insertRule(parentStyle + '.' + prClass + ' { cursor: pointer; display:show; width:100% }', 0);
+	}
+
+	function hideClass(prClass, dealerCode) {
+		if (dealerCode == '27289') {
+			parentStyle = '';
+		}
+		const style = document.createElement('style');
+		style.type = 'text/css';
+		document.getElementsByTagName('head')[0].appendChild(style);
+		if (!(style.sheet || {}).insertRule)
+			(style.styleSheet || style.sheet).addRule(parentStyle + '.' + prClass, 'display:none!important;');
+		else
+			style.sheet.insertRule(parentStyle + '.' + prClass + ' { display:none!important; }', 0);
+	}
+
+	const { dealershipCodes: { cllc, fiat, ar } } = await API.utils.getDealerData();
+	let dealerCode = cllc || fiat || ar;
+
+	API.subscribe('vehicle-data-updated-v1', async ({ payload: { pageData } }) => {
+		if (!(pageData.searchPage || pageData.detailPage)) return;
+		if (dealerCode == '60359' && pageData.searchPage) return;
+		//Deactivation of CTA
+		if (dealerCode == '67920' || dealerCode == '66732') return;
+		//Inwidget Button Invoke
+
+API.insertOnce('vehicle-ctas', (elem, meta) => {
+		fetch('https://e-shop.jeep.com/api/get_cta_config/' + dealerCode+'?vin='+meta.vin, {
+
+			headers: {
+				'Access-Control-Allow-Origin': '*'
+			}
+		}).then(response => {
+			return response.json();
+		}).then(cta_config => {
+			
+				try {
+					if ((dealerCode === undefined) || (dealerCode == 'undefined'))
+						dealerCode = meta.dealerCodes.cllc || meta.dealerCodes.fiat || meta.dealerCodes.ar;
+				} catch (err) {
+					console.log(err);
+				}
+				let imageUrl, imageText, imageStyle, imageStyleLocation = '', newApproachEnable,t3_new_inwidget,vehicle_type;
+				const url = 'https://dealeradmin.drivefca.com/js/app-element.js'; 
+				const wclass = 'inwidgetimage';
+				  meta.address.postalCode  =   meta.address.postalCode.split('-')[0].trim();
+
+				if (isValidVin(meta.vin) === false) return;
+				vehicle_type =  cta_config?.custom_vehicle_type
+				t3_new_inwidget =   cta_config?.t3_new_widget
+				if (cta_config != null && cta_config.button_image_url != '' && cta_config.button_image_url != null) {
+					imageUrl = cta_config.button_image_url;
+					imageText = cta_config.button_text;
+					imageStyleLocation = imageStyle = 'cursor: pointer;display:show;width:100%;' + cta_config.image_style;
+					inwidgetDealerType = cta_config.dealer_type;
+					newApproachEnable = cta_config.new_approach_enable;
+					
+					if (window.DDC != undefined && window.DDC.dataLayer != undefined && window.DDC.dataLayer.page.pageInfo.isVdp) {
+						imageUrl = cta_config.button_image_url_vdp;
+						imageText = cta_config.button_text_vdp;
+						imageStyleLocation = imageStyle = 'cursor: pointer;display:show;width:100%;' + cta_config.image_style_vdp;
+						// buttonClass = cta_config.button_class_vdp;
+
+					}
+				}
+				else {
+					imageUrl = 'https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/payment_option_red.svg';
+					imageText = 'Payment options';
+					imageStyle = 'cursor: pointer;display:show;width:100%';
+					newApproachEnable = 'Y';
+					imageStyleLocation = 'background-color: #d20f06;padding: 0;border-radius: 0;';
+				}
+				const img = document.createElement('img');
+				img.setAttribute('class', wclass);
+				img.setAttribute('src', imageUrl);
+				img.setAttribute('alt', imageText);
+				img.setAttribute('style', imageStyle);
+
+				
+
+				let inventoryType = '';
+				try {
+					if (meta.inventoryType == 'new')
+						inventoryType = 'new';
+				} catch (err) { console.log(err); }
+				if (isValidVin(meta.vin) === false) return;
+				if (inventoryType == 'new') {
+					const app = document.createElement('app-root');
+					app.setAttribute('vin', meta.vin);
+					app.setAttribute('dealercode', dealerCode);
+					app.setAttribute('zipcode', meta.address.postalCode);
+					API.append(elem, app);
+
+					if (newApproachEnable == 'Y') {
+						createClass(wclass, dealerCode);
+						API.insertCallToActionOnce('button', 'payment-calculator', meta => {
+							return {
+								href: 'javascript:void(0)',
+								style: 'padding: 0;',
+								classes: wclass,
+								imgSrc: imageUrl,
+								style: imageStyleLocation,
+								imgAlt: {
+									'en_US': imageText, // English
+								},
+								
+								onclick: () => {
+									invokePopup(meta.vin, dealerCode, meta.address.postalCode, url, wclass,'',t3_new_inwidget,vehicle_type);
+								}
+							}
+						});
+					} else {
+						
+						img.onclick = function () { invokePopup(meta.vin, dealerCode, meta.address.postalCode, url, wclass,'',t3_new_inwidget,vehicle_type); };
+						API.append(elem, img);
+
+					}
+				} else {
+					if (cta_config == null || cta_config.remove_used_cpov == 'N') {
+				
+						const usedBtn = document.createElement('a');
+						if (cta_config != null && cta_config.button_image_url_cpov != '' && cta_config.button_image_url_cpov != null) {
+						 
+							imageUrl = cta_config.button_image_url_cpov;
+							imageText = cta_config.button_text_cpov;
+							imageStyle = 'cursor: pointer;display:show;width:100%;' + cta_config.image_style_cpov;
+							const cpovwclass = 'inwidgetimage';
+							const img = document.createElement('img');
+							img.setAttribute('class', cpovwclass);
+							img.setAttribute('src', imageUrl);
+							img.setAttribute('alt', imageText);
+							img.setAttribute('style', imageStyle);
+							if (newApproachEnable == 'Y') {
+								createClass(cpovwclass, dealerCode);
+								const app = document.createElement('app-root');
+								app.setAttribute('vin', meta.vin);
+								app.setAttribute('dealercode', dealerCode);
+								app.setAttribute('zipcode', meta.address.postalCode);
+								API.append(elem, app);
+								createClass(wclass, dealerCode);
+									API.insertCallToActionOnce('button', 'payment-calculator', meta => {
+										return {
+											href: 'javascript:void(0)',
+											style: 'padding: 0;',
+											classes: wclass,
+											imgSrc: imageUrl,
+											style: imageStyleLocation,
+											imgAlt: {
+												'en_US': imageText, // English
+											},
+											
+											onclick: () => {
+												invokePopup(meta.vin, dealerCode, meta.address.postalCode, url, wclass,'',t3_new_inwidget,vehicle_type);
+											}
+										}
+										
+									});
+									
+							}
+							else {
+								//const usedBtn = document.createElement('a');
+								usedBtn.href = `https://www.fcacertified.com/t3?vin=${meta.vin}&dealerCode=${dealerCode}#vehicleInformation`;
+								usedBtn.target = '_blank';
+								usedBtn.innerHTML = img.outerHTML;
+								API.append(elem, usedBtn);
+								console.log('Preowned:API.append Method is called');
+							}
+						}
+						else {
+							if(t3_new_inwidget == 'Y'){
+								const app = document.createElement('app-root');
+								app.setAttribute('vin', meta.vin);
+								app.setAttribute('dealercode', dealerCode);
+								app.setAttribute('zipcode', meta.address.postalCode);
+								API.append(elem, app);
+
+								if (newApproachEnable == 'Y') {								
+									createClass(wclass, dealerCode);
+									API.insertCallToActionOnce('button', 'payment-calculator', meta => {
+										return {
+											href: 'javascript:void(0)',
+											style: 'padding: 0;',
+											classes: wclass,
+											imgSrc: imageUrl,
+											style: imageStyleLocation,
+											imgAlt: {
+												'en_US': imageText, // English
+											},
+											
+											onclick: () => {
+												invokePopup(meta.vin, dealerCode, meta.address.postalCode, url, wclass,'',t3_new_inwidget,vehicle_type);
+											}
+										}
+									});
+								} else {
+									img.onclick = function () { invokePopup(meta.vin, dealerCode, meta.address.postalCode, url, wclass,'',t3_new_inwidget,vehicle_type); };
+									API.append(elem, img);
+
+								}	
+								
+							}else{
+							const app = document.createElement('a');
+							imageUrl = 'https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/payment_option_red.svg';
+							imageText = 'Payment options';
+							imageStyle = 'cursor: pointer;display:show;width:100%';
+                      imageStyleLocation = 'background-color: #d20f06;padding: 0;border-radius: 0;';
+							usedBtn.href = `https://www.fcacertified.com/t3?vin=${meta.vin}&dealerCode=${dealerCode}#vehicleInformation`;
+							usedBtn.target = '_blank';
+							usedBtn.innerHTML = img.outerHTML;
+							API.append(elem, usedBtn);
+							console.log('Preowned:Final API-append');
+							}
+							
+						}
+
+					}
+				}
+			});
+		});
+
+		// Checking DDC flag to takeover eprice
+		if (config.disableEpriceTakeover === true) return;
+		// checking dom for eprice button availability
+		if (document.querySelector('html:is(.srp, .vdp) [data-location="vehicle-eprice-button"]') == null) return;
+
+		//Eprice Button Invoke
+
+		fetch('https://e-shop.jeep.com/api/get_eprice_cta_config/' + dealerCode, {
+
+			headers: {
+				'Access-Control-Allow-Origin': '*'
+			}
+		}).then(response => {
+			return response.json();
+		}).then(cta_config => {
+			API.insertOnce('vehicle-ctas', (elem, meta) => {
+				let imageUrl, imageText, imageStyle, buttonClass;
+				const url = 'https://dealeradmin.drivefca.com/js/app-eprice-element.js';
+				const wclass = 'eshop-eprice';
+				if (cta_config != null && cta_config.button_image_url != '' && cta_config.button_image_url != null) {
+					buttonClass = cta_config.button_class;
+					imageUrl = cta_config.button_image_url;
+					imageText = cta_config.button_text;
+					imageStyle = 'cursor: pointer;display:show;width:100%;' + cta_config.image_style;
+				} else {
+					buttonClass = 'default';
+					imageUrl = 'https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/fca-button.svg';
+					imageText = 'E-Price';
+					imageStyle = 'cursor: pointer;display:show;width:100%';
+				}
+
+				let inventoryType = '';
+				try {
+					if (meta.inventoryType == 'new')
+						inventoryType = 'new';
+				} catch (err) { console.log(err); }
+				if (isValidVin(meta.vin) === false) return;
+				if (inventoryType == 'new' && cta_config.is_enable == 'Y') {
+					const app = document.createElement('app-eprice');
+					app.setAttribute('vin', meta.vin);
+					app.setAttribute('dealercode', dealerCode);
+					app.setAttribute('zipcode', meta.address.postalCode);
+					API.append(elem, app);
+					if (cta_config.cta_type == 'text') {
+						API.insertCallToActionOnce('button', 'eprice', meta => {
+							return {
+								type: cta_config.button_class,
+								text: {
+									en_US: cta_config.button_text,
+								},
+								classes: wclass,
+								style: cta_config.image_style,
+								target: '_self',
+								onclick: () => {
+									invokePopup(meta.vin, dealerCode, meta.address.postalCode, url, wclass, 'text',t3_new_inwidget,vehicle_type);
+								}
+							}
+						});
+					} else {
+						createClass(wclass, dealerCode);
+						API.insertCallToActionOnce('button', 'eprice', meta => {
+							return {
+								href: 'javascript:void(0)',
+								style: 'padding: 0;',
+								classes: wclass,
+								imgSrc: imageUrl,
+								target: '_self',
+								imgAlt: {
+									'en_US': imageText, // English
+								},
+								onclick: () => {
+									invokePopup(meta.vin, dealerCode, meta.address.postalCode, url, wclass, 'image',t3_new_inwidget,vehicle_type);
+								}
+							}
+						});
+					}
+				}
+			});
+		});
+	});
+})(window.DDC.APILoader); 

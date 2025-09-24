@@ -1,0 +1,157 @@
+<div class="vehicleDtls_empty" [ngClass]="{'mobileAccessories' : isMobileScreen , 'desktopAccessories':!isMobileScreen}" *ngIf="!accessories || accessories.length === 0 ">
+    <!-- <p>Vehicle accessories are currently not available, please try again later</p> -->
+    <p>See dealer for details on available accessories.</p>
+</div>
+<!-- <div class="vehicleDtls_empty" *ngIf="isAccesoriesLoaded =='error'">
+    <p>Vehicle accessories are currently not available, please try again later</p>
+</div> -->
+
+<div class="widget_accessories_container">
+    <form class="inWidgetForm vehicle_accessories_filter" *ngIf="isAccesoriesLoaded !='error' && accessories != undefined ">
+        <div class="widget-row">
+            <div *ngIf="isMobileScreen" class="widget-col-md-12 widget-pb-1">
+                <span class="accessories_title">Accessories</span>
+            </div>
+            <!-- <div  class="widget-col-md-12 widget-pb-1">
+                <small class="widget_potential_disclaimer"> Potential available options shown, see dealer for pricing details.</small>
+            </div> -->
+        </div>
+
+        <div class="widget-row accessories_dropdown_row">
+            <div class="widget-col-md-6" *ngIf="isAccesoriesLoaded !='error'">
+                <!-- <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Category</mat-label>
+                    <mat-select class="dropdown-calc"  *ngIf="accessories_loaded" [(value)]="featured_accessories_select" (selectionChange)="get_accesories_details($event)">
+                        <mat-option value="featured"  >Featured</mat-option>
+                        <mat-option value="vehicle care products"   >Vehicle Care Products</mat-option>
+                        <mat-option value="exterior accessories"  >Exterior Accessories</mat-option>
+                        <mat-option value="lighting & electrical accessories"  >Lighting &amp; Electrical Accessories</mat-option>
+                        <mat-option value="interior accessories"  >Interior Accessories</mat-option>
+                        <mat-option value="carriers & cargo hauling accessories"  >Carriers &amp; Cargo Hauling Accessories</mat-option>
+                        <mat-option value="lifestyle & off-road accessories"  >Lifestyle &amp; Off-road Accessories</mat-option>
+                        <mat-option value="audio/video and electronics accessories"  >Audio/video And Electronics Accessories</mat-option>
+                        <mat-option value="performance"  >Performance</mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                <label class="widget-select-term-lable" for="dropdown2" *ngIf="accessories_loaded && isGreaterThanOne ">Category</label>
+                <div class="WidgetDropdown">
+                    <mat-select class="widget-select-term-dropdown" #accessoriesCategory *ngIf="accessories_loaded && isGreaterThanOne " [value]="category" [(value)]="featured_accessories_select" (selectionChange)="get_accesories_details(accessoriesCategory.value)">
+                        <mat-option *ngFor="let category of getAvailableCategories()" [value]="category">{{ category | titlecase }}</mat-option>
+                    </mat-select>
+                </div>
+
+
+
+
+
+                <!-- <span *ngIf="isAccesoriesLoaded !='error'" class="material-icons select_accessories_dropdown">expand_more</span> -->
+            </div>
+            <div class="widget-col-md-6" *ngIf="accessories_loaded && (accessories.length > 0 || accessories == 1)">
+                <mat-form-field class="widget_accesories_search" appearance="outline">
+                    <!-- <mat-label>Part Number(s) or Keywords</mat-label> -->
+                    <input class="partnumber" matInput type="text" (keyup)="onKeyUpEvent($event);search_accrssories(searchname);" (blur)="merkle_search()" placeholder="Part Number(s) or Keywords" value="{{searchname}}">
+                    <mat-icon matSuffix (click)="search_accrssories(searchname)" (click)="merkle_search()">search</mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+    <div class="vehicleDtls_empty" *ngIf="isAccesoriesLoaded =='error' && make_url != 'alfa'">
+        <p>Vehicle accessories are currently not available, please try again later</p>
+    </div>
+    <div class="vehicleDtls_empty" *ngIf="accessories?.length == 0 && isAccesoriesLoaded !='error' && make_url != 'alfa'">
+        <p>Currently accessories are not available.</p>
+    </div>
+    <div class="widget-col-md-12">
+        <!-- <div class="pickedOptions" *ngIf="selectedAccessories.length> 0">
+            <div class="picked__msg">
+                <mat-icon>check_circle_outline</mat-icon>You have selected to receive more information from your dealer
+                on the:
+            </div>
+            <div class="row">
+                <div *ngFor="let item of selectedAccessories;" class="col-md-4">
+                    <p class="picked__item">{{item.accessories_title}}<mat-icon title="Click to Remove the Package"
+                            (click)="oncheckitem(item)">cancel </mat-icon>
+                    </p>
+                </div>
+            </div>
+        </div> -->
+
+
+
+
+        <!-- <mat-form-field class="search"  appearance="fill">
+                <mat-label class="search-label">Part Number(s) or Keywords</mat-label>
+                <input class="search-input" type="text" (keyup)="onKeyUpEvent($event);search_accrssories(searchname);"
+                    (blur)="merkle_search()" matInput placeholder="Part Number(s) or Keywords" value="{{searchname}}">
+                <mat-icon matSuffix (click)="search_accrssories(searchname)" (click)="merkle_search()"
+                    class="search-button">search</mat-icon>
+            </mat-form-field> -->
+
+
+        <!-- <div class="row vehicle_accessories__row" *ngIf="accessories?.length > 0 && isAccesoriesLoaded !='error'">
+            <div class="col-6 col-md-4 col-lg-3 vehicle_accessories__col" *ngFor="let item of accessories">
+                <div class="card vehicle_accessories__item">
+                    <img class="card-img-top vehicle_accessories__img" [src]="item.accessories_img" alt="{{item.accessories_title}}" onerror="this.className='vehicle_accessories__img';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'">
+                    <div class="card-body vehicle_accessories__details text-center">                         
+                        <div class="benefits_item">
+                        {{item.accessories_title}}<br>
+                        <i class="disclaimer_bubble_transparent" attr.data-title="Part Number:{{item.part_number}} {{item.accessories_info}}"
+                            >i</i>
+                    </div>  
+                        <p class="card-text" *ngIf="inc_access_flag">
+                            <span><b>MSRP: </b>{{item.msrp | currency:'USD':'symbol':'1.2-2'}}</span><br>
+                        </p>
+                        <label for="{{item.id}}" class="vehicle_accessories__label" [ngClass]="{ 'checked' : item.property }" (click)="oncheckitem(item)">
+                            <button class="btn">
+                                <span class="add">Add</span>
+                                <span class="added">Added <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/tick-white.svg" alt="Added Icon" /></span>
+                            </button>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="widget-row vehicle_accessories__row" *ngIf="accessories?.length > 0 && isAccesoriesLoaded !='error' && accessories != 1">
+            <!-- Use slice to control the visible items -->
+            <div class="widget-col-6 widget-col-md-6 widget-col-lg-4 widget-col-xl-4 vehicle_accessories__col" *ngFor="let item of accessories,let i = index">
+                <div class="card vehicle_accessories__item">
+                    <img class="card-img-top vehicle_accessories__img" [src]="item.accessories_img" alt="{{item.accessories_title}}" onerror="this.className='vehicle_accessories__img';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'">
+                    <div class="card-body vehicle_accessories__details text-center">
+                        <div class="benefits_item">
+                            {{item.accessories_title}}<br>
+                            <i class="disclaimer_bubble_transparent" attr.data-title="{{item.accessories_info}}">i</i>
+                            <br>
+                            <p class="card-text" *ngIf="inc_access_flag">
+                                <span><b>MSRP: </b>{{item.msrp | currency:'USD':'symbol':'1.2-2'}}</span><br>
+                            </p>
+                            <span class="card-text"><b>Part Number: </b>{{item.part_number}}</span>
+                            <p class="card-text" *ngIf="item.installation_cost != null && item.installation_cost > 0"><b>Installation Cost: </b>{{item.installation_cost | currency:'USD':'symbol':'1.2-2'}}
+                                <i class="disclaimer_bubble_transparent" attr.data-title="{{item.part_disclosure}}" *ngIf="item.installation_cost != null && item.installation_cost > 0 && item.part_disclosure != null && item.part_disclosure != ''">
+                                    i
+                                </i>
+                            </p>
+                        </div>
+
+                        <label for="{{item.id}}" class="vehicle_accessories__label" [ngClass]="{ 'checked' : item.property }" (click)="oncheckitem(item)">
+                            <button class="btn">
+                                <span class="add">Add</span>
+                                <span class="added">Added <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/tick-white.svg" alt="Added Icon" /></span>
+                                <span class="remove">Remove X</span>
+                            </button>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Button to toggle between showing all or a limited number -->
+        <div class="widget-text-center mt-3" *ngIf="accessories?.length > 4 && isMobileScreen">
+            <button class="widget_primary_btn" (click)="toggleShowAll()">
+                {{ showAll ? 'Show Less' : 'Show More' }}
+            </button>
+        </div>
+
+    </div>
+</div>
+<div *ngIf="accessories == 1">
+    <p class="widget_potential_disclaimer" style="color:#8f6900;;">Sorry! we don't have "{{searchname}}" sequence in Accessories List</p>
+</div>

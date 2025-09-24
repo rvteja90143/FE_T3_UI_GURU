@@ -1,0 +1,463 @@
+<div class="Widget_jeep_wave_program">
+  <div *ngIf="activeTab == 'lease' && checkWaveBenefits" style="text-align: center;">
+    <img class="widget_jeep_wave_logo" src="{{serviceLeaseLogo}}" alt="FlexCare">
+  </div>
+  <div *ngIf="activeTab == 'finance' && checkWaveBenefits" style="text-align: center;">
+    <img class="widget_jeep_wave_logo" src="{{serviceFinanceLogo}}" alt="FlexCare">
+  </div>
+  <div *ngIf="activeTab == 'cash' && checkWaveBenefits" style="text-align: center;">
+    <img class="widget_jeep_wave_logo" src="{{serviceCashLogo}}" alt="FlexCare">
+  </div>
+</div>
+<div class="widget_protection_container Widget_protection_section">
+
+  <p *ngIf="activeTab == 'lease' && checkWaveBenefits" class="widget_include_jeep_wave_text" [innerHTML]="serviceLeaseHeader"></p>
+  <p *ngIf="activeTab == 'finance' && checkWaveBenefits" class="widget_include_jeep_wave_text" [innerHTML]="serviceFinanceHeader"></p>
+  <p *ngIf="activeTab == 'cash' && checkWaveBenefits" class="widget_include_jeep_wave_text" [innerHTML]="serviceCashHeader"></p>
+
+  <!-- <div class="widget_brand_benifits_list" *ngIf="activeTab == 'lease' && checkWaveBenefits ">
+    <h3 *ngIf="serviceWaveLeaseDescription !='' && serviceWaveLeaseDescription != null">
+      {{serviceWaveLeaseDescription}}</h3>
+    <ul class="widget-row benefits-text">
+      <li class="widgetCheckbox widget-col-md-4" *ngFor="let itemL of serviceWaveLease">
+        <span class="widget_relative"> {{itemL.name}} <i class="disclaimer_bubble_transparent2_bottom" attr.data-title="{{itemL.disclaimer}}" (mouseenter)="adobe_sdg_event('view-disclaimer',itemL.name)" (click)="adobe_sdg_event('view-disclaimer',itemL.name)" *ngIf="itemL.disclaimer != '' && itemL.disclaimer != null"><img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/info-icon.svg" alt="Info Icon" /></i>
+        </span>
+      </li>
+    </ul>
+  </div> -->
+  <!-- <div class="widget_brand_benifits_list" *ngIf="activeTab == 'finance' && checkWaveBenefits ">
+    <h3 *ngIf="serviceWaveFinanceDescription !='' && serviceWaveFinanceDescription != null">
+      {{serviceWaveFinanceDescription}}</h3>
+    <ul class="widget-row benefits-text">
+      <li class="widgetCheckbox widget-col-md-4" *ngFor="let itemL of serviceWaveFinance">
+        <span class="widget_relative"> {{itemL.name}} <i class="disclaimer_bubble_transparent2_bottom" attr.data-title="{{itemL.disclaimer}}" (mouseenter)="adobe_sdg_event('view-disclaimer',itemL.name)" (click)="adobe_sdg_event('view-disclaimer',itemL.name)" *ngIf="itemL.disclaimer != '' && itemL.disclaimer != null"><img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/info-icon.svg" alt="Info Icon" /></i>
+        </span>
+      </li>
+    </ul>
+  </div> -->
+  <!-- <div class="widget_brand_benifits_list" *ngIf="activeTab == 'cash' && checkWaveBenefits ">
+    <h3 *ngIf="serviceWaveCashDescription !='' && serviceWaveCashDescription != null">{{serviceWaveCashDescription}}
+    </h3>
+    <ul class="widget-row benefits-text">
+      <li class="widgetCheckbox widget-col-md-4" *ngFor="let itemL of serviceWaveCash">
+        <span class="widget_relative"> {{itemL.name}} <i class="disclaimer_bubble_transparent2_bottom" attr.data-title="{{itemL.disclaimer}}" (mouseenter)="adobe_sdg_event('view-disclaimer',itemL.name)" (click)="adobe_sdg_event('view-disclaimer',itemL.name)" *ngIf="itemL.disclaimer != '' && itemL.disclaimer != null"><img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/info-icon.svg" alt="Info Icon" /></i>
+        </span>
+      </li>
+    </ul>
+  </div> -->
+  <!-- monthly and payment drop down -->
+  <div class="widget_protection_serive_select">
+    <div class="tab_title">
+      <h3 class="widget_service_and_protection_text" *ngIf="!checkWavePlans">Service & Protection</h3><small *ngIf="!checkWavePlans"> Potential available options shown, see dealer for pricing details.</small>
+    </div>
+    <div *ngIf="checkWavePlans">
+      <div class="tab_title" *ngIf="activeTab == 'lease'">
+        <h3 class="widget_service_and_protection_text" [innerHTML]="servicePlanSectionHeader.lease.title"></h3><small> Potential available options shown, see dealer for pricing details.</small>
+        <p *ngIf="servicePlanSectionHeader.lease.description !='' && servicePlanSectionHeader.lease.description != null ">
+          {{servicePlanSectionHeader.lease.description}}</p>
+      </div>
+      <div class="tab_title" *ngIf="activeTab == 'finance'">
+        <h3 class="widget_service_and_protection_text" [innerHTML]="servicePlanSectionHeader.finance.title">
+        </h3><small> Potential available options shown, see dealer for pricing details.</small>
+        <p *ngIf="servicePlanSectionHeader.finance.description !='' && servicePlanSectionHeader.finance.description != null ">
+          {{servicePlanSectionHeader.finance.description}}</p>
+      </div>
+      <div class="tab_title" *ngIf="activeTab == 'cash'">
+        <h3 class="widget_service_and_protection_text" [innerHTML]="servicePlanSectionHeader.cash.title"></h3><small> Potential available options shown, see dealer for pricing details.</small>
+        <p *ngIf="servicePlanSectionHeader.cash.description !='' && servicePlanSectionHeader.cash.description != null ">
+          {{servicePlanSectionHeader.cash.description}}</p>
+      </div>
+    </div>
+
+    <div class="widget-row">
+      <div class="widget-col-md-6 " *ngIf="customplan == 0">
+        <!-- *ngIf="customplan == 0" -->
+        <div>
+          <label *ngIf="activeTab == 'lease'" class="widget-select-term-lable" for="dropdown1">Select Term</label>
+          <div class="WidgetDropdown" *ngIf="activeTab == 'lease'">
+
+            <!-- <select class="widget-select-term-dropdown" id="dropdown1" name="dropdown1" (change)="fntermduration($event)">
+              <option *ngFor="let term of leasetermduration" value="{{term}}" [selected]="term == leasedefaulttermduration">{{term}} Months</option>
+            </select> -->
+
+
+            <mat-select [(value)]="leasedefaulttermduration" class="widget-select-term-dropdown" id="dropdown1" name="dropdown1" (selectionChange)="fntermduration($event)">
+              <mat-option *ngFor="let term of leasetermduration" [value]="term">
+                {{ term }} Months
+              </mat-option>
+            </mat-select>
+
+          </div>
+          <label *ngIf="activeTab == 'finance' " class="widget-select-term-lable" for="dropdown2">Select
+            Term</label>
+          <div class="WidgetDropdown" *ngIf="activeTab == 'finance' ">
+
+            <!-- <select class="widget-select-term-dropdown" id="dropdown2" name="dropdown2" (change)="fntermduration($event)">
+              <option *ngFor="let term of financetermduration" value="{{term}}" [selected]="term == financedefaulttermduration">{{term}} Months</option>
+            </select> -->
+            <mat-select class="widget-select-term-dropdown" id="dropdown2" name="dropdown2" [(value)]="financedefaulttermduration" (selectionChange)="fntermduration($event)">
+              <mat-option *ngFor="let term of financetermduration" [value]="term">
+                {{ term }} Months
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </div>
+      <div class="widget-col-md-6">
+        <label class="widget-select-term-lable" for="dropdown3">Options Based On</label>
+        <div class="WidgetDropdown">
+          <!-- <select class="widget-select-term-dropdown" id="dropdown3" name="dropdown3" value="{{selectedMode}}" (change)="leaseFinanceCashSwitch($event)">
+            <option value="lease">Lease</option>
+            <option value="finance">Finance</option>
+            <option value="cash">Cash</option>
+          </select> -->
+
+
+          <mat-select class="widget-select-term-dropdown" id="dropdown3" name="dropdown3" [(value)]="selectedMode" (selectionChange)="leaseFinanceCashSwitch($event)">
+            <mat-option *ngIf="leaseResponseAvailable" value="lease">Lease</mat-option>
+            <mat-option *ngIf="financeResponseAvailable" value="finance">Finance</mat-option>
+            <mat-option value="cash">Cash</mat-option>
+          </mat-select>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- loading from serviceContract api -->
+  <div>
+    <div id="serviceLease" class="widget_protection_cards_container" *ngIf="activeTab == 'lease'  ">
+      <div class="vehicleDtls_empty widget-col-md-12 text-center" *ngIf="leaseLoading">
+        <h3>Loading</h3><img src="https://d1jougtdqdwy1v.cloudfront.net/images/ajax-loader.gif" alt="Pre loader Image" />
+      </div>
+      <div class="vehicleDtls_empty widget-col-md-12 text-center" *ngIf="!serviceleaseavailable">
+        <h5>Currently the Service & Protection plans are not available. Please contact your Dealer for further
+          details.</h5>
+      </div>
+
+      <div class="widget-row">
+        <div class="widget-col-lg-6 widget-mb-4" *ngFor="let itemL of serviceLease">
+          <div class="widget_car_protection_card ">
+            <div class="widget-car-container">
+              <!-- <input type="checkbox" class="widget_card_checkbox" id="service-{{itemL.id}}" (change)="oncheckitem($event, itemL,'lease')" name="serviceLease" value="{{itemL.protection_name}}" [checked]="isItemSelected(itemL.id, selectedLeaseItems)" [disabled]="false" />-->
+              <img src="{{itemL.plan_image_url}}" class="card-image" alt="{{itemL.protection_name}}" *ngIf="itemL.plan_image_url != '' && itemL.plan_image_url != null" onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" />
+              <img class="card-image" alt="{{itemL.protection_name}}" *ngIf="itemL.plan_image_url == '' || itemL.plan_image_url == null" src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png' />
+            </div>
+            <div class="widget_card_description">
+              <h5 class="widget-card-title"><span>{{ itemL.protection_name }}</span> <span class="sp_disclaimer"><i class="disclaimer_bubble_transparent1" attr.data-title="{{itemL.protection_description}}"><img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/info-icon.svg" alt="Info Icon" /></i></span></h5>
+              <div class="widget-row">
+                <div *ngIf="itemL.term != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Term</p>
+                  <p class="widget-card-elements-value">{{ itemL.term }} Months</p>
+                </div>
+                <div *ngIf="itemL.mile != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Miles</p>
+                  <p class="widget-card-elements-value">{{ itemL.mile }}</p>
+                </div>
+                <div *ngIf="this.serviceContract == 1 && servicepricelease =='Y'" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">MSRP</p>
+                  <p class="widget-card-elements-value">{{ itemL.lease_percentageamount |
+                    currency:'USD':'symbol':'1.0-0' }}</p>
+                </div>
+                <div *ngIf="itemL.protection_cost  && this.serviceContract == 0 " class="widget-col-9">
+                  <p class="widget-card-elements-name">Cost</p>
+                  <p class="widget-card-elements-value">{{ itemL.protection_cost |
+                    currency:'USD':'symbol':'1.2-2' }}&nbsp;{{itemL.protection_cost_duration}}</p>
+                </div>
+                <div *ngIf="itemL.deductible != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Deductible</p>
+                  <p class="widget-card-elements-value">$ {{itemL.deductible}}</p>
+                </div>
+                <div *ngIf="itemL.optioncode != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Option Code</p>
+                  <p class="widget-card-elements-value">{{itemL.optioncode}}</p>
+                </div>
+              </div>
+              <!-- <p class="widget_card_description_text">
+                <span [innerHTML]="itemL.showMore ? itemL.protection_description : getSlicedText(itemL.protection_description)"></span>
+                <span *ngIf="itemL.protection_cost && this.serviceContract == 0">
+                  <b>Cost: </b>{{itemL.protection_cost | currency:'USD':'symbol':'1.0-2' }}
+                  {{itemL.protection_cost_duration | uppercase}}
+                </span>
+              </p>
+              <a class="widget_card_see_more_link" (click)="toggleShowMore(itemL)">{{ itemL.showMore ? 'see less' : 'see more' }}</a> -->
+              <div class="vehicle_accessories__details">
+                <button class="widget_card_button btn" id="service-{{itemL.id}}" (click)="onToggleItemSelection($event, itemL, 'lease')" [class.selected]="isItemSelected(itemL.id, selectedLeaseItems)">
+                  <!-- {{ isItemSelected(itemL.id, selectedLeaseItems) ? 'Added' : 'Add' }} -->
+                  <span class="add">Add</span>
+                  <span class="added">Added <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/tick-white.svg" alt="Added Icon" /></span>
+                  <span class="remove">Remove X</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="serviceFinance" class="widget_protection_cards_container" *ngIf="activeTab == 'finance'">
+      <div class="vehicleDtls_empty widget-col-md-12 text-center" *ngIf="financeLoading">
+        <h3>Loading </h3><img src="https://d1jougtdqdwy1v.cloudfront.net/images/ajax-loader.gif" alt="Pre loader Image" />
+      </div>
+      <div class="vehicleDtls_empty widget-col-md-12 text-center" *ngIf="!servicefinanceavailable">
+        <h5>Currently the Service & Protection plans are not available. Please contact your Dealer for further
+          details.</h5>
+      </div>
+      <div class="widget-row">
+        <div class="widget-col-lg-6 widget-mb-4" *ngFor="let itemF of serviceFinance">
+          <div class="widget_car_protection_card ">
+            <div class="widget-car-container">
+              <!-- <input type="checkbox" class="widget_card_checkbox" id="service-{{itemF.id}}" (change)="oncheckitem($event, itemF, 'finance')" name="serviceFinance" value="{{itemF.protection_name}}" [checked]="isItemSelected(itemF.id, selectedFinanceItems)" [disabled]="false" /> -->
+
+              <img src="{{itemF.plan_image_url}}" class="card-image" alt="{{itemF.protection_name}}" *ngIf="itemF.plan_image_url != '' && itemF.plan_image_url != null" onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" />
+              <img class="card-image" alt="{{itemF.protection_name}}" *ngIf="itemF.plan_image_url == '' || itemF.plan_image_url == null" src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png' />
+            </div>
+            <div class="widget_card_description">
+              <h5 class="widget-card-title"><span>{{ itemF.protection_name }}</span> <span class="sp_disclaimer"><i class="disclaimer_bubble_transparent1" attr.data-title="{{itemF.protection_description}}"><img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/info-icon.svg" alt="Info Icon" /></i></span> </h5>
+              <div class="widget-row">
+                <div *ngIf="itemF.term != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Term</p>
+                  <p class="widget-card-elements-value">{{ itemF.term }} Months</p>
+                </div>
+                <div *ngIf="itemF.mile != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Miles</p>
+                  <span class="widget-card-elements-value">{{ itemF.mile }}</span>
+                </div>
+                <div *ngIf="servicepricefinance =='Y' && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">MSRP</p>
+                  <p class="widget-card-elements-value">{{ itemF.finance_percentageamount |
+                    currency:'USD':'symbol':'1.0-0' }}</p>
+                </div>
+                <div *ngIf="itemF.protection_cost && this.serviceContract == 0" class="widget-col-9">
+                  <p class="widget-card-elements-name">Cost</p>
+                  <p class="widget-card-elements-value">{{ itemF.protection_cost |
+                    currency:'USD':'symbol':'1.2-2' }}&nbsp;{{itemF.protection_cost_duration}}</p>
+                </div>
+                <div *ngIf="itemF.deductible != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Deductible</p>
+                  <p class="widget-card-elements-value">$ {{itemF.deductible}}</p>
+                </div>
+                <div *ngIf="itemF.optioncode != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Option Code</p>
+                  <p class="widget-card-elements-value">{{itemF.optioncode}}</p>
+                </div>
+              </div>
+              <!-- <p class="widget_protection_cards_seemore">
+                <span [innerHTML]="itemF.showMore ? itemF.protection_description : getSlicedText(itemF.protection_description)"></span>
+                <span *ngIf="itemF.protection_cost && this.serviceContract == 0">
+                  <b>Cost: </b>{{itemF.protection_cost | currency:'USD':'symbol':'1.0-2' }}
+                  {{itemF.protection_cost_duration | uppercase}}
+                </span>
+                <a class="widget_card_see_more_link" (click)="toggleShowMore(itemF)">{{ itemF.showMore ? 'see less' : 'see more' }}</a>
+              </p> -->
+
+              <div class="vehicle_accessories__details">
+                <button class="widget_card_button btn" id="service-{{itemF.id}}" (click)="onToggleItemSelection($event, itemF, 'finance')" [class.selected]="isItemSelected(itemF.id, selectedFinanceItems)">
+                  <!-- {{ isItemSelected(itemF.id, selectedFinanceItems) ? 'Remove X' : 'Add' }} -->
+                  <span class="add">Add</span>
+                  <span class="added">Added <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/tick-white.svg" alt="Added Icon" /></span>
+                  <span class="remove">Remove X</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="serviceCash" class="widget_protection_cards_container" *ngIf="activeTab == 'cash'">
+      <div class="vehicleDtls_empty widget-col-md-12 text-center" *ngIf="cashLoading">
+        <h3>Loading</h3><img src="https://d1jougtdqdwy1v.cloudfront.net/images/ajax-loader.gif" alt="Pre loader Image" />
+      </div>
+      <div class="vehicleDtls_empty widget-col-md-12 text-center" *ngIf="!servicecashavailable">
+        <h5>Currently the Service & Protection plans are not available. Please contact your Dealer for further
+          details.</h5>
+      </div>
+      <div class="widget-row">
+        <div class="widget-col-lg-6 widget-mb-4" *ngFor="let itemC of serviceCash">
+          <div class="widget_car_protection_card ">
+            <div class="widget-car-container">
+              <!-- <input type="checkbox" class="widget_card_checkbox" id="service-{{itemC.id}}" (change)="oncheckitem($event, itemC,'cash')" name="serviceCash" value="{{itemC.protection_name}}" [checked]="isItemSelected(itemC.id, selectedCashItems)" [disabled]="false" /> -->
+
+
+              <img src="{{itemC.plan_image_url}}" class="card-image" alt="{{itemC.protection_name}}" *ngIf="itemC.plan_image_url != '' && itemC.plan_image_url != null" onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" />
+              <img class="card-image" alt="{{itemC.protection_name}}" *ngIf="itemC.plan_image_url == '' || itemC.plan_image_url == null" src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png' />
+            </div>
+            <div class="widget_card_description">
+              <h5 class="widget-card-title"><span>{{ itemC.protection_name }}</span> <span class="sp_disclaimer"> <i class="disclaimer_bubble_transparent1" attr.data-title="{{itemC.protection_description}}"><img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/info-icon.svg" alt="Info Icon" /></i></span></h5>
+              <div class="widget-row">
+                <div *ngIf="itemC.term != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Term</p>
+                  <p class="widget-card-elements-value">{{ itemC.term }} Months</p>
+                </div>
+                <div *ngIf="itemC.mile != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Miles</p>
+                  <p class="widget-card-elements-value">{{ itemC.mile }}</p>
+                </div>
+                <div *ngIf="servicepricecash =='Y' && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">MSRP</p>
+                  <p class="widget-card-elements-value">{{ itemC.cash_percentageamount |
+                    currency:'USD':'symbol':'1.0-0' }}</p>
+                </div>
+                <div *ngIf="itemC.protection_cost && this.serviceContract == 0" class="widget-col-9">
+                  <p class="widget-card-elements-name">Cost</p>
+                  <p class="widget-card-elements-value">{{ itemC.protection_cost |
+                    currency:'USD':'symbol':'1.2-2' }}&nbsp;{{itemC.protection_cost_duration}}</p>
+                </div>
+                <div *ngIf="itemC.deductible != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Deductible</p>
+                  <p class="widget-card-elements-value">$ {{itemC.deductible}}</p>
+                </div>
+                <div *ngIf="itemC.optioncode != null && this.serviceContract == 1" class="widget-col-6 widget-col-md-6 widget-col-lg-6 widget-col-xl-6">
+                  <p class="widget-card-elements-name">Option Code</p>
+                  <p class="widget-card-elements-value">{{itemC.optioncode}}</p>
+                </div>
+              </div>
+              <!-- <p class="widget_card_description_text">
+                <span [innerHTML]="itemC.showMore ? itemC.protection_description : getSlicedText(itemC.protection_description)"></span>
+                <span *ngIf="itemC.protection_cost && this.serviceContract == 0">
+                  <b>Cost: </b>{{itemC.protection_cost | currency:'USD':'symbol':'1.0-2' }}
+                  {{itemC.protection_cost_duration | uppercase}}
+                </span>
+              </p>
+              <a class="widget_card_see_more_link" (click)="toggleShowMore(itemC)">{{ itemC.showMore ? 'see less' : 'see more' }}</a> -->
+              <div class="vehicle_accessories__details">
+                <button class="widget_card_button btn" id="service-{{itemC.id}}" (click)="onToggleItemSelection($event, itemC,'cash')" [class.selected]="isItemSelected(itemC.id, selectedCashItems)">
+                  <!-- {{ isItemSelected(itemC.id, selectedCashItems) ? 'Remove X ' : 'Add' }} -->
+                  <span class="add">Add</span>
+                  <span class="added">Added <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/tick-white.svg" alt="Added Icon" /></span>
+                  <span class="remove">Remove X</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Planes are added -->
+    <!--  
+    <div id="serviceLease" class="widget_protection_cards_container" *ngIf="!checkWavePlans && activeTab == 'lease'">
+      <div class="vehicleDtls_empty col-md-12 text-center" *ngIf="leaseLoading">
+        <h3>Loading</h3><img src="https://d1jougtdqdwy1v.cloudfront.net/images/ajax-loader.gif" alt="Pre loader Image" />
+      </div>
+      <div class="vehicleDtls_empty col-md-12 text-center" *ngIf="!serviceleaseavailable">
+        <h5>Currently the Service & Protection plans are not available. Please contact your Dealer for further details.</h5>
+      </div>
+      <div class="widget_protection_cards_container" *ngFor="let itemL of serviceLease">
+        <div class="widget_protection_cards">
+          <div class="widget_protection_cards_head">
+            <input type="checkbox" id="service-{{itemL.id}}" (change)="oncheckitem($event, itemL, 'lease')" name="serviceLease" value="{{itemL.protection_name}}" [checked]="isItemSelected(itemL.id, selectedLeaseItems)" [disabled]="false" />
+            <img src="{{itemL.plan_image_url}}" class="widget-img-fluid widget-d-block widget-mx-auto" alt="{{itemL.protection_name}}" *ngIf="itemL.plan_image_url != '' && itemL.plan_image_url != null" />
+          </div>
+          <div class="widget_protection_cards_content">
+            <h3>{{ itemL.protection_name }} <i class="disclaimer_bubble_transparent">i</i></h3>
+            <ul>
+              <li *ngIf="itemL.term != null && this.serviceContract == 1"><span class="widget_head">Term</span><br><span class="widget_value">{{ itemL.term }} Months</span></li>
+              <li *ngIf="itemL.mile != null && this.serviceContract == 1"><span class="widget_head">Miles</span><br><span class="widget_value">{{ itemL.mile }}</span></li>
+              <li *ngIf="itemL.lease_percentageamount != null && this.serviceContract == 1"><span class="widget_head">MSRP</span><br><span class="widget_value">{{ itemL.lease_percentageamount | currency:'USD':'symbol':'1.2-2' }}/month</span></li>
+              <li *ngIf="itemL.deductible != null && this.serviceContract == 1"><span class="widget_head">Deductible</span><br><span class="widget_value">{{itemL.deductible}}</span></li>
+              <li *ngIf="itemL.optioncode != null && this.serviceContract == 1"><span class="widget_head">Option Code</span><br><span class="widget_value">{{itemL.optioncode}}</span></li>
+            </ul>
+            <div class="widget_protection_cards_seemore">
+              <p>
+                <span [innerHTML]="itemL.showMore ? itemL.protection_description : getSlicedText(itemL.protection_description)"></span>
+                <span *ngIf="itemL.protection_cost && this.serviceContract == 0">
+                  <b>Cost: </b>{{itemL.protection_cost | currency:'USD':'symbol':'1.0-2' }}
+                  {{itemL.protection_cost_duration | uppercase}}
+                </span>
+                <span class="see-more-click" (click)="toggleShowMore(itemL)">
+                  {{ itemL.showMore ? 'see less' : 'see more' }}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="serviceFinance" class="widget_protection_cards_container" *ngIf="!checkWavePlans && activeTab == 'finance'">
+      <div class="vehicleDtls_empty col-md-12 text-center" *ngIf="financeLoading">
+        <h3>Loading </h3><img src="https://d1jougtdqdwy1v.cloudfront.net/images/ajax-loader.gif" alt="Pre loader Image" />
+      </div>
+      <div class="vehicleDtls_empty col-md-12 text-center" *ngIf="!servicefinanceavailable">
+        <h5>Currently the Service & Protection plans are not available. Please contact your Dealer for further details.</h5>
+      </div>
+      <div class="widget_protection_cards_container" *ngFor="let itemF of serviceFinance">
+        <div class="widget_protection_cards">
+          <div class="widget_protection_cards_head">
+            <input type="checkbox" id="service-{{itemF.id}}" (change)="oncheckitem($event, itemF, 'finance')" name="serviceFinance" value="{{itemF.protection_name}}" [checked]="isItemSelected(itemF.id, selectedFinanceItems)" [disabled]="false" />
+            <img src="{{itemF.plan_image_url}}" class="widget-img-fluid widget-d-block widget-mx-auto" alt="{{itemF.protection_name}}" *ngIf="itemF.plan_image_url != '' && itemF.plan_image_url != null" />
+          </div>
+          <div class="widget_protection_cards_content">
+            <h3>{{ itemF.protection_name }} <i class="disclaimer_bubble_transparent">i</i></h3>
+            <ul>
+              <li *ngIf="itemF.term != null && this.serviceContract == 1"><span class="widget_head">Term</span><br><span class="widget_value">{{ itemF.term }} Months</span></li>
+              <li *ngIf="itemF.mile != null && this.serviceContract == 1"><span class="widget_head">Miles</span><br><span class="widget_value">{{ itemF.mile }}</span></li>
+              <li *ngIf="itemF.lease_percentageamount != null && this.serviceContract == 1"><span class="widget_head">MSRP</span><br><span class="widget_value">{{ itemF.lease_percentageamount | currency:'USD':'symbol':'1.2-2' }}/month</span></li>
+              <li *ngIf="itemF.deductible != null && this.serviceContract == 1"><span class="widget_head">Deductible</span><br><span class="widget_value">{{itemF.deductible}}</span></li>
+              <li *ngIf="itemF.optioncode != null && this.serviceContract == 1"><span class="widget_head">Option Code</span><br><span class="widget_value">{{itemF.optioncode}}</span></li>
+            </ul>
+            <div class="widget_protection_cards_seemore">
+              <p>
+                <span [innerHTML]="itemF.showMore ? itemF.protection_description : getSlicedText(itemF.protection_description)"></span>
+                <span *ngIf="itemF.protection_cost && this.serviceContract == 0">
+                  <b>Cost: </b>{{itemF.protection_cost | currency:'USD':'symbol':'1.0-2' }}
+                  {{itemF.protection_cost_duration | uppercase}}
+                </span>
+                <span class="see-more-click" (click)="toggleShowMore(itemF)">
+                  {{ itemF.showMore ? 'see less' : 'see more' }}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="serviceCash" class="widget_protection_cards_container" *ngIf="!checkWavePlans && activeTab == 'cash'">
+      <div class="vehicleDtls_empty col-md-12 text-center" *ngIf="cashLoading">
+        <h3>Loading</h3><img src="https://d1jougtdqdwy1v.cloudfront.net/images/ajax-loader.gif" alt="Pre loader Image" />
+      </div>
+      <div class="vehicleDtls_empty col-md-12 text-center" *ngIf="!servicecashavailable">
+        <h5>Currently the Service & Protection plans are not available. Please contact your Dealer for further details.</h5>
+      </div>
+      <div class="widget_protection_cards_container" *ngFor="let itemC of serviceCash">
+        <div class="widget_protection_cards">
+          <div class="widget_protection_cards_head">
+            <input type="checkbox" id="service-{{itemC.id}}" (change)="oncheckitem($event, itemC,'cash')" name="serviceCash" value="{{itemC.protection_name}}" [checked]="isItemSelected(itemC.id, selectedCashItems)" [disabled]="false" />
+            <img src="{{itemC.plan_image_url}}" class="widget-img-fluid widget-d-block widget-mx-auto" alt="{{itemC.protection_name}}" *ngIf="itemC.plan_image_url != '' && itemC.plan_image_url != null" />
+          </div>
+          <div class="widget_protection_cards_content">
+            <h3>{{ itemC.protection_name }} <i class="disclaimer_bubble_transparent">i</i></h3>
+            <ul>
+              <li *ngIf="itemC.term != null && this.serviceContract == 1"><span class="widget_head">Term</span> <br><span class="widget_value">{{ itemC.term }} Months</span></li>
+              <li *ngIf="itemC.mile != null && this.serviceContract == 1"><span class="widget_head">Miles</span> <br><span class="widget_value">{{ itemC.mile }}</span></li>
+              <li *ngIf="itemC.lease_percentageamount != null && this.serviceContract == 1"><span class="widget_head">MSRP</span><br><span class="widget_value">{{ itemC.lease_percentageamount | currency:'USD':'symbol':'1.2-2' }}/month</span></li>
+              <li *ngIf="itemC.deductible != null && this.serviceContract == 1"><span class="widget_head">Deductible</span><br><span class="widget_value">{{itemC.deductible}}</span></li>
+              <li *ngIf="itemC.optioncode != null && this.serviceContract == 1"><span class="widget_head">Option Code</span><br><span class="widget_value">{{itemC.optioncode}}</span></li>
+            </ul>
+
+            <div class="widget_protection_cards_seemore">
+              <p>
+                <span [innerHTML]="itemC.showMore ? itemC.protection_description : getSlicedText(itemC.protection_description)"></span>
+                <span *ngIf="itemC.protection_cost && this.serviceContract == 0">
+                  <b>Cost: </b>{{itemC.protection_cost | currency:'USD':'symbol':'1.0-2' }}
+                  {{itemC.protection_cost_duration | uppercase}}
+                </span>
+                <span class="see-more-click" (click)="toggleShowMore(itemC)">
+                  {{ itemC.showMore ? 'see less' : 'see more' }}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  -->
+  </div>

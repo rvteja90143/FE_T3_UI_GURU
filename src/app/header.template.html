@@ -1,0 +1,50 @@
+<!-- Mobile code start here -->
+
+<div class="widget_car_gallery_section">
+    <div class="widget-row">
+        <div class="widget-col-12">
+            <div class="widget_car_gallery">
+                <app-photo-gallery [images]="veh_images" class="photo-gallery-images" [ind]="0"></app-photo-gallery>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="widget-container marginforimages">
+    <div class="widget_car_main_details">
+        <div class="widget-row">
+            <div class="widget-col-12">
+                <h1 class="widget_car_name"> {{display_vehicle_name}}</h1><br>
+                <h1 class="widget_car_name"> VIN:{{vin}} <a href='{{redirectionURL}}' target="_blank"><img src="https://d1jougtdqdwy1v.cloudfront.net/images/window_sticker.svg"></a> 
+                </h1><br>
+            </div>
+        </div>
+    </div>
+    <div class="widget_car_msrp_section">
+        <div class="widget-row">
+            <div class="widget-col-12">
+                <h1 class="widget_car_msrp_details" *ngIf="vehicle_type == 'new' && ListPrice == '' "><span class="widget_car_msrp_label">MSRP</span><span class="widget_car_msrp_amount"><span>{{msrp | currency:'USD':'symbol':'1.0-0'}}</span></span></h1>
+                <h1 class="widget_car_msrp_details" *ngIf="vehicle_type == 'new' && ListPrice != '' && ListPrice != undefined && ListPrice != null && msrp != ListPrice"><span class="widget_car_msrp_label">List Price</span><span class="widget_car_msrp_amount"><span>{{ListPrice | currency:'USD':'symbol':'1.0-0'}}</span></span></h1>
+                <h1 class="widget_car_msrp_details" *ngIf="vehicle_type == 'used' && !hidePayment"><span class="widget_car_msrp_label">Dealer Price </span><span class="widget_car_msrp_amount"><span>{{dealerprice | currency:'USD':'symbol':'1.0-0'}}</span></span></h1>
+            </div>
+            <div class="estimator-pricing" *ngIf="vehicle_type == 'used' && hidePayment">Please contact dealer for pricing.</div>
+        </div>
+    </div>
+    <div class="widget-row" *ngIf="showTestDriveBtn !== 'N' && TestDrive">
+        <div class="widget_testdrive_btn_wrapper">
+            <button (click)="invokeTestDrive()" id="testDriveBtn" class="widget_testdrive_btn">
+                <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_2325_3147)">
+                        <path d="M8.90215 0C9.30054 0 9.69893 0 10.0973 0C10.1477 0.0112719 10.1977 0.0292365 10.2488 0.0331112C11.2199 0.103913 12.1608 0.319136 13.0421 0.728095C16.2719 2.22655 18.1042 4.74265 18.4646 8.29683C18.6034 9.6646 18.3913 10.9947 17.8859 12.2712C16.3405 16.1734 12.4334 18.4701 8.27268 17.9188C6.77211 17.7198 5.40187 17.1692 4.18732 16.2632C2.19994 14.7806 1.00054 12.8116 0.603561 10.3599C0.5627 10.107 0.534168 9.852 0.5 9.59767C0.5 9.19928 0.5 8.80089 0.5 8.4025C0.527828 8.18305 0.551428 7.96325 0.583483 7.7445C0.800467 6.26013 1.33483 4.90116 2.23129 3.69648C3.71425 1.70276 5.68543 0.500895 8.14165 0.103561C8.39421 0.0627 8.64853 0.034168 8.90215 0ZM3.18201 6.73848L15.8178 6.73848C14.9467 4.24739 12.5352 2.25473 9.49991 2.25473C6.46178 2.25473 4.05171 4.25056 3.18236 6.73848H3.18201ZM2.76002 9.00907C2.76072 10.8577 3.51805 12.7735 5.19299 14.1681C6.11024 14.9317 7.15993 15.4203 8.353 15.6211C8.3456 14.8166 8.22548 14.0628 7.98419 13.3304C7.4523 11.715 6.52589 10.4071 5.00594 9.57689C4.31237 9.19823 3.56349 9.014 2.76002 9.00872V9.00907ZM10.6475 15.6292C12.3774 15.2967 13.7772 14.4636 14.8449 13.0895C15.7759 11.8912 16.2268 10.5248 16.2433 8.99392C15.9844 9.01999 15.7449 9.03337 15.5085 9.07036C14.5589 9.2183 13.7318 9.63043 13.0048 10.2525C12.1206 11.0088 11.5116 11.9542 11.1136 13.0384C10.8113 13.8616 10.6525 14.7141 10.6475 15.6292ZM10.6225 9.02527C10.6503 8.43244 10.1547 7.91182 9.5295 7.87765C8.93949 7.84524 8.4171 8.33874 8.378 8.96609C8.34102 9.56104 8.85248 10.0986 9.47913 10.1232C10.0744 10.1465 10.5936 9.6484 10.6229 9.02563L10.6225 9.02527Z" fill="black"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_2325_3147">
+                            <rect width="18" height="18" fill="white" transform="translate(0.5)"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+                Test Drive
+            </button>
+        </div>
+    </div>       
+</div>
+<!-- Mobile code end here -->

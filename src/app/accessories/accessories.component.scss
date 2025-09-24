@@ -1,0 +1,433 @@
+.accessories_heading {
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    word-wrap: break-word;
+    text-align: left;
+    margin-bottom: 0px;
+    margin-left: 20px;
+}
+
+.toggleHeader__title {
+    margin-top: 16px;
+}
+
+.form-control {
+    width: 100%;
+    margin-top: 7px;
+    padding: 16px;
+}
+
+.select_accessories_dropdown {
+    position: absolute;
+    margin-top: -40px;
+    right: 26px;
+}
+
+.widget_accesories_search {
+    width: 100%;
+    margin-top: 1.45rem;
+}
+
+.vehicle_accessories_filter {
+    margin-top: 16px;
+}
+
+
+// ::ng-deep .mdc-line-ripple {
+//     display: none
+// }
+
+.card-title {
+    margin-right: 4px;
+}
+
+.partnumber {
+    height: auto;
+    width: 338px;
+    max-width: 100%;
+    padding: 0px 14px;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px !important;
+    border-radius: 5px;
+}
+
+.mdc-text-field,
+.mat-mdc-text-field-wrapper {
+    border: 1px solid black !important;
+    border-radius: 4px !important;
+}
+
+.vehicle_accessories__item {
+    border: 0px solid transparent;
+    margin-bottom: 47px;
+    min-height: 235px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px -1px rgba(81.50, 81.50, 81.50, 0.10);
+
+    .disclaimer_bubble_transparent {
+        background: #ffffff;
+        cursor: pointer;
+        border-radius: 50%;
+        border: 1px solid black;
+        display: inline-block;
+        font-style: normal;
+        font-size: 8px;
+        font-weight: 600;
+        width: 15px;
+        height: 15px;
+        line-height: 1;
+        padding: 3px;
+        text-align: center;
+        text-transform: none;
+        position: relative;
+
+        &:before {
+            background: #f7f7f7;
+            border-radius: 3px;
+            top: 20px;
+            left: -60px;
+            box-shadow: 0px 0px 8px 0px #999;
+            content: attr(data-title);
+            display: none;
+            font-weight: normal;
+            line-height: 1.2;
+            padding: 3px 6px;
+            position: absolute;
+            text-transform: none;
+            width: 150px;
+            z-index: 1;
+            text-align: left;
+        }
+
+        &[title]:before {
+            content: attr(title);
+        }
+
+        &:after {
+            content: "";
+            display: none;
+            position: absolute;
+            height: 10px;
+            width: 10px;
+            border: 5px solid transparent;
+            border-top-color: #f7f7f7;
+            bottom: 11px;
+            right: 4px;
+            z-index: 1;
+        }
+
+        &:hover {
+
+            &:before,
+            &:after {
+                display: block;
+            }
+        }
+    }
+}
+
+.vehicle_accessories__img {
+    aspect-ratio: 16 / 13;
+    //height: 116px;
+    width: 100%;
+    border-bottom: 2px solid #9D9D9D;
+    margin: auto;
+    display: block;
+}
+
+.vehicle_accessories__name {
+    color: black;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 20px;
+    word-wrap: break-word;
+    margin: 0px;
+    margin-top: 10px;
+    align-self: center;
+    position: relative !important;
+}
+
+.vehicle_accessories__details .btn {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    word-wrap: break-word;
+    background: #000000;
+    border-radius: 5px;
+    text-transform: capitalize;
+    width: 100%;
+    height: 33px;
+    border: none;
+    padding: 0 !important;
+}
+
+.vehicle_accessories__details .vehicle_accessories__label .btn {
+    span.remove {
+        display: none;
+    }
+}
+
+.vehicle_accessories__details .vehicle_accessories__label.checked .btn {
+    color: #000000;
+    background: #F2B54A;
+
+    span.add {
+        display: none;
+    }
+
+    span.remove {
+        display: none;
+    }
+
+    span.added {
+        color: #fff;
+        display: block;
+
+        img {
+            display: inline;
+        }
+    }
+}
+
+.vehicle_accessories__details .vehicle_accessories__label.checked .btn:hover {
+    color: #FFFFFF;
+    background: #cc1213;
+
+    span.add {
+        display: none;
+    }
+
+    span.added {
+        display: none;
+    }
+
+    span.remove {
+        color: #fff;
+        display: block;
+
+        img {
+            display: inline;
+        }
+    }
+}
+
+.vehicle_accessories__details .btn:before {
+    /* background: url(../images/icons/check_mark_white.svg) ; */
+    background-size: 100% 100%;
+    content: '';
+    display: none;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    top: 7px;
+}
+
+.vehicle_accessories__details .btn .added {
+    color: #fff;
+    display: none;
+}
+
+.vehicle_accessories__details .btn .added .mat-icon {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+}
+
+.vehicle_accessories__details input:not(:checked)+.btn {
+    background: black;
+    color: #ffffff;
+}
+
+.vehicle_accessories__details input:checked+.btn:before {
+    display: block;
+}
+
+.vehicle_accessories__details input:checked+.btn .added {
+    display: block;
+}
+
+.vehicle_accessories__details input:checked+.btn .add {
+    display: none;
+}
+
+.vehicle_accessories__details {
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+
+    .card-text {
+        font-weight: 300 !important;
+
+        b {
+            font-weight: 600 !important;
+        }
+    }
+
+    label {
+        bottom: 15px;
+        margin-top: 10px;
+        width: 100%;
+        margin-bottom: 0;
+
+        span.btn {
+            background: black;
+            color: #ffffff;
+            padding: 0;
+            height: 33px;
+            border: 0;
+            line-height: 33px;
+            font-size: 16px;
+
+            span.add {
+                line-height: 2.15;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:992px) and (max-width: 1366px) {
+    .vehicle_accessories__details {
+        min-height: 134px;
+    }
+}
+
+h5.vehicle_accessories__name span {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    font-size: 15px !important;
+}
+
+
+.benefits_item {
+    font-weight: 800;
+    min-height: 180px;
+    text-align: center;
+}
+
+.widget_potential_disclaimer {
+    // display: flex;
+    // justify-content: end;
+    // position: relative;
+    // top: 15px;
+    // max-width: 65%;
+    // left: 35%;
+}
+
+
+
+.mobileAccessories {
+    // margin-top: 21%;
+    margin-left: 2px;
+}
+
+.desktopAccessories {
+    margin-top: 21px;
+    // margin-left: -10px;
+}
+
+label.widget-select-term-lable {
+    font-weight: bold;
+}
+
+.drs_subtitle {
+    border-bottom: 1px solid #444 !important;
+    font-weight: 600 !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 5px !important;
+    font-size: 24px !important;
+
+    @media screen and (max-width:1200px) {
+        font-size: 22px !important;
+    }
+}
+
+.accessories_title {
+    color: var(--widget-primary-color);
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    justify-content: center;
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+.accessories_dropdown_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: self-end;
+    margin-bottom: 10px;
+
+    @media (min-width:997px) {
+        .WidgetDropdown {
+            margin-bottom: 27px !important;
+        }
+    }
+
+
+
+    .widget_accesories_search {
+        margin-top: 30px !important;
+    }
+
+    .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--outlined.mdc-text-field--no-label {
+        margin-bottom: 0px !important;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
+        height: 1px !important;
+    }
+
+    .widget_accesories_search {
+        .mdc-text-field {
+            padding-left: 5px !important;
+        }
+
+        .mat-mdc-form-field-input-control {
+            font-size: 14px !important;
+            padding: 0px !important;
+        }
+
+        .mat-mdc-form-field-icon-suffix {
+            display: flex;
+            align-items: center;
+
+            .mat-icon {
+                padding: 0px 5px !important;
+                line-height: 1.2;
+            }
+        }
+    }
+
+    .material-icons {
+        line-height: 1.2 !important;
+    }
+}
+
+@media (max-width:996px) {
+    .accessories_dropdown_row .WidgetDropdown {
+        margin-bottom: 5px;
+    }
+
+    .widget_potential_disclaimer {
+        top: 0px;
+    }
+}
+
+.widget_accessories_container {
+    .mat-mdc-select-min-line {
+        font-size: 14px !important;
+    }
+}

@@ -1,0 +1,806 @@
+<!-- MOBILE CODE STARTS FOR STEP 4 SUBMIT PAGE-->
+@if(isMobileScreen){
+<div class="widget-container">
+    <div class="widget_accessories_section widget-container-fluid">
+        <form class="inWidgetForm " [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="widget-row" id="PurchaseContainer">
+                <div class="widget-col-sm-12 widget-col-12">
+                    <hr style="margin-top: 50px; margin-bottom: 50px; border: 1px #676767 solid">
+                </div>
+            </div>
+            <div *ngIf="!hideDropdown" class="widget-row">
+                <div class="widget-col-sm-12 widget-col-12">
+                    <!-- mobile -->
+                    <div class="payment-input-fields payment-options">
+                        <mat-label><b>Purchase Options</b></mat-label>
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-select class="widget-select-term-dropdown" id="purchase_option" name="purchase_option" [(value)]="paymentType" (selectionChange)="leaseFinanceCashSwitch($event)">
+                                <mat-option *ngIf="leaseResponseAvailable && vehicle_type == 'new'" value="lease">Lease</mat-option>
+                                <mat-option *ngIf="financeResponseAvailable" value="finance">Finance</mat-option>
+                                <mat-option value="cash">Cash</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-row">
+                <div class="widget-col-sm-12 widget-col-12">
+                    <hr style="margin-top: 22px; margin-bottom: 22px; border: 1px #676767 solid">
+                </div>
+            </div>
+            <div *ngIf="(showdelivery == 1 || showdelivery == 'O' || showdelivery == 'P' || showdelivery == 'H') && vehicleStatus === true" class="widget-row">
+                <div class="widget-col-12">
+                    <h5 *ngIf="showdelivery == 1 || showdelivery == 'O' || showdelivery == 'P' || showdelivery == 'H'" class="widget_delivery_option">Delivery Options</h5>
+                    <div class="widget_radio_group">
+                        <div class="widget_radio_option" *ngIf="fnCheckVehicalDelivery('P')">
+                            <input type="radio" [(ngModel)]="selectedLocation" id="drs_dealership" name="location" value="Pick up at Dealership" formControlName="location" (change)="atDealership()" (click)="handleDeliveryClick()">
+                            <label for="drs_dealership">Pick up at Dealership</label>
+                        </div>
+                        <div class="widget_radio_option" *ngIf="fnCheckVehicalDelivery('H')">
+                            <input type="radio" [(ngModel)]="selectedLocation" id="drs_myhome" name="location" value="My Home" formControlName="location" (change)="homeAddress()" (click)="handleDeliveryClick()">
+                            <label for="drs_myhome">My Home</label>
+                        </div>
+                        <span class="widget_radio_option_span_warning" *ngIf="(showdelivery === 'H' || selectedLocation === 'My Home') && (showdelivery == 1 ) &&(showdeliveryText != '' && showdeliveryText !=null)">{{showdeliveryText}}</span>
+                        <div class="widget_radio_option" *ngIf="fnCheckVehicalDelivery('O')">
+                            <input type="radio" [(ngModel)]="selectedLocation" id="drs_otherlocation" name="location" value="Other Location (No extra charge)" formControlName="location" (change)="otherAddress()" (click)="handleDeliveryClick()">
+                            <label for="drs_otherlocation">Other Location (No extra charge)</label>
+                        </div>
+                        <span class="widget_radio_option_span_warning" *ngIf="(showdelivery === 'O' || selectedLocation === 'Other Location (No extra charge)') && (showdelivery == 1 ) &&(showdeliveryText != '' && showdeliveryText !=null)">{{showdeliveryText}}</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="(showdelivery == 1 || showdelivery == 'O' || showdelivery == 'P' || showdelivery == 'H') && vehicleStatus === true" class="widget-row">
+                <div class="widget-col-12 widget_delivery_heading">
+                    <h5 class="widget_package_and_options">Delivery Options - {{ selectedLocation }}</h5>
+                </div>
+            </div>
+
+            <div class="widget-row" *ngIf="(showdelivery === 'P' || selectedLocation === 'Pick up at Dealership' || selectedLocation == 'My Home' || selectedLocation == 'Other Location (No extra charge)') && vehicleStatus === true">
+                <div class="widget-col-12">
+                    <div class="widget-row">
+                        <div class="widget-col-12 delivery_date_time">
+                            <div class="WidgetInputElement">
+                                <div class="WidgetInputElement mob-m15">
+                                    <mat-form-field class="widget_accesories_search testDrive__date" appearance="outline">
+                                        <mat-label>Date</mat-label>
+                                        <input formControlName="date" name="delivery_date" id="delivery_date" class="textbox-n" type="text" readonly placeholder="Select a Date" onfocus="(type='')" onblur="(type='text')" id="date" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [matDatepickerFilter]="showroomTimingFilter"
+                                         (dateChange)="initialevent($event)" />
+                                        <mat-error *ngIf="submitted && f.date.errors && f.date.errors?.required" class="invalid-feedback">Date is required</mat-error>
+
+                                        <mat-datepicker-toggle matSuffix [for]="picker" (click)="shiftdigitaldate()"></mat-datepicker-toggle>
+                                        <mat-datepicker panelClass="in-widget-datepicker" #picker></mat-datepicker>
+                                    </mat-form-field>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-row">
+                        <div class="widget-col-12 delivery_date_time" (click)="enabletime(1)">
+                            <div class="WidgetDropdown">
+                                <mat-form-field class="widget_accesories_search testdriveTime_select" appearance="outline">
+                                    <mat-label>Time</mat-label>
+                                    <mat-select formControlName="time" id="delivery_time" name="delivery_time" placeholder="Select a Time" [ngClass]="{ 'is-invalid': submitted && f.time.errors }">
+                                        <mat-option>Select Time</mat-option>
+                                        <mat-option *ngFor="let time of times" value="{{time}}">{{time}} </mat-option>
+                                    </mat-select>
+                                    <mat-select-trigger>
+                                        <mat-icon>schedule</mat-icon>
+                                    </mat-select-trigger>
+                                    <mat-error *ngIf="submitted && f.time.errors && f.time.errors?.required" class="invalid-feedback">Time is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="(showdelivery == 1 || showdelivery == 'O' || showdelivery == 'P' || showdelivery == 'H') && vehicleStatus === true" class="widget-row">
+                <!-- <div class="widget-col-12">
+                    <h5 class="widget_package_and_options">Delivery Options - {{ selectedLocation }}</h5>
+                </div> -->
+                <div class="widget-col-12">
+                    <div id="homeAddress-delivery" *ngIf="showdelivery === 'H' || selectedLocation === 'My Home'">
+                        <div class="widget-row">
+                            <div class="widget-col-12">
+                                <div class="WidgetInputElement mob-margin-0">
+                                    <label class="" for="hlhomeAddress"><span>Home Address</span><span class="req">&#42;</span></label>
+                                    <mat-form-field class="widget_accesories_search" appearance="outline">
+                                        <input type="text" formControlName="hlhomeAddress" placeholder="Enter your home address" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlhomeAddress.errors }" matInput (keyup)="populateaddress($event)" autocomplete=”off” />
+                                        <div class="autoCompleteAddress" *ngIf="autoEnable == 1 && address.length > 0">
+                                            <div class="autoCompleteAddress_list" *ngFor="let add of address">
+                                                <span (click)="selectaddress($event,'hlhomeAddress','hlcity','hlstate','hlzipcode')">{{add}}</span>
+                                            </div>
+                                        </div>
+                                        <mat-error *ngIf="submitted && f.hlhomeAddress.errors && f.hlhomeAddress.errors?.required" class="invalid-feedback">Home Address is required</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="widget-col-12">
+                                <div class="WidgetInputElement1">
+                                    <label class="" for="hlcity"><span>City</span><span class="req">&#42;</span></label>
+                                    <mat-form-field class="widget_accesories_search" appearance="outline">
+                                        <input type="text" formControlName="hlcity" placeholder="Enter City" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlcity.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                        <mat-error *ngIf="submitted && f.hlcity.errors && f.hlcity.errors?.required" class="invalid-feedback">
+                                            Enter a valid city</mat-error>
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-row">
+                            <div class="widget-col-12">
+                                <div class="WidgetInputElement1">
+                                    <label class=""><span>State</span><span class="req">&#42;</span></label>
+                                    <mat-form-field class="widget_accesories_search" appearance="outline">
+                                        <input type="text" formControlName="hlstate" placeholder="Enter State" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlstate.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                        <mat-error *ngIf="submitted && f.hlstate.errors && f.hlstate.errors?.required" class="invalid-feedback">
+                                            Enter a valid state</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="widget-col-12">
+                                <div class="WidgetInputElement1">
+                                    <label class=""><span>ZIP Code</span><span class="req">&#42;</span></label>
+                                    <mat-form-field class="widget_accesories_search" appearance="outline">
+                                        <input type="text" formControlName="hlzipcode" maxlength="5" placeholder="ZIP Code" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlzipcode.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                        <mat-error *ngIf="submitted && f.hlzipcode.errors && f.hlzipcode.errors?.required" class="invalid-feedback">
+                                            Enter a valid ZIP Code </mat-error>
+
+                                        <mat-error *ngIf="f.hlzipcode.errors?.pattern || f.hlzipcode.errors?.maxlength || f.hlzipcode.errors?.minlength" class="invalid-feedback">
+                                            Invalid ZIP Code </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="otherAddress-delivery" *ngIf="showdelivery === 'O' || selectedLocation === 'Other Location (No extra charge)'">
+                        <div class="widget-row">
+                            <div class="widget-col-12">
+                                <div class="WidgetInputElement mob-margin-0">
+                                    <label class="" for="olhomeAddress"><span>Other Address</span><span class="req">&#42;</span></label>
+                                    <mat-form-field class="widget_accesories_search" appearance="outline">
+                                        <input type="text" formControlName="olhomeAddress" placeholder="Other Address" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olhomeAddress.errors }" matInput (keyup)="populateaddress($event)" autocomplete=”off” />
+                                        <div class="autoCompleteAddress" *ngIf="autoEnable == 1 && address.length > 0">
+                                            <div class="autoCompleteAddress_list" *ngFor="let add of address">
+                                                <span (click)="selectaddress($event,'olhomeAddress','olcity','olstate','olzipcode')">{{add}}</span>
+                                            </div>
+                                        </div>
+                                        <mat-error *ngIf="submitted && f.olhomeAddress.errors && f.olhomeAddress.errors?.required" class="invalid-feedback">Other Address is required</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="widget-col-12">
+                                <div class="WidgetInputElement1">
+                                    <label class="" for="olcity"><span>City</span><span class="req">&#42;</span></label>
+                                    <mat-form-field class="widget_accesories_search" appearance="outline">
+                                        <input type="text" formControlName="olcity" placeholder="Enter City" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olcity.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                        <mat-error *ngIf="submitted && f.olcity.errors && f.olcity.errors?.required" class="invalid-feedback">
+                                            Enter a valid city</mat-error>
+                                    </mat-form-field>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-row">
+                            <div class="widget-col-12">
+                                <div class="WidgetInputElement1">
+                                    <label class="" for="olcity"><span>State</span><span class="req">&#42;</span></label>
+                                    <mat-form-field class="widget_accesories_search" appearance="outline">
+                                        <input type="text" formControlName="olstate" placeholder="Enter State" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olstate.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                        <mat-error *ngIf="submitted && f.olstate.errors && f.olstate.errors?.required" class="invalid-feedback">
+                                            Enter a valid state</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="widget-col-12">
+                                <div class="WidgetInputElement1">
+                                    <label class="" for="olzipcode"><span>ZIP Code</span><span class="req">&#42;</span></label>
+                                    <mat-form-field class="widget_accesories_search" appearance="outline">
+                                        <input type="text" formControlName="olzipcode" maxlength="5" placeholder="ZIP Code" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olzipcode.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                        <mat-error *ngIf="submitted && f.olzipcode.errors && f.olzipcode.errors?.required" class="invalid-feedback">
+                                            Enter a valid ZIP Code </mat-error>
+                                        <mat-error *ngIf="f.olzipcode.errors?.pattern || f.olzipcode.errors?.maxlength || f.olzipcode.errors?.minlength" class="invalid-feedback">
+                                            Invalid ZIP Code </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-row submit-to-dealer-accordion">
+                <div class="widget-col-12">
+                    <div class="widget-accordion">
+                        <div class="widget_accordion_item">
+                            <input type="checkbox" id="submitpage_vehicle_info" class="widget-accordion-checkbox">
+                            <label for="submitpage_vehicle_info" class="widget-accordion-header" (click)="vehicleInfoClick()">
+                                Vehicle Info
+                                <svg *ngIf="!toggleVehicleInfo" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="ic:baseline-plus">
+                                        <path id="Vector" d="M19.7917 13.5396H13.5417V19.7896H11.4584V13.5396H5.20837V11.4563H11.4584V5.20625H13.5417V11.4563H19.7917V13.5396Z" fill="black" />
+                                    </g>
+                                </svg>
+                                <svg *ngIf="toggleVehicleInfo" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="minus_icon">
+                                    <g id="ic:baseline-minus">
+                                        <path id="Vector" d="M41.9587 13.5394H11.042V11.4561H41.9587V13.5394Z" fill="#0A0A0A" />
+                                    </g>
+                                </svg>
+                            </label>
+                            <div class="widget-accordion-content">
+                                <div class="widget_accordian_content_container" *ngFor="let info of vehicleInfo ">
+                                    <p class="widget_details_name">{{info.caption}}</p>
+                                    <p class="widget_details_value">{{info.value}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-row">
+                <div class="widget-col-12">
+                    <div class="widget-row">
+                        <div class="widget-col-12">
+                            <h5 class="widget_dealer_information">Dealer Information</h5>
+                            <p class="widget_dealer_name">{{dealerinfo?.dealerName}}</p>
+                            <p (click)="adobe_sdg_event('dealer-address')" class="widget_dealer_address">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                    <g clip-path="url(#clip0_1362_220087)">
+                                        <path d="M6 6.49609C6 6.09827 6.15804 5.71674 6.43934 5.43543C6.72064 5.15413 7.10218 4.99609 7.5 4.99609C7.89782 4.99609 8.27936 5.15413 8.56066 5.43543C8.84196 5.71674 9 6.09827 9 6.49609C9 6.89392 8.84196 7.27545 8.56066 7.55675C8.27936 7.83806 7.89782 7.99609 7.5 7.99609C7.10218 7.99609 6.72064 7.83806 6.43934 7.55675C6.15804 7.27545 6 6.89392 6 6.49609Z" fill="black" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1 6.496C1.0008 4.7727 1.686 3.12028 2.90493 1.9021C4.12386 0.68392 5.7767 -0.00026527 7.5 7.7153e-08C11.089 7.7153e-08 14 2.909 14 6.496C14 9.17 12.662 11.289 11.228 12.721C10.5941 13.3577 9.88367 13.9132 9.113 14.375C8.791 14.565 8.49 14.715 8.228 14.817C7.981 14.915 7.722 14.991 7.5 14.991C7.278 14.991 7.019 14.915 6.772 14.817C6.46612 14.6925 6.17026 14.5448 5.887 14.375C5.11634 13.9132 4.40592 13.3576 3.772 12.721C2.338 11.289 1 9.17 1 6.496ZM7.5 3.997C6.83696 3.997 6.20107 4.26039 5.73223 4.72923C5.26339 5.19807 5 5.83396 5 6.497C5 7.16004 5.26339 7.79593 5.73223 8.26477C6.20107 8.73361 6.83696 8.997 7.5 8.997C8.16304 8.997 8.79893 8.73361 9.26777 8.26477C9.73661 7.79593 10 7.16004 10 6.497C10 5.83396 9.73661 5.19807 9.26777 4.72923C8.79893 4.26039 8.16304 3.997 7.5 3.997Z" fill="black" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_1362_220087">
+                                            <rect width="15" height="15" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <a href="https://www.google.com/maps/search/?api=1&query={{dealerinfo?.dealerAddress1}} {{dealerinfo?.dealerCity}}{{dealerinfo?.dealerState}}{{dealerinfo?.dealerZip}}" class="widget_dealer_address_link" target="blank">
+                                    {{dealerinfo?.dealerAddress1}}<br>{{dealerinfo?.dealerCity}},
+                                    {{dealerinfo?.dealerState}} {{dealerinfo?.dealerZip}}
+                                </a>
+                            </p>
+                            <p (click)="adobe_sdg_event('dealer-phone')" *ngIf="dealerinfo?.customize_email_phone == 'Y'">
+                                <a href="tel:{{dealerinfo?.phoneNumber}}" title="{{dealerinfo?.phoneNumber}}" target="_blank" class="widget_dealer_number">
+                                    <svg class="" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                        <path d="M15.3983 11.6265C15.2799 12.5263 14.838 13.3523 14.1551 13.9501C13.4722 14.5479 12.5951 14.8767 11.6875 14.8751C6.41485 14.8751 2.12501 10.5853 2.12501 5.31261C2.12338 4.40503 2.45218 3.52789 3.05 2.84502C3.64782 2.16214 4.47378 1.72024 5.3736 1.60183C5.60114 1.57404 5.83157 1.6206 6.03048 1.73453C6.22939 1.84847 6.38612 2.02368 6.47727 2.23402L7.87977 5.36507V5.37304C7.94956 5.53404 7.97838 5.70983 7.96366 5.88468C7.94894 6.05954 7.89115 6.22803 7.79544 6.37511C7.78348 6.39304 7.77087 6.40964 7.75758 6.42624L6.37501 8.06515C6.87239 9.07585 7.92958 10.1237 8.95356 10.6225L10.5699 9.24718C10.5858 9.23384 10.6024 9.22142 10.6197 9.20999C10.7666 9.11198 10.9357 9.05215 11.1116 9.03592C11.2875 9.01968 11.4647 9.04756 11.6271 9.11702L11.6357 9.12101L14.7641 10.5228C14.9748 10.6137 15.1505 10.7703 15.2648 10.9692C15.3791 11.1681 15.4259 11.3987 15.3983 11.6265Z" fill="black" />
+                                    </svg>{{dealerinfo?.phoneNumber}}
+                                </a>
+                            </p>
+                            <p *ngIf="dealerinfo?.demail != '' && dealercode != '45107'">
+                                <a href="mailto:{{dealerinfo?.demail}}" title="{{dealerinfo?.demail}}" class="widget_dealer_email">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                        <path d="M14.1665 2.83325H2.83317C2.054 2.83325 1.42359 3.47075 1.42359 4.24992L1.4165 12.7499C1.4165 13.5291 2.054 14.1666 2.83317 14.1666H14.1665C14.9457 14.1666 15.5832 13.5291 15.5832 12.7499V4.24992C15.5832 3.47075 14.9457 2.83325 14.1665 2.83325ZM14.1665 5.66659L8.49984 9.20825L2.83317 5.66659V4.24992L8.49984 7.79158L14.1665 4.24992V5.66659Z" fill="black" />
+                                    </svg>{{dealerinfo?.demail}}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-row">
+                <div class="widget-col-sm-12 widget-col-12">
+                    <hr style="margin-top: 34px; margin-bottom: 22px; border: 1px #676767 solid">
+                </div>
+            </div>
+
+
+            <div class="widget-row" *ngIf="packageoption?.length > 0">
+                <div class="widget-col-12" (click)="enabletime(2)">
+                    <h5 class="widget_package_and_options">Package & Options</h5>
+                    <ul class="row" *ngIf="packageoption?.length > 0">
+                        <li class="col-md-4" *ngFor="let details of packageoption">
+                            <div class="packageText">{{details}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- tradein, service and protection and accessories -->
+            <div class="drs_section tradein_info" *ngIf="show == 1" (click)="enabletime(2)">
+                <h4 class="drs_subtitle">Trade-In</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="tradein_info_title">
+                            <p>Your trade-in vehicle was assessed at </p>{{tradein}}
+                        </h5>
+                        <p>You Applied <strong>{{tradein_adj | currency:'USD':'symbol':'1.0-0'}}</strong> of your total
+                            trade-in
+                            value to your new vehicle purchase.<br>
+                            Your purchase is accurate until <strong>{{currentDate | date: 'MMMM dd, yyyy' }}</strong>.
+                            Upon
+                            dealer inspection and market conditions, these values may be adjusted. Your dealer will
+                            confirm the
+                            final evaluation.</p>
+                    </div>
+                    <div class="col-md-12">
+                        <h6>Your Vehicle Details:</h6>
+                        <address>{{vehicle}}<br>
+                            Style: {{style}}<br>
+                            Mileage: {{mileage}}</address>
+                    </div>
+                    <div class="col-md-12" *ngIf="options.length > 0 ">
+                        <h6>Options and Equipment:</h6>
+                        <p class="tradein_info_list" *ngIf="kbbmake =='' "><span *ngFor="let option of options">{{option.name}}</span></p>
+                        <p class="tradein_info_list" *ngIf="kbbmake !='' "><span *ngFor="let option of options">{{option}}</span></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="drs_section vehicle_service" *ngIf="financeDisplay?.length > 0 &&  servicefinanceflag == 1 && paymentType =='finance'" (click)="enabletime(2)">
+                <h4 class="drs_subtitle">SERVICE & PROTECTION</h4>
+                <ul class="row service_pts_list">
+                    <li class="col-md-6" *ngFor="let item of financeDisplay">
+                        <h4 class="service_pts_title">
+                            <span>{{item.protection_name}}</span>
+                        </h4>
+                        <div class="packageText">{{item.protection_description}}
+                            <span *ngIf="item.customplan == 0 && item.pricedisplay=='Y' "><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}} /month</span>
+
+                            <span *ngIf="item.cost && item.customplan == 1"><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}}</span><br>
+                            <span *ngIf="item.term"><b>Term:</b> {{item.term}}/months</span>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="drs_section vehicle_service" *ngIf="leaseDisplay?.length  > 0 && serviceleaseflag == 1 && paymentType == 'lease' " (click)="enabletime(2)">
+                <h4 class="drs_subtitle">SERVICE & PROTECTION service</h4>
+                <ul class="row service_pts_list">
+                    <li class="col-md-6" *ngFor="let item of leaseDisplay ">
+                        <h4 class="service_pts_title">
+                            <span>{{item.protection_name}}</span>
+                        </h4>
+                        <div class="packageText">{{item.protection_description}}customplan
+                            <span *ngIf="item.customplan == 0 && item.pricedisplay=='Y'"><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}} /month</span>
+                            <span *ngIf="item.cost && item.customplan == 1"><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}}</span><br>
+                            <span *ngIf="item.term "><b>Term:</b> {{item.term}} months</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="drs_section vehicle_service" *ngIf="(cashDisplay?.length  > 0 || servicecashflag == 1 )&& paymentType=='cash'" (click)="enabletime(2)">
+                <h4 class="drs_subtitle">SERVICE & PROTECTION</h4>
+                <ul class="row service_pts_list">
+                    <li class="col-md-6" *ngFor="let item of cashDisplay ">
+                        <h4 class="service_pts_title">
+                            <span>{{item.protection_name}}</span>
+                        </h4>
+                        <div class="packageText">{{item.protection_description}}
+                            <span *ngIf="item.customplan == 0  && item.pricedisplay=='Y'"><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}}</span>
+
+                            <span *ngIf="item.cost  && item.customplan == 1"><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}} </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="drs_section vehicle_personalize" *ngIf="accessoriesflag == 1" (click)="enabletime(2)">
+                <h4 class="drs_subtitle">Accessories</h4>
+                <ul class="selected_item_row widget-row">
+                    <li class="selected_item_card widget-col-md-12" *ngFor="let item of accessoriesDisplay">
+                        <div class="packageText">{{item.title}}
+                            <i class="disclaimer_bubble" attr.data-title="{{item.desc}}">i</i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+
+}
+<!-- MOBILE CODE ENDS FOR STEP 4 SUBMIT PAGE-->
+
+<!-- DESKTOP CODE STARTS FOR STEP 4 SUBMIT PAGE-->
+@else{
+<div class="widget-container">
+    <div class="widget-container-fluid">
+        <div class="widget-d-flex widget-justify-content-center widget-mb-3">
+            <img class="widget_car_image" src="{{heroImage}}" alt="Car Image">
+        </div>
+        <div class="widget-row">
+            <div class="widget_col">
+
+                <h5 class="widget_car_name">{{display_vehicle_name}}</h5>
+                <h2 class="widget_car_price" *ngIf="vehicle_type == 'new'">MSRP <b>{{msrp |
+                        currency:'USD':'symbol':'1.0-0'}}</b></h2>
+                <h2 class="widget_car_price" *ngIf="vehicle_type == 'used' && !hideDealerText">Dealer Price <b>{{msrp |
+                        currency:'USD':'symbol':'1.0-0'}}</b></h2>
+            </div>
+            <div class="estimator-pricing" *ngIf="vehicle_type == 'used' && hideDealerText">Please contact dealer for pricing.</div>
+        </div>
+        <form class="inWidgetForm " [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div *ngIf="!hideDropdown" class="payment-form-row" style="margin-top:10px">
+                <div class="payment-form-row mileage-outer">
+                    <div class="widget-row">
+                        <div class="payment-form-row widget-col-md-6">
+                            <div class="payment-input-fields">
+                                <mat-label>Purchase Options</mat-label>
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-select class="widget-select-term-dropdown" id="purchase_option" name="purchase_option" [(value)]="paymentType" (selectionChange)="leaseFinanceCashSwitch($event)">
+                                        <mat-option *ngIf="vehicle_type =='new' && leaseResponseAvailable" value="lease">Lease</mat-option>
+                                        <mat-option *ngIf="financeResponseAvailable" value="finance">Finance</mat-option>
+                                        <mat-option value="cash">Cash</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-row">
+                <div class="widget-col-6 widget-p-4">
+                    <div class="widget-row">
+                        <div class="widget-col-12">
+                            <h5 class="widget_dealer_information">Dealer Information</h5>
+                            <p class="widget_dealer_name">{{dealerinfo?.dealerName}}</p>
+                            <p (click)="adobe_sdg_event('dealer-address')" class="widget_dealer_address">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                    <g clip-path="url(#clip0_1362_220087)">
+                                        <path d="M6 6.49609C6 6.09827 6.15804 5.71674 6.43934 5.43543C6.72064 5.15413 7.10218 4.99609 7.5 4.99609C7.89782 4.99609 8.27936 5.15413 8.56066 5.43543C8.84196 5.71674 9 6.09827 9 6.49609C9 6.89392 8.84196 7.27545 8.56066 7.55675C8.27936 7.83806 7.89782 7.99609 7.5 7.99609C7.10218 7.99609 6.72064 7.83806 6.43934 7.55675C6.15804 7.27545 6 6.89392 6 6.49609Z" fill="black" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1 6.496C1.0008 4.7727 1.686 3.12028 2.90493 1.9021C4.12386 0.68392 5.7767 -0.00026527 7.5 7.7153e-08C11.089 7.7153e-08 14 2.909 14 6.496C14 9.17 12.662 11.289 11.228 12.721C10.5941 13.3577 9.88367 13.9132 9.113 14.375C8.791 14.565 8.49 14.715 8.228 14.817C7.981 14.915 7.722 14.991 7.5 14.991C7.278 14.991 7.019 14.915 6.772 14.817C6.46612 14.6925 6.17026 14.5448 5.887 14.375C5.11634 13.9132 4.40592 13.3576 3.772 12.721C2.338 11.289 1 9.17 1 6.496ZM7.5 3.997C6.83696 3.997 6.20107 4.26039 5.73223 4.72923C5.26339 5.19807 5 5.83396 5 6.497C5 7.16004 5.26339 7.79593 5.73223 8.26477C6.20107 8.73361 6.83696 8.997 7.5 8.997C8.16304 8.997 8.79893 8.73361 9.26777 8.26477C9.73661 7.79593 10 7.16004 10 6.497C10 5.83396 9.73661 5.19807 9.26777 4.72923C8.79893 4.26039 8.16304 3.997 7.5 3.997Z" fill="black" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_1362_220087">
+                                            <rect width="15" height="15" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <a href="https://www.google.com/maps/search/?api=1&query={{dealerinfo?.dealerAddress1}} {{dealerinfo?.dealerCity}}{{dealerinfo?.dealerState}}{{dealerinfo?.dealerZip}}" class="widget_dealer_address_link" target="blank">
+                                    {{dealerinfo?.dealerAddress1}}<br>{{dealerinfo?.dealerCity}},
+                                    {{dealerinfo?.dealerState}} {{dealerinfo?.dealerZip}}
+                                </a>
+                            </p>
+                            <p (click)="adobe_sdg_event('dealer-phone')" *ngIf="dealerinfo?.customize_email_phone == 'Y'">
+                                <a href="tel:{{dealerinfo?.phoneNumber}}" title="{{dealerinfo?.phoneNumber}}" target="_blank" class="widget_dealer_number">
+                                    <svg class="" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                        <path d="M15.3983 11.6265C15.2799 12.5263 14.838 13.3523 14.1551 13.9501C13.4722 14.5479 12.5951 14.8767 11.6875 14.8751C6.41485 14.8751 2.12501 10.5853 2.12501 5.31261C2.12338 4.40503 2.45218 3.52789 3.05 2.84502C3.64782 2.16214 4.47378 1.72024 5.3736 1.60183C5.60114 1.57404 5.83157 1.6206 6.03048 1.73453C6.22939 1.84847 6.38612 2.02368 6.47727 2.23402L7.87977 5.36507V5.37304C7.94956 5.53404 7.97838 5.70983 7.96366 5.88468C7.94894 6.05954 7.89115 6.22803 7.79544 6.37511C7.78348 6.39304 7.77087 6.40964 7.75758 6.42624L6.37501 8.06515C6.87239 9.07585 7.92958 10.1237 8.95356 10.6225L10.5699 9.24718C10.5858 9.23384 10.6024 9.22142 10.6197 9.20999C10.7666 9.11198 10.9357 9.05215 11.1116 9.03592C11.2875 9.01968 11.4647 9.04756 11.6271 9.11702L11.6357 9.12101L14.7641 10.5228C14.9748 10.6137 15.1505 10.7703 15.2648 10.9692C15.3791 11.1681 15.4259 11.3987 15.3983 11.6265Z" fill="black" />
+                                    </svg>{{dealerinfo?.phoneNumber}}
+                                </a>
+                            </p>
+                            <p *ngIf="dealerinfo?.demail != '' && dealercode != '45107'">
+                                <a href="mailto:{{dealerinfo?.demail}}" title="{{dealerinfo?.demail}}" class="widget_dealer_email">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                        <path d="M14.1665 2.83325H2.83317C2.054 2.83325 1.42359 3.47075 1.42359 4.24992L1.4165 12.7499C1.4165 13.5291 2.054 14.1666 2.83317 14.1666H14.1665C14.9457 14.1666 15.5832 13.5291 15.5832 12.7499V4.24992C15.5832 3.47075 14.9457 2.83325 14.1665 2.83325ZM14.1665 5.66659L8.49984 9.20825L2.83317 5.66659V4.24992L8.49984 7.79158L14.1665 4.24992V5.66659Z" fill="black" />
+                                    </svg>{{dealerinfo?.demail}}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="(showdelivery == 1 || showdelivery == 'O' || showdelivery == 'P' || showdelivery == 'H') && vehicleStatus === true" class="widget-col-6 widget-p-4">
+                    <div class="widget-row">
+                        <div class="widget-col-12">
+                            <h5 *ngIf="showdelivery == 1 || showdelivery == 'O' || showdelivery == 'P' || showdelivery == 'H'" class="widget_delivery_option">Delivery Options</h5>
+                            <div class="widget_radio_group">
+                                <div class="widget_radio_option" *ngIf="fnCheckVehicalDelivery('P')">
+                                    <input type="radio" id="drs_dealership" [(ngModel)]="selectedLocation" name="location" value="Pick up at Dealership" formControlName="location" (change)="atDealership()" (click)="handleDeliveryClick()">
+                                    <label for="drs_dealership">Pick up at Dealership</label>
+                                </div>
+                                <div class="widget_radio_option" *ngIf="fnCheckVehicalDelivery('H')">
+                                    <input type="radio" id="drs_myhome" [(ngModel)]="selectedLocation" name="location" value="My Home" formControlName="location" (change)="homeAddress()" (click)="handleDeliveryClick()">
+                                    <label for="drs_myhome"> My Home </label>
+                                </div>
+                                <span class="widget_radio_option_span_warning" *ngIf="(showdelivery === 'H' || selectedLocation === 'My Home') && (showdelivery == 1 ) &&(showdeliveryText != '' && showdeliveryText !=null)">{{showdeliveryText}}</span>
+                                <div class="widget_radio_option" *ngIf="fnCheckVehicalDelivery('O')">
+                                    <input type="radio" id="drs_otherlocation" [(ngModel)]="selectedLocation" name="location" value="Other Location (No extra charge)" formControlName="location" (change)="otherAddress()" (click)="handleDeliveryClick()">
+                                    <label for="drs_otherlocation">Other Location (No extra charge)</label>
+                                </div>
+                                <span class="widget_radio_option_span_warning" *ngIf="(showdelivery === 'O' || selectedLocation === 'Other Location (No extra charge)') && (showdelivery == 1 ) &&(showdeliveryText != '' && showdeliveryText !=null)">{{showdeliveryText}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="widget-row" *ngIf="packageoption?.length > 0">
+                <div class="widget-col-6" (click)="enabletime(2)">
+                    <h5 class="widget_package_and_options">Package & Options</h5>
+                    <ul class="row" *ngIf="packageoption?.length > 0">
+                        <li class="col-md-4" *ngFor="let details of packageoption">
+                            <div class="packageText">{{details}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="widget-row deliveryOptionsRow" *ngIf="showdelivery == 1 && vehicleStatus === true">
+                <div class="widget-col-12">
+                    <h5 class="widget_package_and_options">Delivery Options - {{ selectedLocation }}</h5>
+                </div>
+                <div class="widget-col-12 mt-3">
+                    <div class="widget-row">
+                        <div class="widget-col-6">
+                            <div class="WidgetInputElement">
+                                                                <mat-form-field class="widget_accesories_search testDrive__date" appearance="outline">
+                                                                    <mat-label>Date</mat-label>
+                                                                    <input formControlName="date" name="delivery_date" id="delivery_date" type="text" readonly placeholder="Select a Date" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [matDatepickerFilter]="showroomTimingFilter"
+                                                                     (click)="picker.open()" (dateChange)="initialevent($event)" />
+                                                                    <mat-error *ngIf="submitted && f.date.errors && f.date.errors?.required" class="invalid-feedback">Date is required</mat-error>
+                                 
+                                                                    <mat-datepicker-toggle matSuffix [for]="picker" (click)="shiftdigitaldate()"></mat-datepicker-toggle>
+                                                                    <mat-datepicker panelClass="in-widget-datepicker" #picker></mat-datepicker>
+                                                                </mat-form-field>
+
+                            </div>
+                        </div>
+
+
+                        <div class="widget-col-6" (click)="enabletime(1)">
+                            <div class="WidgetDropdown">
+                                <mat-form-field class="widget_accesories_search testdriveTime_select" appearance="outline">
+                                    <mat-label>Time</mat-label>
+                                    <mat-select formControlName="time" id="delivery_time" name="delivery_time" placeholder="Select Time" [ngClass]="{ 'is-invalid': submitted && f.time.errors }">
+                                        <mat-option>Select Time</mat-option>
+                                        <mat-option *ngFor="let time of times" value="{{time}}"> {{time}} </mat-option>
+                                    </mat-select>
+                                    <mat-select-trigger>
+                                        <mat-icon>schedule</mat-icon>
+                                    </mat-select-trigger>
+                                    <mat-error *ngIf="submitted && f.time.errors && f.time.errors?.required" class="invalid-feedback">Time is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="widget-col-12">
+                    <div class="widget-row">
+                        <div class="widget-col-12">
+                            <div id="homeAddress-delivery" *ngIf="showdelivery === 'H' || selectedLocation === 'My Home'">
+                                <div class="widget-row">
+                                    <div class="widget-col-6">
+                                        <div class="WidgetInputElement">
+                                            <label class="" for="hlhomeAddress"><span>Home Address</span><span class="req">&#42;</span></label>
+                                            <mat-form-field class="widget_accesories_search" appearance="outline">
+                                                <input type="text" formControlName="hlhomeAddress" placeholder="Enter your home address" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlhomeAddress.errors }" matInput (keyup)="populateaddress($event)" autocomplete=”off” />
+                                                <div class="autoCompleteAddress" *ngIf="autoEnable == 1 && address.length > 0">
+                                                    <div class="autoCompleteAddress_list" *ngFor="let add of address">
+                                                        <span (click)="selectaddress($event,'hlhomeAddress','hlcity','hlstate','hlzipcode')">{{add}}</span>
+                                                    </div>
+                                                </div>
+                                                <mat-error *ngIf="submitted && f.hlhomeAddress.errors && f.hlhomeAddress.errors?.required" class="invalid-feedback">Home Address is required</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="widget-col-6">
+                                        <div class="WidgetInputElement1">
+                                            <label class="" for="hlcity"><span>City</span><span class="req">&#42;</span></label>
+                                            <mat-form-field class="widget_accesories_search" appearance="outline">
+                                                <input type="text" formControlName="hlcity" placeholder="Enter City" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlcity.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                                <mat-error *ngIf="submitted && f.hlcity.errors && f.hlcity.errors?.required" class="invalid-feedback">
+                                                    Enter a valid city</mat-error>
+
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-row">
+                                    <div class="widget-col-6">
+                                        <div class="WidgetInputElement1">
+                                            <label class=""><span>State</span><span class="req">&#42;</span></label>
+                                            <mat-form-field class="widget_accesories_search" appearance="outline">
+                                                <input type="text" formControlName="hlstate" placeholder="Enter State" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlstate.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                                <mat-error *ngIf="submitted && f.hlstate.errors && f.hlstate.errors?.required" class="invalid-feedback">
+                                                    Enter a valid state</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="widget-col-6">
+                                        <div class="WidgetInputElement1">
+                                            <label class=""><span>ZIP Code</span><span class="req">&#42;</span></label>
+                                            <mat-form-field class="widget_accesories_search" appearance="outline">
+                                                <input type="text" formControlName="hlzipcode" maxlength="5" placeholder="ZIP Code" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.hlzipcode.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                                <mat-error *ngIf="submitted && f.hlzipcode.errors && f.hlzipcode.errors?.required" class="invalid-feedback">
+                                                    Enter a valid ZIP Code </mat-error>
+
+                                                <mat-error *ngIf="f.hlzipcode.errors?.pattern || f.hlzipcode.errors?.maxlength || f.hlzipcode.errors?.minlength" class="invalid-feedback">
+                                                    Invalid ZIP Code </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="otherAddress-delivery" *ngIf="showdelivery === 'O' || selectedLocation === 'Other Location (No extra charge)'">
+                                <div class="widget-row">
+                                    <div class="widget-col-6">
+                                        <div class="WidgetInputElement mob-margin-0">
+                                            <label class="" for="olhomeAddress"><span>Other Address</span><span class="req">&#42;</span></label>
+                                            <mat-form-field class="widget_accesories_search" appearance="outline">
+                                                <input type="text" formControlName="olhomeAddress" placeholder="Enter your address" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olhomeAddress.errors }" matInput (keyup)="populateaddress($event)" autocomplete=”off” />
+                                                <div class="autoCompleteAddress" *ngIf="autoEnable == 1 && address.length > 0">
+                                                    <div class="autoCompleteAddress_list" *ngFor="let add of address">
+                                                        <span (click)="selectaddress($event,'olhomeAddress','olcity','olstate','olzipcode')">{{add}}</span>
+                                                    </div>
+                                                </div>
+                                                <mat-error *ngIf="submitted && f.olhomeAddress.errors && f.olhomeAddress.errors?.required" class="invalid-feedback">Other Address is required</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="widget-col-6">
+                                        <div class="WidgetInputElement">
+                                            <label class="" for="olcity"><span>City</span><span class="req">&#42;</span></label>
+                                            <mat-form-field class="widget_accesories_search" appearance="outline">
+                                                <input type="text" formControlName="olcity" placeholder="Enter City" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olcity.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                                <mat-error *ngIf="submitted && f.olcity.errors && f.olcity.errors?.required" class="invalid-feedback">
+                                                    Enter a valid city</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-row">
+                                    <div class="widget-col-6">
+                                        <div class="WidgetInputElement1">
+                                            <label class="" for="olstate"><span>State</span><span class="req">&#42;</span></label>
+                                            <mat-form-field class="widget_accesories_search" appearance="outline">
+                                                <input type="text" formControlName="olstate" placeholder="Enter State" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olstate.errors }" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                                <mat-error *ngIf="submitted && f.olstate.errors && f.olstate.errors?.required" class="invalid-feedback">
+                                                    Enter a valid state</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="widget-col-6">
+                                        <div class="WidgetInputElement1">
+                                            <label class="" for="olzipcode"><span>ZIP Code</span><span class="req">&#42;</span></label>
+                                            <mat-form-field class="widget_accesories_search" appearance="outline">
+                                                <input type="text" formControlName="olzipcode" maxlength="5" placeholder="ZIP Code" class="inputField" [ngClass]="{ 'is-invalid': submitted && f.olzipcode.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                                <mat-error *ngIf="submitted && f.olzipcode.errors && f.olzipcode.errors?.required" class="invalid-feedback">
+                                                    Enter a valid ZIP Code </mat-error>
+                                                <mat-error *ngIf="f.olzipcode.errors?.pattern || f.olzipcode.errors?.maxlength || f.olzipcode.errors?.minlength" class="invalid-feedback">
+                                                    Invalid ZIP Code </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-row submit-to-dealer-accordion">
+                <div class="widget-col-12 widget-p-2">
+                    <div class="widget-accordion">
+                        <div class="widget_accordion_item">
+                            <input type="checkbox" id="submitpage_vehicle_info" class="widget-accordion-checkbox">
+                            <label for="submitpage_vehicle_info" class="widget-accordion-header" (click)="vehicleInfoClick()">
+                                Vehicle Info
+                                <svg *ngIf="!toggleVehicleInfo" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="ic:baseline-plus">
+                                        <path id="Vector" d="M19.7917 13.5396H13.5417V19.7896H11.4584V13.5396H5.20837V11.4563H11.4584V5.20625H13.5417V11.4563H19.7917V13.5396Z" fill="black" />
+                                    </g>
+                                </svg>
+                                <svg *ngIf="toggleVehicleInfo" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="minus_icon">
+                                    <g id="ic:baseline-minus">
+                                        <path id="Vector" d="M41.9587 13.5394H11.042V11.4561H41.9587V13.5394Z" fill="#0A0A0A" />
+                                    </g>
+                                </svg>
+                            </label>
+                            <div class="widget-accordion-content">
+                                <div class="widget_accordian_content_container" *ngFor="let info of vehicleInfo ">
+                                    <p class="widget_details_name">{{info.caption}}</p>
+                                    <p class="widget_details_value">{{info.value}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- tradein, service and protection and accessories -->
+            <div class="drs_section tradein_info" *ngIf="show == 1" (click)="enabletime(2)">
+                <h4 class="drs_subtitle">Trade-In</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="tradein_info_title">
+                            <p>Your trade-in vehicle was assessed at </p>{{tradein}}
+                        </h5>
+                        <p>You Applied <strong>{{tradein_adj | currency:'USD':'symbol':'1.0-0'}}</strong> of your total
+                            trade-in
+                            value to your new vehicle purchase.<br>
+                            Your purchase is accurate until <strong>{{currentDate | date: 'MMMM dd, yyyy' }}</strong>.
+                            Upon
+                            dealer inspection and market conditions, these values may be adjusted. Your dealer will
+                            confirm the
+                            final evaluation.</p>
+                    </div>
+                    <div class="col-md-12">
+                        <h6>Your Vehicle Details:</h6>
+                        <address>{{vehicle}}<br>
+                            Style: {{style}}<br>
+                            Mileage: {{mileage}}</address>
+                    </div>
+                    <div class="col-md-12" *ngIf="options.length > 0 ">
+                        <h6>Options and Equipment:</h6>
+                        <p class="tradein_info_list" *ngIf="kbbmake =='' "><span *ngFor="let option of options">{{option.name}}</span></p>
+                        <p class="tradein_info_list" *ngIf="kbbmake !='' "><span *ngFor="let option of options">{{option}}</span></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="drs_section vehicle_service" *ngIf="financeDisplay?.length > 0 &&  servicefinanceflag == 1 && paymentType =='finance'" (click)="enabletime(2)">
+                <h4 class="drs_subtitle">SERVICE & PROTECTION</h4>
+                <ul class="row service_pts_list">
+                    <li class="col-md-6" *ngFor="let item of financeDisplay">
+                        <h4 class="service_pts_title">
+                            <span>{{item.protection_name}}</span>
+                        </h4>
+                        <div class="packageText">{{item.protection_description}}
+                            <span *ngIf="item.customplan == 0 && item.pricedisplay=='Y' "><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}} /month</span>
+
+                            <span *ngIf="item.cost && item.customplan == 1"><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}}</span><br>
+                            <span *ngIf="item.term"><b>Term:</b> {{item.term}}/months</span>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="drs_section vehicle_service" *ngIf="leaseDisplay?.length  > 0 && serviceleaseflag == 1 &&   paymentType  == 'lease'" (click)="enabletime(2)">
+                <h4 class="drs_subtitle">SERVICE & PROTECTION</h4>
+                <ul class="row service_pts_list">
+                    <li class="col-md-6" *ngFor="let item of leaseDisplay ">
+                        <h4 class="service_pts_title">
+                            <span>{{item.protection_name}}</span>
+                        </h4>
+                        <div class="packageText">{{item.protection_description}}customplan
+                            <span *ngIf="item.customplan == 0 && item.pricedisplay=='Y'"><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}} /month</span>
+                            <span *ngIf="item.cost && item.customplan == 1"><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}}</span><br>
+                            <span *ngIf="item.term "><b>Term:</b> {{item.term}} months</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="drs_section vehicle_service" *ngIf="(cashDisplay?.length  > 0 || servicecashflag == 1 ) && paymentType=='cash'" (click)="enabletime(2)">
+                <h4 class="drs_subtitle">SERVICE & PROTECTION</h4>
+                <ul class="row service_pts_list">
+                    <li class="col-md-6" *ngFor="let item of cashDisplay ">
+                        <h4 class="service_pts_title">
+                            <span>{{item.protection_name}}</span>
+                        </h4>
+                        <div class="packageText">{{item.protection_description}}
+                            <span *ngIf="item.customplan == 0  && item.pricedisplay=='Y'"><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}}</span>
+
+                            <span *ngIf="item.cost  && item.customplan == 1"><b>Cost:</b> {{item.cost |
+                                currency:'USD':'symbol':'1.0-2' }}
+                                {{item.term}} </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="drs_section vehicle_personalize" *ngIf="accessoriesflag == 1" (click)="enabletime(2)">
+                <h4 class="drs_subtitle">Accessories</h4>
+                <ul class="row">
+                    <li class="col-md-4" *ngFor="let item of accessoriesDisplay">
+                        <div class="packageText">{{item.title}}
+                            <i class="disclaimer_bubble" attr.data-title="{{item.desc}}">i</i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+}
+<!-- DESKTOP CODE ENDS FOR STEP 4 SUBMIT PAGE-->

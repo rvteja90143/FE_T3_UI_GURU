@@ -1,0 +1,158 @@
+<div class="apply-credit-div">
+    <div class="apply-credit-container">
+        <button _ngcontent-ng-c3681135761="" *ngIf="termsandcondition == 0" mat-dialog-close="" type="button" role="Close" aria-label="Close" class="mD__close position-absolute" (click)="closeApplyCredit()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8" fill="none">
+                <path d="M7.77295 6.97699C7.87862 7.08266 7.93799 7.22599 7.93799 7.37543C7.93799 7.52487 7.87862 7.66819 7.77295 7.77387C7.66728 7.87954 7.52395 7.9389 7.37451 7.9389C7.22507 7.93891 7.08175 7.87954 6.97607 7.77387L3.99998 4.79683L1.02295 7.77293C0.917276 7.8786 0.773954 7.93797 0.624511 7.93797C0.475068 7.93797 0.331746 7.8786 0.226073 7.77293C0.120401 7.66726 0.0610352 7.52393 0.0610352 7.37449C0.0610352 7.22505 0.120401 7.08173 0.226073 6.97605L3.2031 3.99996L0.227011 1.02293C0.121339 0.917256 0.0619727 0.773934 0.0619727 0.624491C0.0619727 0.475048 0.121339 0.331726 0.227011 0.226054C0.332683 0.120382 0.476005 0.0610155 0.625448 0.0610155C0.774891 0.0610155 0.918214 0.120382 1.02389 0.226054L3.99998 3.20309L6.97701 0.225585C7.08268 0.119913 7.226 0.0605469 7.37545 0.0605469C7.52489 0.0605469 7.66821 0.119913 7.77389 0.225585C7.87956 0.331257 7.93892 0.474579 7.93892 0.624022C7.93892 0.773466 7.87956 0.916788 7.77389 1.02246L4.79685 3.99996L7.77295 6.97699Z"
+                    fill="black" />
+            </svg>
+        </button>
+        <h3 class="widget-title" *ngIf="termsandcondition == 0  && make_url !='ALFA'">Explore Finance Options-
+            <span>{{model}}</span>
+        </h3>
+        <h3 *ngIf=" termsandcondition == 0 && make_url =='ALFA'" class="widget-title">Explore Finance Options-
+            <span>{{vehicle_model}} {{model}}</span>
+        </h3>
+
+        <!-- <button mat-button mat-dialog-close type="button" class="mD__close" (click)="closeApplyCredit()" *ngIf="termsandcondition == 0"
+    aria-label="Close">Close<span aria-hidden="true" class="mat-button-wrapper">&times;</span></button> -->
+
+        <!-- <button mat-button type="button" class="mD__close" *ngIf="termsandcondition == 1" (click)="closetermsandcondition()"
+    aria-label="Close">Close<span aria-hidden="true" class="mat-button-wrapper">&times;</span></button> -->
+
+
+        <div *ngIf="alstDesc=='alstpop' && isBcincentiveAvailable" class="disclaimerPara">
+            You are opting in for the eshop exclusive $500 incentive offer. To claim this offer please fill in the online
+            credit
+            form below.
+        </div>
+
+        <div class="widget-row" *ngIf="termsandcondition == 0">
+            <div class="widget-col-md-6 desktop-lead-image">
+                <img alt="vehicle image" src={{heroImage}} onerror="this.className='';this.src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" class="loader_img">
+            </div>
+            <div class="initial_form widget-col-md-6">
+                <form action="" *ngIf="termsandcondition == 0" class="inWidgetForm submitDealer__form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="widget-row">
+                        <div class="widget-col-md-12">
+                            <mat-form-field appearance="outline">
+                                <mat-label>First Name</mat-label>
+                                <input formControlName="firstName" (keypress)="validateInput($event);" (keyup)="initialevent();" placeholder="First Name" class=" " [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" matInput>
+                                <mat-error *ngIf="submitted && f.firstName.errors && f.firstName.errors?.required" class="invalid-feedback">First Name is required</mat-error>
+                                <mat-error *ngIf="(f.firstName.errors?.pattern || f.firstName.errors?.atLeastOneAlphabet) &&  f.firstName.errors?.required != true" class="invalid-feedback">Enter a valid
+                                    First
+                                    Name
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="widget-col-md-12">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Last Name</mat-label>
+                                <input formControlName="lastName" (keypress)="validateInput($event);" (keyup)="initialevent();" placeholder="Last Name" class=" " [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" matInput />
+                                <mat-error *ngIf="submitted && f.lastName.errors && f.lastName.errors?.required" class="invalid-feedback">Last Name is required</mat-error>
+                                <mat-error *ngIf="(f.lastName.errors?.pattern) &&  f.lastName.errors?.required != true" class="invalid-feedback">Enter a valid
+                                    Last
+                                    Name
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="widget-col-md-12">
+                            <mat-form-field appearance="outline">
+                                <mat-label>ZIP Code</mat-label>
+                                <input formControlName="zipCode" maxlength="5" minlength="5" (keyup)="initialevent();" placeholder="ZIP Code" class=" " [ngClass]="{ 'is-invalid': submitted && f.zipCode.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                                <mat-error *ngIf="submitted && f.zipCode.errors && f.zipCode.errors?.required" class="invalid-feedback">
+                                    ZIP Code is
+                                    required</mat-error>
+                                <mat-error *ngIf="f.zipCode.errors?.pattern || f.zipCode.errors?.maxlength || f.zipCode.errors?.minlength" class="invalid-feedback">
+                                    Please enter valid ZIP Code</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="widget-col-md-12">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Phone<span *ngIf="mandatoryphone == 'Y'" class="req">&#42;</span></mat-label>
+                                <input [ngClass]="{ 'is-invalid': submitted && f['phonenumber'].errors }" maxlength="14" formControlName="phonenumber" class=" " matInput (keypress)="keyPress($event)" (input)="onPhoneNumberInput($event)" />
+                                <!-- <mat-error *ngIf="f['phonenumber']?.errors?.['invalidFirstDigit'] || f['phonenumber'].errors?.['pattern'] || f['phonenumber'].errors?.['maxlength'] || f['phonenumber'].errors?.['minlength']" class="invalid-feedback">
+                                    Please enter a valid phone number</mat-error> -->
+                                <mat-error *ngIf="f['phonenumber'].errors?.['required']" class="invalid-feedback">
+                                    Please enter a valid phone number
+                                </mat-error>
+                                <mat-error class="invalid-feedback" *ngIf="mandatoryphone == 'Y'" class="invalid-feedback">
+                                    Phone number Required</mat-error>
+                                <mat-error class="invalid-feedback" *ngIf="f.phonenumber.hasError('exactLength')">
+                                    Phone number must be 10 numbers
+                                </mat-error>
+                                <!-- <mat-error *ngIf="f['phonenumber']?.errors?.['invalidFirstDigit']" class="invalid-feedback">
+                                    Phone number must not be start with 0 and 1</mat-error> -->
+                                <mat-error *ngIf="f['phonenumber']?.errors?.['invalidFirstDigit']" class="invalid-feedback">
+                                    Phone number must not start with 0 or 1.
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="widget-col-md-12">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input formControlName="email" class=" " (keyup)="initialevent();" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" matInput />
+                                <mat-error *ngIf="submitted && f.email.errors && f.email.errors?.required" class="invalid-feedback">
+                                    Email is required
+                                </mat-error>
+                                <mat-error *ngIf="f.email.errors?.pattern" class="invalid-feedback">Email must be a valid email
+                                    address
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                        <div class="widget-col-md-12 widget-form-group agreeTerms tnccheck">
+                            <mat-checkbox disableRipple [ngClass]="{ 'is-invalid': submitted && f.Termsandcondition.errors }" formControlName="Termsandcondition" id="Termsandcondition">
+                                <label for="acceptTerms" class="form-check-terms terms_lable" (click)="fntermsandcondition()" style="text-decoration: underline;">Terms and
+                                    Conditions</label></mat-checkbox>
+                            <mat-error *ngIf="submitted && f.Termsandcondition.errors && f.Termsandcondition.errors?.required" class="invalid-feedback">Please read and accept Terms and Conditions</mat-error>
+                        </div>
+                        <div class="widget-col-md-12">
+                            <button class="btn submitbtn" type="submit" [disabled]="formSubmitted">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="terms_condition">
+        <div *ngIf="termsandcondition == 1">
+            <button type="button" class="mD__close close_btn_spacing position-absolute" (click)="closetermsandcondition()" aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8" fill="none">
+                    <path d="M7.77295 6.97699C7.87862 7.08266 7.93799 7.22599 7.93799 7.37543C7.93799 7.52487 7.87862 7.66819 7.77295 7.77387C7.66728 7.87954 7.52395 7.9389 7.37451 7.9389C7.22507 7.93891 7.08175 7.87954 6.97607 7.77387L3.99998 4.79683L1.02295 7.77293C0.917276 7.8786 0.773954 7.93797 0.624511 7.93797C0.475068 7.93797 0.331746 7.8786 0.226073 7.77293C0.120401 7.66726 0.0610352 7.52393 0.0610352 7.37449C0.0610352 7.22505 0.120401 7.08173 0.226073 6.97605L3.2031 3.99996L0.227011 1.02293C0.121339 0.917256 0.0619727 0.773934 0.0619727 0.624491C0.0619727 0.475048 0.121339 0.331726 0.227011 0.226054C0.332683 0.120382 0.476005 0.0610155 0.625448 0.0610155C0.774891 0.0610155 0.918214 0.120382 1.02389 0.226054L3.99998 3.20309L6.97701 0.225585C7.08268 0.119913 7.226 0.0605469 7.37545 0.0605469C7.52489 0.0605469 7.66821 0.119913 7.77389 0.225585C7.87956 0.331257 7.93892 0.474579 7.93892 0.624022C7.93892 0.773466 7.87956 0.916788 7.77389 1.02246L4.79685 3.99996L7.77295 6.97699Z"
+                        fill="black" />
+                </svg>
+            </button>
+
+            <h4 class="widget-text-center">TERMS AND CONDITIONS</h4>
+
+            <p class="initial_disclaimer" *ngIf="dealercode.toString() != '60490'">FCA US LLC does not intentionally market to children under {{disclaimerAge}} old.
+                By
+                submitting this request, you are confirming you are {{disclaimerAge}} of age or older. FCA US LLC
+                understands the importance of your online privacy.
+                By submitting your email, you agree to receive email communication.
+                By submitting your mobile phone number, you also acknowledge that FCA US LLC or its parent, subsidiary or
+                affiliated companies or one of their authorized dealers or representatives may send you commercial text
+                messages. Such contact may use automated technology. You consent and agree to that type of contact and more
+                generally to the FCA US LLC online privacy policy when you submit your registration. Standard text message
+                and data rates may apply. You can opt out at any time. Text STOP to opt-out after receiving text
+                communications. You are not required to agree to this as a condition of purchasing any property, goods, or
+                services.
+            </p>
+            <p class="initial_disclaimer" *ngIf="dealercode.toString() == '60490'">
+                By checking the box, you consent to our dealership using automatic telephone dialing systems to call and/or send you periodic SMS (text) marketing messages to the number you have provided. You do not have to consent in order to obtain any of our products or services. You may opt-out by texting 'STOP' or reply HELP for additional messaging help. Message and data rates may apply.
+            </p>
+            <div class="widget-text-center">
+                <button mat-button class="widget_payment-btn widget_submit-button" (click)="closetermsandcondition('back')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.7071 5.79289C15.0976 6.18342 15.0976 6.81658 14.7071 7.20711L9.41421 12.5L14.7071 17.7929C15.0976 18.1834 15.0976 18.8166 14.7071 19.2071C14.3166 19.5976 13.6834 19.5976 13.2929 19.2071L7.29289 13.2071C6.90237 12.8166 6.90237 12.1834 7.29289 11.7929L13.2929 5.79289C13.6834 5.40237 14.3166 5.40237 14.7071 5.79289Z" fill="black" />
+                    </svg> Back</button>
+            </div>
+        </div>
+    </div>
+</div>

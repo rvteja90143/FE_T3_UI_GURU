@@ -1,0 +1,2427 @@
+&.payment_option_27222 span:before {
+    content: "";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 1%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.85) 70%, rgba(255, 255, 255, 0.85) 71%, rgba(255, 255, 255, 0) 100%);
+    width: 15%;
+    height: 100%;
+    transform: skew(-10deg, 0deg);
+    -webkit-transform: skew(-10deg, 0deg);
+    -moz-transform: skew(-10deg, 0deg);
+    -ms-transform: skew(-10deg, 0deg);
+    -o-transform: skew(-10deg, 0deg);
+    animation: move 2s;
+    animation-iteration-count: infinite;
+    animation-delay: 1s;
+}
+
+&.payment_option_27222 {
+    background-color: #12546f !important;
+    border-radius: 0 !important;
+
+    .mat-button-wrapper img {
+        max-height: 42px !important;
+    }
+
+}
+&.payment_option_45825 {
+    background-color: #0D65BF !important;
+}
+
+&.payment_option_60500 {
+    background-color: #a7232e !important;
+}
+
+&.payment_option_05037 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_36464 {
+    background-color: #D20F06 !important;
+    border-radius: 8px !important;
+    img {
+        width: 100% !important;
+    }
+}
+&.payment_option_61884 {
+    background-color: #D20F06 !important;
+    border-radius: 8px !important;
+    img {
+        width: 100% !important;
+    }
+}
+&.payment_option_45700 {
+    background-color: #008000 !important;
+}
+&.payment_option_69218 {
+    background-color: #abb8c3 !important;
+}
+&.payment_option_45310 {
+    background-color: #5BB75B !important;
+}
+&.payment_option_42905 {
+    background-color: #3B21FF !important;
+}
+&.payment_option_58625 {
+    background-color: #5BB75B !important;
+}
+&.payment_option_60159 {
+    background-color: #D20F06 !important;
+}
+&.payment_option_43401 {
+    background-color: #000000 !important;
+}
+
+&.payment_option_27291 {
+    border-radius: 4px !important;
+    background-color: #0566B1 !important;
+    padding: 4px 0 !important;
+    .mat-button-wrapper img {
+        max-height: 34px !important;
+    }
+}
+
+&.payment_option_27104 {
+    border-radius: 4px !important;
+    padding: 2px 4px 2px 0px !important;
+    img {
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_27109 {
+margin-top: 5px !important;
+}
+
+&.payment_option_60677 {
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_67774 {
+    border-radius: 0px !important;
+    background-color: #79AF51 !important;
+    margin-top: 10px !important;
+    img {
+        width: 100% !important;
+    }   
+}
+
+&.payment_option_27260 {
+    background: #F59F37 !important;
+    border-radius: 0px !important;
+ 
+    .mat-button-wrapper img {
+        max-height: 50px !important;
+        max-width: 87% !important;
+        width: auto !important;
+    }
+ }
+
+&.payment_option_60706 {
+    background: #555555 !important;
+    margin-bottom: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 70px !important;
+    }
+
+}
+
+
+&.payment_option_37269 {
+    background-color: #1C2B64 !important;
+
+}
+
+&.payment_option_60761 {
+    background-color: #e0a800 !important;
+}
+
+&.payment_option_45526 {
+    background-color: #d20f06 !important;
+    border-radius: 0px !important;
+    margin-bottom: 5px !important;
+    width: 100% !important;
+
+    .mat-button-wrapper img {
+        max-height: 39px !important;
+    }
+
+}
+
+&.payment_option_26903 {
+    background-color: #045e29 !important;
+    padding: 0 !important;
+    line-height: 32px !important;
+
+    .mat-button-wrapper img {
+        max-height: 34px !important;
+    }
+
+}
+
+&.payment_option_45778 {
+    background-color: #045e29 !important;
+    padding: 0 !important;
+    line-height: 32px !important;
+
+    .mat-button-wrapper img {
+        max-height: 36px !important;
+    }
+
+}
+
+&.payment_option_45712 {
+    background: #06008b !important;
+    border: 1px solid #06008b !important;
+    border-radius: 4px !important;
+
+    .mat-button-wrapper img {
+        max-height: 80px !important;
+    }
+}
+
+
+&.payment_option_52488 {
+    background-color: #000000 !important;
+
+    .mat-button-wrapper img {
+        max-height: 48px !important;
+
+    }
+
+}
+
+&.payment_option_60569 {
+    background-color: #008000 !important;
+
+    .mat-button-wrapper img {
+        max-height: 55px !important;
+
+    }
+
+}
+&.payment_option_27177 {
+    width: 100% !important; 
+    
+        img{
+            height: 100%;
+            width: 100%;
+            max-height: 64px;
+        }
+}
+
+&.payment_option_60393 {
+    background-color: #fff!important;
+    border: 2px solid #000000!important;
+    border-radius: 0 !important;
+    max-width: 350px !important;
+
+    .mat-button-wrapper img {
+        max-height: 50px !important;
+
+    }
+
+}
+
+&.payment_option_45468 {
+    background-color: #d20f06 !important;
+    border-radius: 5px !important;
+    padding: 3px 0 !important;
+
+    img {
+        width: 100% !important;
+        height: 46px !important;
+    }
+
+}
+
+&.payment_option_27066 {
+    background-color: unset !important;
+
+}
+
+
+&.payment_option_60348 {
+    margin-top: 5px !important;
+
+}
+
+&.payment_option_27247 {
+    background: #1e1a34 !important;
+    border-radius: 0 !important;
+    padding: 5px 0 !important;
+
+    .mat-button-wrapper img {
+        display: block !important;
+        max-height: 42px !important;
+    }
+}
+
+
+&.payment_option_60893 {
+    background-color: #33cc66 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 52px !important;
+    }
+}
+&.payment_option_45602 {
+    background-color: #DA0000 !important;
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_69317 {
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_67949 {
+    background-color: #04B404 !important;
+}
+&.payment_option_45905 {
+    background-color: #11A00A !important;
+}
+&.payment_option_60980 {
+    background-color: #4971CB !important;
+}
+&.payment_option_23246 {
+    background-color: #1ED760 !important;
+}
+
+&.payment_option_43192 {
+    background-color: #638EDF !important;
+}
+
+
+&.payment_option_65033 {
+    background-color: #1F3E74 !important;
+}
+
+&.payment_option_45770 {
+    background-color: #10558E !important;
+}
+
+
+&.payment_option_45820 {
+    background-color: #343A40 !important;
+        margin-top: 5px !important;
+}
+&.payment_option_45925 {
+    background-color: #F38D21 !important;
+}
+&.payment_option_60549 {
+    background-color: #D20F06 !important;
+    padding: 10px 0 !important;
+
+    .mat-button-wrapper img {
+        max-height: 22px !important;
+    }
+}
+
+&.payment_option_45622 {
+    background-color: #4cbb17 !important;
+
+    .mat-button-wrapper img {
+        max-height: 64px !important;
+    }
+}
+&.payment_option_69409 {
+    background-color: unset !important;
+    background: unset !important;
+
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_26947 {
+    border-radius: 3px !important;
+    padding: 0px 0 !important;
+    background-color: #44B549 !important;
+    margin-bottom: 0px !important;
+}
+
+&.payment_option_27313 {
+    background-color: transparent !important;
+    border: 1px solid #e7e7e7 !important;
+    border-radius: 2px !important;
+
+}
+
+&.payment_option_27214 {
+    background-color: green !important;
+    border-radius: 5px !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+    }
+}
+
+&.payment_option_68904 {
+    background-color: #1d4101 !important;
+    .mat-button-wrapper img {
+        max-height: 52px !important;
+    }
+}
+
+&.payment_option_45372 {
+    background-color: #418fde !important;
+}
+
+
+&.payment_option_27237 {
+    background-color: #5BB75A !important;
+}
+&.payment_option_41198 {
+    background-color: black !important;
+}
+
+&.payment_option_44766 {
+    background-color: #1f3e6f !important;
+    border-radius: 8px !important;
+    padding: 8px 0 !important;
+
+    .mat-button-wrapper img {
+        max-height: 35px !important;
+    }
+}
+
+&.payment_option_60933 {
+    border-radius: 0px !important;
+    padding: 8px 0 !important;
+
+    .mat-button-wrapper img {
+        max-height: 25px !important;
+    }
+}
+
+&.payment_option_67673 {
+    background-color: #008001 !important;
+    border-radius: 0px !important;
+    padding: 3px 0 !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+    }
+}
+
+&.payment_option_27337 {
+    background-color: #d20f06 !important;
+    border-radius: 0px !important;
+    margin-bottom: 5px !important;
+    padding: 9px !important;
+    width: 100% !important;
+    border: none !important;
+
+    .mat-button-wrapper img {
+        max-height: 28px !important;
+    }
+}
+
+&.payment_option_27008 {
+    background-color: #d20f06 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+
+    .mat-button-wrapper img {
+        max-height: 52px !important;
+    }
+}
+
+&.payment_option_27250 {
+    background-color: #FFBA02 !important;
+    border-radius: 0px !important;
+}
+
+&.payment_option_26991 {
+    border-radius: 0 !important;
+
+    .mat-button-wrapper img {
+        max-height: 54px !important;
+    }
+}
+
+&.payment_option_27279 {
+    background: #045e29 !important;
+    border-radius: 5px !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+        min-height: 46px !important;
+    }
+}
+
+&.payment_option_27320 {
+    background: #039012 !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+    }
+}
+
+&.payment_option_43246 {
+    border-radius: 0 !important;
+    .mat-button-wrapper img {
+        max-height: 52px !important;
+    }
+}
+
+&.payment_option_60840 {
+    background-color: #045e29 !important;
+    border-radius: 2px !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+        min-height: 46px !important;
+    }
+}
+
+&.payment_option_27178 {
+    background-color: #fbdb1b!important;
+    border-radius: 2px !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+        min-height: 46px !important;
+    }
+}
+
+&.payment_option_27327 {
+    background-color: #282b34 !important;
+    border-radius: 5px !important;
+    min-height: 36px !important;
+
+    .mat-button-wrapper img {
+        max-height: 44px !important;
+    }
+}
+
+&.payment_option_45259 {
+    background-color: #045e29 !important;
+    border-radius: 5px !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+        min-height: 46px !important;
+    }
+}
+&.payment_option_45290{
+    background-color: #000000 !important;
+}
+&.payment_option_23087{
+    background-image: none !important;
+    background: unset !important;
+    img{
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_60682{
+    img{
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_64784{
+    img{
+        width: 100% !important;
+    }
+}
+
+&.payment_option_27000{
+    img{
+        width: 100% !important;
+    }
+}
+
+&.payment_option_26990{
+    img{
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_26985{
+    margin-top: 5px !important;
+}
+
+
+
+&.payment_option_53891{
+    img{
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_60196 {
+    background-color: #F72F4A !important;
+}
+
+
+
+
+&.payment_option_27249{
+    background-color: #d20f06 !important;
+    padding: 0px !important;
+    max-height: 80px !important;
+    img{
+        width: 100% !important;
+    }
+}
+
+&.payment_option_65940{
+    margin-top: 5px !important;
+    img{
+        width: 80% !important;
+        visibility: visible !important;
+    }
+}
+
+
+&.payment_option_27186{
+    img{
+        width: 100% !important;
+        
+    }
+}
+
+
+&.payment_option_60313{
+    height: unset !important;
+    img{
+        width: 100% !important;
+        
+    }
+}
+
+
+&.payment_option_26967{
+    img{
+        width: 100% !important;
+        
+    }
+}
+
+
+&.payment_option_45258{
+    height: 100px !important;
+    background: transparent !important;
+    background: unset !important;
+    img{
+        width: 100% !important;  
+    }
+}
+
+&.payment_option_45258:after{
+    content: none !important;
+
+}
+
+&.payment_option_43733{
+    img{
+        width: 100% !important;
+        
+    }
+}
+
+
+&.payment_option_26768{
+    background-color: #d20f06 !important;
+    img{
+        width: 100% !important;
+    }
+}
+
+&.payment_option_66792{
+    img{
+        width: 100% !important;
+    }
+}
+
+&.payment_option_26419{
+    background-color: #d20f06 !important;
+    img{
+        width: 100% !important;
+        height: 60px !important;
+        display: block !important;
+    }
+}
+
+&.payment_option_26419::before{
+   content: none !important;
+}
+
+
+// &.payment_option_26820{
+//     background-color: #d20f06 !important;
+//     width: 100% !important;
+//     img{
+//         width: 100% !important;
+//     }
+// }
+
+
+// &.payment_option_27195{
+//     background-color: #d20f06 !important;
+//     width: 100% !important;
+//     img{
+//         width: 100% !important;
+//     }
+// }
+
+
+// &.payment_option_44039{
+//     background-color: #d20f06 !important;
+//     width: 100% !important;
+//     img{
+//         width: 100% !important;
+//     }
+// }
+
+// &.payment_option_45136{
+//     background-color: #d20f06 !important;
+//     width: 100% !important;
+//     img{
+//         width: 100% !important;
+//     }
+// }
+
+// &.payment_option_42411{
+//     background-color: #d20f06 !important;
+//     width: 100% !important;
+//     img{
+//         width: 100% !important;
+//     }
+// }
+
+
+// &.payment_option_60114{
+//     background-color: #d20f06 !important;
+//     width: 100% !important;
+//     img{
+//         width: 100% !important;
+//     }
+// }
+
+
+// &.payment_option_27072{
+//     background-color: #d20f06 !important;
+//     width: 100% !important;
+//     img{
+//         width: 100% !important;
+//     }
+// }
+
+// &.payment_option_42725{
+//     background-color: #d20f06 !important;
+//     width: 100% !important;
+//     img{
+//         width: 100% !important;
+//     }
+// }
+
+&.payment_option_44074{
+    background-color: #1F3E74 !important;
+
+ }
+
+
+ &.payment_option_45489{
+    background-color: #28A745 !important;
+    
+ }
+
+
+  &.payment_option_27283{
+    margin-top: 5px !important;
+    
+ }
+
+
+ &.payment_option_27159 {
+    background-color: #1f3864 !important;
+ }
+
+ &.payment_option_60619 {
+    background-color: #000000 !important;
+ }
+
+  &.payment_option_60334 {
+    background-color: #000000 !important;
+ }
+
+
+   &.payment_option_26539 {
+    background-color: #000000 !important;
+ }
+
+
+&.payment_option_69362{
+    background-color: #d20f06 !important;
+    width: 100% !important;
+    img{
+        width: 100% !important;
+    }
+}
+
+&.payment_option_60617 {
+    border-radius: 2px !important;
+}
+
+&.payment_option_60914 {
+    border-radius: 2px !important;
+    background-color: #28A745 !important;
+    img{
+        width: 100% !important;
+    }
+}
+
+&.payment_option_60935 {
+    border-radius: 2px !important;
+    img {
+        width: 100% !important;
+    }
+}
+&.payment_option_27423 {
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_45544 {
+    background-color: transparent !important;
+
+    .mat-button-wrapper img {
+        max-height: 52px !important;
+    }
+}
+
+&.payment_option_27206 {
+    background-color: #045e29 !important;
+    border-radius: 5px !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+    }
+}
+
+
+
+
+&.payment_option_27207 {
+    background-color: #ff67c5 !important;
+
+}
+
+
+&.payment_option_26977 {
+    background-color: #045e29 !important;
+    border-radius: 2px !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+    }
+}
+
+
+&.payment_option_26633 {
+    
+    margin-top: 10px !important;
+
+}
+
+
+&.payment_option_27065 {
+    background-color: #004183 !important;
+   
+}
+
+
+&.payment_option_26684  {
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_26976 {
+    background-color: #045e29 !important;
+    border-radius: 2px !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+        min-height: 46px !important;
+    }
+}
+
+&.payment_option_27097 {
+    background-color: #fbdb1b !important;
+    border-radius: 5px !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+        min-height: 46px !important;
+    }
+}
+
+&.payment_option_26789 {
+    border-radius: 0px !important;
+
+    .mat-button-wrapper img {
+        max-height: 34px !important;
+    }
+}
+
+&.payment_option_45520 {
+    border-radius: 30px !important;
+    overflow: hidden !important;
+    padding: 12px 0 !important;
+
+    .mat-button-wrapper img {
+        max-height: 29px !important;
+    }
+}
+
+&.payment_option_45747 {
+    background: #33ff00 !important;
+
+}
+
+&.payment_option_45748 {
+    background: unset !important;
+
+    img{
+        width: 100% !important;
+        margin-top: 5px !important;
+    }
+
+}
+
+&.payment_option_45788 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_60494 {
+    background: #33ff00 !important;
+
+}
+
+&.payment_option_67857 {
+    background-color:#DC3545 !important;
+}
+
+&.payment_option_64356 {
+    background-color: #3FB300 !important;
+
+}
+
+&.payment_option_44653 {
+    background-color: #3FB300 !important;
+    border-radius: 0px !important;
+
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+    }
+}
+
+&.payment_option_43649 {
+    background-color: #2EBFF7 !important;
+    border-radius: 0px !important;
+    margin-top: 5px !important;
+
+    .mat-button-wrapper img {
+        max-height: 53px !important;
+    }
+}
+
+&.payment_option_60041 {
+    background: #000 !important;
+    border-radius: 4px !important;
+
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_26937 {
+    background-color: #001d61 !important;
+    border-radius: 2px !important;
+    overflow: hidden !important;
+    .mat-button-wrapper {
+
+        &:before {
+            content: "";
+            position: absolute;
+            opacity: 0.5;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 1%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.85) 70%, rgba(255, 255, 255, 0.85) 71%, rgba(255, 255, 255, 0) 100%);
+            width: 15%;
+            height: 100%;
+            transform: skew(-10deg, 0deg);
+            -webkit-transform: skew(-10deg, 0deg);
+            -moz-transform: skew(-10deg, 0deg);
+            -ms-transform: skew(-10deg, 0deg);
+            -o-transform: skew(-10deg, 0deg);
+            animation: move 2s;
+            animation-name: shimmer;
+            animation-iteration-count: infinite;
+            animation-delay: 1s;
+        }
+
+        img {
+            max-height: 46px !important;
+        }
+
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: 0%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+&.payment_option_26767 {
+    background-color: #3fb300 !important;
+
+}
+
+
+&.payment_option_64979 {
+    background-color: #3fb300 !important;
+    padding: 8px !important;
+
+    .mat-button-wrapper img {
+        max-height: 51px !important;
+    }
+}
+
+&.payment_option_45465 {
+    background-color: #2C8800!important;
+    border-radius: 0px !important;
+    padding: 8px !important;
+
+    .mat-button-wrapper img {
+        max-height: 38px !important;
+    }
+}
+
+&.payment_option_60268 {
+    border-radius: 0px !important;
+    padding: 4px !important;
+
+    .mat-button-wrapper img {
+        max-height: 44px !important;
+    }
+}
+
+&.payment_option_69074 {
+    border-radius: 0px !important;
+    padding: 6px !important;
+
+    .mat-button-wrapper img {
+        max-height: 40px !important;
+    }
+}
+
+&.payment_option_60644 {
+    background-color: transparent !important;
+
+    .mat-button-wrapper img {
+        max-height: 42px !important;
+    }
+}
+
+&.payment_option_41838 {
+    background-color: #33d0f2 !important;
+    border: 1px solid #33d0f2 !important;
+    padding: 5px 0 !important;
+    height: 60px !important;
+    .mat-button-wrapper img {
+        max-height: 46px !important;
+        width: 100%;
+    }
+}
+
+&.payment_option_60851{
+    background-color: #2a9129 !important;
+}
+
+&.payment_option_45791{
+    background-color: #2a9129 !important;
+}
+
+&.payment_option_69398{
+    background-color: #2a9129 !important;
+}
+
+&.payment_option_60365 {
+    background-color: #FFC007 !important; 
+}
+
+&.payment_option_65748 {
+    background-color: #FFC007 !important; 
+}
+&.payment_option_65748 {
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_45933 {
+   margin-top: 5px !important;
+}
+
+&.payment_option_26762 {
+    background-color: #FFC007 !important; 
+    border-radius: 8px !important;
+}
+
+    &.payment_option_69325 {
+        background-color: #9A0A2A !important;
+        border-radius: 5px !important;
+         margin-bottom: unset !important;
+        .mat-button-wrapper img {
+            max-height: 46px !important;
+        }
+    }
+
+
+&.payment_option_45858 {
+    background-color: #195b36 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 60px !important;
+    }
+}
+
+&.payment_option_45764 {
+    background-color: #195b36 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 60px !important;
+    }
+}
+
+&.payment_option_60712 {
+    background-color: #195b36 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 60px !important;
+    }
+}
+
+&.payment_option_60713 {
+    background-color: #195b36 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 60px !important;
+    }
+}
+
+&.payment_option_60757 {
+    background-color: #195b36 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 60px !important;
+    }
+}
+
+&.payment_option_60756 {
+    background-color: #195b36 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 60px !important;
+    }
+}
+
+&.payment_options_69377 {
+    background-color: #195b36 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 60px !important;
+    }
+}
+
+&.payment_option_26265 {
+    border-radius: 0px !important;
+}
+
+&.payment_option_42649 {
+    background-color: #3fb300 !important;
+    border-radius: 4px !important;
+    .mat-button-wrapper img {
+        max-height: 76px !important;
+    }
+}
+
+&.payment_option_26887 {
+    background-color: #c22039 !important;
+    border-radius: 0 !important;
+    .mat-button-wrapper img {
+        max-height: 44px!important;
+    }
+}
+
+&.payment_option_45756 {
+    .mat-button-wrapper img {
+        max-height: 60px!important;
+    }
+}
+
+&.payment_option_60709 {
+    .mat-button-wrapper img {
+        max-height: 60px!important;
+    }
+}
+
+&.payment_option_60371 {
+    .mat-button-wrapper img {
+        max-height: 60px!important;
+    }
+}
+
+&.payment_option_65381 {
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 63px!important;
+    }
+}
+
+&.payment_option_60868 {
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 34px!important;
+    }
+}
+
+&.payment_option_68183 {
+    margin-top: 5px !important;
+   
+}
+
+&.payment_option_26815 {
+    .mat-button-wrapper img {
+    max-height: 63px!important;
+    }
+}
+&.payment_option_27069 {
+    background-color: #39bf78!important;
+    margin-top: 5px !important;
+    border-radius: 0 !important;
+    .mat-button-wrapper img {
+        max-height: 31px!important;
+    }
+}
+&.payment_option_67057 {
+    background: transparent !important;
+    
+}
+&.payment_option_58004 {
+    background: transparent !important;
+    border: 1px solid black !important;
+    .mat-button-wrapper img {
+        max-height: 80px !important;
+    }
+}
+
+&.payment_option_08704 {
+    background-color: black !important;
+    border-radius: 4px !important;
+    .mat-button-wrapper img {
+        max-height: 50px !important;
+    }
+}
+
+&.payment_option_66709 {
+    background-color: #080b51 !important;
+    .mat-button-wrapper {
+        &:before {
+            content: "";
+            position: absolute;
+            opacity: 0.5;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 1%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.85) 70%, rgba(255, 255, 255, 0.85) 71%, rgba(255, 255, 255, 0) 100%);
+            width: 15%;
+            height: 100%;
+            transform: skew(-10deg, 0deg);
+            -webkit-transform: skew(-10deg, 0deg);
+            -moz-transform: skew(-10deg, 0deg);
+            -ms-transform: skew(-10deg, 0deg);
+            -o-transform: skew(-10deg, 0deg);
+            animation: move 2s;
+            animation-name: shimmer;
+            animation-iteration-count: infinite;
+            animation-delay: 1s;
+        }
+    }
+}
+&.payment_option_60130 {
+    background-color: #080b51 !important;
+    .mat-button-wrapper {
+        &:before {
+            content: "";
+            position: absolute;
+            opacity: 0.5;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 1%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.85) 70%, rgba(255, 255, 255, 0.85) 71%, rgba(255, 255, 255, 0) 100%);
+            width: 15%;
+            height: 100%;
+            transform: skew(-10deg, 0deg);
+            -webkit-transform: skew(-10deg, 0deg);
+            -moz-transform: skew(-10deg, 0deg);
+            -ms-transform: skew(-10deg, 0deg);
+            -o-transform: skew(-10deg, 0deg);
+            animation: move 2s;
+            animation-name: shimmer;
+            animation-iteration-count: infinite;
+            animation-delay: 1s;
+        }
+    }
+}
+
+
+
+&.payment_option_26986 {
+    background: #f6b800 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 38px !important;
+    }
+}
+
+&.payment_option_27226 {
+    border-radius: 0px !important;
+    background-color: black !important;
+    .mat-button-wrapper img {
+        max-height: 53px !important;
+    }
+}
+
+&.payment_option_27032 {
+    border-radius: 0px !important;
+    background-color: black !important;
+    .mat-button-wrapper img {
+        max-height: 53px !important;
+    }
+}
+
+&.payment_option_26928 {
+    background-color: #212121 !important;
+    border-radius: 3px !important;
+    .mat-button-wrapper img {
+        max-height: 53px !important;
+    }
+}
+
+&.payment_option_45678 {
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 53px !important;
+    }
+}
+
+&.payment_option_60383 {
+    background-color: #51aa56 !important;
+    border-radius: 0px !important;
+}
+
+&.payment_option_68833 {
+    background: #0b7ebd!important;
+}
+
+
+&.payment_option_68839 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_60281 {
+    background: #6A6A6A !important;
+}
+
+&.payment_option_67031 {
+    background: #C12037 !important;
+}
+
+&.payment_option_68009 {
+    background-color: #008064!important;
+    border-radius: 0px !important;
+}
+
+&.payment_option_26998 {
+    background-color: #008064!important;
+    border-radius: 0px !important;
+}
+
+&.payment_option_44221 {
+    border-radius: 0px !important;
+    border: solid 1px #006e9c !important;
+    background-color: #0093d0 !important;
+    .mat-button-wrapper img {
+        max-height: 56px !important;
+    }
+}
+
+&.payment_option_60484 {
+    border: solid 2px #a8c45a !important;
+    background-color: transparent !important;
+    line-height: normal !important;
+    
+}
+
+&.payment_option_45572 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_45540 {
+    background-color: white !important;
+}
+&.payment_option_60813 {
+    background-color: #065535 !important;
+    .mat-button-wrapper img {
+        width:auto !important;
+    }
+    
+}
+
+&.payment_option_45864 {
+    background-color: black !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 53px !important;
+    }
+}
+
+&.payment_option_60939 {
+    background-color: #008000 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 53px !important;
+    }
+}
+
+&.payment_option_68305 {
+    background-color: transparent !important;
+    border: solid 2px black !important;
+    border-radius: 0px !important;
+    max-width: 350px !important;
+}
+
+&.payment_option_39705 {
+    background-color: transparent !important;
+    border-radius: 0px !important;
+}
+
+&.payment_option_45885 {
+    background-color: #009dd9 !important;
+    padding: 7px 0 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 38px !important;
+    }
+}
+
+&.payment_option_45881 {
+  margin-top: 5px !important;
+}
+
+&.payment_option_42514 {
+    background-color: #212121 !important;
+  }
+
+
+&.payment_option_44254 {
+    border-radius: 5px !important;
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_60683 {
+    background-color: #0492FF !important;
+}
+
+&.payment_option_44912 {
+    background-color: #f75c0c !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 53px !important;
+    }
+}
+
+&.payment_option_60741 {
+    background-color: #008000 !important;
+    border-radius: 0px !important;
+    img {
+        height: 50px !important;
+    }
+}
+
+&.payment_option_63689 {
+    background-color: #3fb300 !important;
+    .mat-button-wrapper img {
+        max-height: 57px !important;
+    }
+}
+
+&.payment_option_60424 {
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 52px !important;
+    }
+}
+
+&.payment_option_60697{
+    background: #f2d70a !important;
+    border: 1px solid #0C6BC5 !important;
+    border-radius: 3px;
+}
+
+&.payment_option_26890 {
+    border-radius: 0px !important;
+    background-color: #5093c7 !important;
+    .mat-button-wrapper img {
+        max-height: 52px !important;
+    }
+}
+
+&.payment_option_69008 {
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 54px !important;
+    }
+}
+
+&.payment_option_41423 {
+    background-color: black !important;
+    margin-bottom: 0px !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 52px !important;
+    }
+}
+
+&.payment_option_60875 {
+    border-radius: 0px !important;
+    background-color: #D21E06 !important;
+    .mat-button-wrapper img {
+        max-height: 52px !important;
+    }
+}
+
+&.payment_option_44443 {
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 50px !important;
+    }
+}
+
+&.payment_option_44430 {
+    background-color: #007BFF !important;
+    margin-top: 5px !important;
+}
+
+&.payment_option_27114 {
+    padding: 10px 0 !important;
+    background-color: #dddddd !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 26px !important;
+    }
+}
+
+&.payment_option_45824 {
+    background: #000000 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 34px !important;
+    }
+}
+
+&.payment_option_27106 {
+    background-color: #333333 !important;
+    border-radius: 0px !important;
+    .mat-button-wrapper img {
+        max-height: 52px !important;
+    }
+}
+
+&.payment_option_60823 {
+    background-color: white !important;
+    border: 3px solid #12446D !important;
+    img {
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_60305 {
+    height: 46px !important;
+    img {
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_60358 {
+    background-color: #0f3c7b!important;
+}
+&.payment_option_27096 {
+    background-color: #0f3c7b!important;
+}
+&.payment_option_60856 {
+    background-color: #008896 !important;
+}
+&.payment_option_60321 {
+    background-color: #3caf2d !important;
+}
+&.payment_option_26920 {
+    background-color: green !important;
+}
+&.payment_option_27265 {
+    background-color: #FFA500 !important;
+}
+&.payment_option_60510 {
+    background-image: linear-gradient(#8fd163, #5c9041,#2c5120, #264a1c);
+}
+
+&.payment_option_26890 {
+    background: #5093c7 !important;
+}
+
+&.payment_option_45767 {
+    background-color: #F15D22!important;
+}
+&.payment_option_60736 {
+    background-color: #1580E2 !important;
+}
+&.payment_option_45842 {
+    background-color: #1580E2 !important;
+}
+
+&.payment_option_44678 {
+    background: transparent !important;
+}
+&.payment_option_68433 {
+    background-color: #26f400 !important;
+}
+
+&.payment_option_45647 {
+    background: #007BFF !important;
+}
+
+&.payment_option_65477 {
+    background: #007BFF !important;
+}
+
+&.payment_option_60799 {
+    background-color: #2f4f92 !important;
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_27242 {
+    background-color: #000000 !important;
+}
+
+&.payment_option_24280 {
+    background-color: #102F47 !important;
+}
+
+&.payment_option_60219 {
+    background-color:  #FA7341 !important;
+}
+
+&.payment_option_45882 {
+    background-color:  #2370BF !important;
+}
+&.payment_option_45817 {
+    background-color: #D20F06 !important;
+
+    img {
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_45813 {
+    background: linear-gradient(180deg, #8FD063 0%, #264A1C 72%, #264A1C 80%) !important;
+    margin-top: 5px !important;
+    }
+
+&.payment_option_60912 {
+    background-color:  #0071BA !important;
+}
+
+&.payment_option_45526 {
+    background-color:  #000000 !important;
+}
+
+&.payment_option_68742 {
+    background-color: white !important;
+}
+
+&.payment_option_66325 {
+    background-color: transparent !important;
+    padding-top: 5px !important;
+}
+
+&.payment_option_65454 {
+    background-color: #C12037 !important;
+}
+
+&.payment_option_23955 {
+    background-color: #0BDA51 !important;
+}
+
+&.payment_option_68258 {
+    background-color: #85bb65 !important;
+}
+
+&.payment_option_67906 {
+    background-color: #0f5132 !important;
+}
+
+&.payment_option_27336 {
+    background-color: #CE2820 !important;
+}
+&.payment_option_45802 {
+    background-color: #F4BB64  !important;
+}
+&.payment_option_45752 {
+    background-color: transparent  !important;
+}
+&.payment_option_60786 {
+    background-color: black  !important;
+}
+&.payment_option_52516 {
+    background-color: #107C41  !important;
+}
+&.payment_option_60175 {
+    background-color: #808080  !important;
+}
+&.payment_option_27116 {
+    background-color: #2D7BFA  !important;
+}
+&.payment_option_44841 {
+    background-color: black  !important;
+}
+&.payment_option_06018 {
+    background: #D20F06 !important;
+    img {
+        width: 100% !important;
+    }
+}
+&.payment_option_69399 {
+    background-color:#BA0816 !important;
+    img {
+        width: 100% !important;
+        }
+}
+&.payment_option_26916 {
+    background-color:#89060C  !important;
+}
+&.payment_option_45428 {
+    background-color:black  !important;
+}
+
+
+&.payment_option_27019 {
+    margin-top: 5px !important;
+}
+
+
+&.payment_option_60521 {
+    margin-top: 5px !important;
+}
+
+
+&.payment_option_60562 {
+    width: unset !important;
+}
+
+&.payment_option_60528 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_27220 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_60542 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_68655 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_23066 {
+    background-color: unset !important;
+    margin-top: 5px !important;
+    img {
+        width: 100% !important;
+    }
+}
+
+
+
+&.payment_option_68648 {
+    background : transparent !important;
+    .mat-button-wrapper img {
+    max-height: none !important;
+	}
+}
+&.payment_option_68510 {
+    background: transparent  !important;
+}
+&.payment_option_60381 {
+    background: transparent  !important;
+}
+&.payment_option_60962 {
+    background-color:#2B5094  !important;
+}
+&.payment_option_25001 {
+    background-color:#93D3EB  !important;
+}
+&.payment_option_60891 {
+    background-color:#2f3790  !important;
+}
+&.payment_option_39712 {
+    background-color:#226836  !important;
+}
+
+&.payment_option_27342 {
+    background-color:#3F51B5  !important;
+}
+
+&.payment_option_27343 {
+    background-color:#008000  !important;
+}
+
+
+&.payment_option_60785 {
+    background-color:black !important;
+}
+
+&.payment_option_27340 {
+    background-color:#eeb34f !important;
+    margin-top: 5px !important;
+}
+&.payment_option_45753 {
+    background-color:#55AA55!important;
+}
+&.payment_option_44408 {
+    background-color:#009DD9!important;
+}
+&.payment_option_26016 {
+    background-color:#32CD32!important;
+}
+&.payment_option_60830 {
+    background-color:#32CD32!important;
+}
+
+
+&.payment_option_60835 {
+    background-color:#5E95D6!important;
+    margin-top: 5px !important;
+
+img {
+    width: 100% !important;
+}
+}
+&.payment_option_45178 {
+    background-color:#32CD32!important;
+}
+&.payment_option_45832 {
+    background-color: #56B300 !important;
+}
+&.payment_option_64053 {
+    background-color: #56B300 !important;
+}
+&.payment_option_27362 {
+    background-color: #09254E !important;
+}
+&.payment_option_63540 {
+    background-color: unset !important;
+}
+
+&.payment_option_63168 {
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_27364 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_27063  {
+    background-color: black !important;
+}
+&.payment_option_45171  {
+    background-color: black !important;
+}
+&.payment_option_67828   {
+    background-color: #0D65BF !important;
+}
+
+&.payment_option_68528  {
+    margin-top: 5px !important;
+    background-color: #ffffff !important;
+    border: 2px Solid #D20F06 !important;
+}
+&.payment_option_26874   {
+    background-color: black !important;
+}
+&.payment_option_44907   {
+    background-color: #FFA500 !important;
+    img {
+        width: 100% !important;
+    }
+}
+&.payment_option_60805   {
+    background-color: #56B300 !important;
+}
+&.payment_option_60932   {
+    background-color: #09254E !important;
+}
+&.payment_option_45856   {
+    background-color: black !important;
+}
+&.payment_option_68543  {
+    background-color: #ffff00 !important;
+}
+&.payment_option_60804  {
+    background-color: #018BCB !important;
+}
+&.payment_option_45464  {
+    background: transparent !important;
+}
+&.payment_option_45801  {
+    background-color: #1E3060 !important;
+}
+
+&.payment_option_43940  {
+    margin-top: 5px !important;
+}
+
+
+&.payment_option_45657  {
+    margin-top: 5px !important;
+}
+
+&.payment_option_45659  {
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_68811  {
+    margin-top: 5px !important;
+}
+
+
+&.payment_option_68906  {
+    margin-top: 5px !important;
+}
+
+
+
+&.payment_option_45499  {
+    background-color: #0068B3 !important;
+    img {
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_51772 {
+    margin-top: 5px !important;
+   
+}
+
+
+&.payment_option_26862 {
+    margin-top: 5px !important;
+   
+}
+
+&.payment_option_43765 {
+    margin-top: 5px !important;
+   
+}
+
+&.payment_option_27243 {
+    margin-top: 5px !important;
+   
+}
+
+&.payment_option_45784 {
+    margin-top: 5px !important;
+   
+}
+
+&.payment_option_60234  {
+    background-color: #D20F06 !important;
+}
+&.payment_option_68400  {
+    background-color: #008000 !important;
+}
+&.payment_option_65191  {
+    background-color: black !important;
+    .mat-button-wrapper img {
+        max-height: 65px !important;
+    }
+}
+&.payment_option_45875  {
+    background-color: #0057B8 !important;
+}
+&.payment_option_65666  {
+    background-color: transparent !important;
+}
+&.payment_option_45107  {
+    background-color: #549C30 !important;
+}
+
+&.payment_option_45877  {
+    margin-top: 5px !important;
+    background-color: unset !important;
+    img {
+        width: 100% !important;
+        border: 2px Solid #d20f06;
+    }
+}
+
+
+&.payment_option_27277  {
+    margin-top: 5px !important;
+    background-color: unset !important;
+    img {
+        width: 100% !important;
+        border: 2px Solid #d20f06;
+    }
+}
+
+&.payment_option_60938  {
+    background-color: #3496CC !important;
+}
+&.payment_option_27015  {
+    background-color: #D20F06 !important;
+}
+&.payment_option_63292  {
+    background-color: #0693E3 !important;
+}
+&.payment_option_08564  {
+    background-color: #fbdb1b !important;
+}
+&.payment_option_60839  {
+    background-color: #2F7AF9 !important;
+}
+&.payment_option_68296  {
+    background-color: #003366 !important;
+}
+&.payment_option_23170  {
+    background-color: #f8b932 !important;
+}
+&.payment_option_60555  {
+    background: transparent !important;
+}
+&.payment_option_60482  {
+    background: transparent !important;
+}
+
+&.payment_option_60418 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_68387 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_52918  {
+    background: transparent !important;
+}
+&.payment_option_58424  {
+    background: transparent !important;
+}
+&.payment_option_27353  {
+    background: transparent !important;
+}
+
+
+&.payment_option_68284  {
+    img {
+        width: 100% !important;
+    }
+}
+
+
+
+&.payment_option_27400  {
+    background-color: #045E29 !important;
+}
+
+&.payment_option_23171  {
+    img {
+        width: 100% !important;
+    }
+}
+
+&.payment_option_60871  {
+    img {
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_27284  {
+    img {
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_42180  {
+    img {
+        width: 100% !important;
+    }
+}
+&.payment_option_60403  {
+    img {
+        width: 100% !important;
+    }
+}
+&.payment_option_45750  {
+    margin-top: 8px !important;
+    img {
+        width: 100% !important;
+    }
+}
+&.payment_option_27413  {
+    img {
+        width: 100% !important;
+    }
+}
+&.payment_option_27136  {
+    img {
+        width: 100% !important;
+    }
+}
+&.payment_option_62346  {
+    img {
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_62388  {
+    background-color: #000000 !important;
+    img {
+        width: 100% !important;
+    }
+}
+
+
+&.payment_option_42081  {
+    background-color: #0D9E00 !important;
+    .mat-button-wrapper img {
+        max-height: 50px !important;
+    }
+}
+&.payment_option_60545  {
+    background-color: #FCBA02 !important;
+}
+&.payment_option_45057  {
+    background-color: #66ff66 !important;
+}
+&.payment_option_27060 {
+    background-color: #0DF64D !important
+}
+&.payment_option_45690 {
+    background: #D20F06 !important;
+ 
+    .mat-button-wrapper img {
+        width: auto !important;
+    }
+ 
+}
+&.payment_option_45612 {
+    background: #D20F06 !important;
+ 
+    .mat-button-wrapper img {
+        width: auto !important;
+    }
+ 
+}
+ 
+&.payment_option_58081 {
+    background: #EE352A !important;
+    .mat-button-wrapper img {
+        max-height: 55px !important;
+    }
+ 
+}
+&.payment_option_45163 {
+    background-color: #008000 !important;
+}
+
+&.payment_option_57317 {
+    background-color: #045E28 !important;
+}
+&.payment_option_45189 {
+    background: #0094D1 !important;
+}
+ 
+&.payment_option_65146 {
+    background: #15468D !important;
+}
+ 
+&.payment_option_27313 {
+    background: #11A00A !important;
+}
+
+&.payment_option_27310 {
+    margin-top: 5px !important;
+}
+
+&.payment_option_60755 {
+    background-color: #007801 !important;
+}
+&.payment_option_60755:after {
+    display: none !important;
+}
+
+&.payment_option_45918 {
+    background-color: #861C25 !important;
+}
+&.payment_option_45737 {
+    background-color: white !important;
+    border: 3px solid #12446D !important;
+    .mat-button-wrapper img {
+        max-height: none !important;
+        width: auto !important;
+    }
+}
+&.payment_option_45732 {
+    background: #295D99 !important;
+}
+&.payment_option_45848 {
+    background: #295D99 !important;
+    .mat-button-wrapper img {
+     width: auto !important;
+    }
+
+}
+&.payment_option_45126 {
+    background-color: #255F82 !important;
+    }
+     
+    &.payment_option_45719 {
+    background-color: #3F51B5 !important;
+        }
+     
+    &.payment_option_69397 {
+    background-color: #BA0616 !important;
+            }
+     
+    &.payment_option_66231 {
+    background-color: #008000 !important;
+         }
+     
+    &.payment_option_42244 {
+    background-color: #FFFFFF !important;
+         }
+
+         &.payment_option_64490 {
+            background: black !important;
+         }
+
+         &.payment_option_26908 {
+            background: #C71806 !important;
+         }
+         
+         &.payment_option_42832 {
+            background-color: #A3F80D !important;
+         }
+
+         &.payment_option_42839  {
+            img {
+                width: 100% !important;
+            }
+         }
+
+         &.payment_option_60569 {
+            background:#737373 !important;
+         }
+
+         &.payment_option_27368 {
+             background-color: #2a9128 !important;
+         }
+
+         &.payment_option_65688  {
+            background-color: #0B7FB9 !important;
+        }
+
+        &.payment_option_60995 {
+            background-color: #49A449 !important;
+        }
+
+        &.payment_option_45794 {
+            background-color: #E03997 !important;
+        }
+
+        &.payment_option_45857  {
+            background-color: #2596BE !important;
+            .mat-button-wrapper img {
+                max-height: 100px !important;
+               }
+        }
+
+        &.payment_option_27379  {
+            background-color: #60C471 !important;
+        }
+        &.payment_option_27374  {
+            background-color: #C1D82F !important;
+        }
+
+        &.payment_option_27371  {
+            background-color: #000000 !important;
+        }
+
+
+        &.payment_option_60682{
+            img{
+                width: 100% !important;
+            }
+        }
+
+
+        &.payment_option_68260{
+            img{
+                width: 100% !important;
+            }
+        }
+             
+        &.payment_option_64784{
+            img{
+                width: 100% !important
+            }
+        }
+            
+        
+        &.payment_option_27000{
+            img{
+                width: 100% !important
+            }
+        }
+        
+
+        &.payment_option_26990{
+            img{
+                width: 100% !important
+            }
+        }
+             
+             
+        &.payment_option_41541{
+            img{
+                width: 100% !important
+            }
+        }
+             
+
+
+        &.payment_option_44367{
+            img{
+                width: 100% !important
+            }
+        }
+             
+             
+        &.payment_option_45721{
+            img{
+                width: 100% !important
+            }
+        }
+             
+         &.payment_option_60973{
+            margin-top: 5px !important;
+        }
+
+
+
+        &.payment_option_27167{
+            background-color: #0062A0 !important;
+        }
+
+        &.payment_option_60995 {
+            background-color: #49A449 !important;
+        }
+
+        &.payment_option_45794 {
+            background-color: #E03997 !important;
+        }
+
+        &.payment_option_45857  {
+            background-color: #2596BE !important;
+            .mat-button-wrapper img {
+                max-height: 100px !important;
+               }
+        }
+        &.payment_option_27379  {
+            background-color: #60C471 !important;
+        }
+        &.payment_option_42685  {
+            background-color: #D20F06 !important;
+        }
+        &.payment_option_43720  {
+            background-color: #000000 !important;
+        }
+
+        &.payment_option_45827  {
+            background: linear-gradient(180deg, #98DC69 0%, #264A1C 68.75%) !important;
+        }
+
+        &.payment_option_26933 {
+            background-color: #008000 !important;
+        }
+
+        &.payment_option_60408 {
+            background-color: #008000 !important;
+        }
+
+        &.payment_option_60968 {
+            background-color: #008000 !important;
+        }
+
+        &.payment_option_60426  {
+           background-color: #005DBA !important;
+        }
+
+        &.payment_option_60614  {
+            background-color: #CCCCCC !important;
+         }
+         &.payment_option_60401  {
+            background-color: #0BDA51 !important;
+         }
+

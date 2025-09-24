@@ -1,0 +1,188 @@
+<!-- Desktop code Starts here -- Details page contect-->
+<div class="widget_tab-boby">
+    <div class="widget_image-slider marginforimages-web">
+
+        <app-photo-gallery [images]="veh_images" [ind]="ind" class="photo-gallery-images"></app-photo-gallery>
+    </div>
+    <p class="widget_grand-text">{{display_vehicle_name}}</p>
+    <div class="widget_vdp-price" *ngIf="vehicle_type == 'new' && ( (selectedPaymentType == 'lease' && (LeaseListPrice == '' || LeaseListPrice == 0 )) || (selectedPaymentType == 'finance' && (FinanceListPrice == '' || FinanceListPrice == 0 )) || (selectedPaymentType == 'cash' && (CashListPrice == '' || CashListPrice == 0 )))">MSRP <span><span class="widget_car_msrp_amount"><span>{{msrp |
+                    currency:'USD':'symbol':'1.0-0'}}</span></span></span></div>
+    <div class="widget_vdp-price" *ngIf="vehicle_type == 'new' && LeaseListPrice != '' && LeaseListPrice != 0 && LeaseListPrice != undefined && LeaseListPrice != null && msrp != LeaseListPrice && selectedPaymentType == 'lease'  ">List Price <span><span class="widget_car_msrp_amount"><span>{{LeaseListPrice |
+                    currency:'USD':'symbol':'1.0-0'}}</span></span></span></div>
+    <div class="widget_vdp-price" *ngIf="vehicle_type == 'new' && FinanceListPrice != '' && FinanceListPrice != 0 && FinanceListPrice != undefined && FinanceListPrice != null && msrp != FinanceListPrice  && selectedPaymentType == 'finance' ">List Price <span><span class="widget_car_msrp_amount"><span>{{FinanceListPrice |
+                    currency:'USD':'symbol':'1.0-0'}}</span></span></span></div>
+    <div class="widget_vdp-price" *ngIf="vehicle_type == 'new' && CashListPrice != '' && CashListPrice != 0 && CashListPrice != undefined && CashListPrice != null && msrp != CashListPrice  && selectedPaymentType == 'cash'  ">List Price <span><span class="widget_car_msrp_amount"><span>{{CashListPrice |
+                    currency:'USD':'symbol':'1.0-0'}}</span></span></span></div>
+    <div class="widget_vdp-price" *ngIf="vehicle_type == 'used' && !hidePaymentCalc">Dealer Price <span><span class="widget_car_msrp_amount"><span>{{dealerPrice |
+                    currency:'USD':'symbol':'1.0-0'}}</span></span></span></div>
+    <div class="estimator-pricing" *ngIf="vehicle_type == 'used' && hidePaymentCalc">Please contact dealer for pricing.</div>
+    <div *ngIf="vehicleInfo !=undefined">
+        <div class="widget_item-details">
+            <div *ngIf="drive != '' && drive != null && drive != undefined" class="widget_item-detail-text">{{drive}}<br><span class="widget_unitvalue">Drive</span></div>
+            <div *ngIf="horsepower != '' && horsepower!= null && horsepower != undefined && horsepower?.toLowerCase() !='hp'" class="widget_item-detail-text">{{horsepower}}<br><span class="widget_unitvalue">Horsepower</span></div>
+            <div *ngIf="seating != '' && seating!= null && seating!= undefined" class="widget_item-detail-text">{{seating}}<br><span class="widget_unitvalue">Seating</span></div>
+
+        </div>
+        <div class="widget_item-feature widget-row">
+            <div class="widget_item-feature-text widget-col-sm-6 widget-col-md-6 widget-col-lg-6">
+                <div class="widget_item-feature-heading">{{vehicleInfo[5]?.caption}}</div>
+                <div class="widget_item-feature-details">{{vehicleInfo[5]?.value}}</div>
+            </div>
+            <div class="widget_item-feature-text widget-col-sm-6 widget-col-md-6 widget-col-lg-6">
+                <div class="widget_item-feature-heading">{{vehicleInfo[6]?.caption}}</div>
+                <div class="widget_item-feature-details">{{vehicleInfo[6]?.value}}</div>
+            </div>
+            <div class="widget_item-feature-text widget-col-sm-6 widget-col-md-6 widget-col-lg-6">
+                <div class="widget_item-feature-heading">{{vehicleInfo[7]?.caption}}</div>
+                <div class="widget_item-feature-details">{{vehicleInfo[7]?.value}}</div>
+            </div>
+            <div class="widget_item-feature-text widget-col-sm-6 widget-col-md-6 widget-col-lg-6">
+                <div class="widget_item-feature-heading">{{vehicleInfo[8]?.caption}}</div>
+                <div class="widget_item-feature-details">{{vehicleInfo[8]?.value}}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="widget_vehicle_detailed_specs_section" >
+        <div class="widget-row">
+            <div class="widget-col-12">
+                <div class="widget-accordion" style="margin-top: -32px;">
+                    <div class="widget-accordion-item">
+                        <input type="checkbox" id="accordion-toggle-1" class="accordion-toggle">
+                        <label for="accordion-toggle-1" class="widget-accordion-header">
+                            <button class="widget_view-detail-text" style="padding: 16px;" id="view-detail">
+                                <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="Unlock">
+                                        <g id="Union">
+                                            <path d="M9.5 13.125C8.67157 13.125 8 12.4534 8 11.625C8 10.7966 8.67157 10.125 9.5 10.125C10.3284 10.125 11 10.7966 11 11.625C11 12.4534 10.3284 13.125 9.5 13.125Z" fill="black" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 1.5C11.5711 1.5 13.25 3.17893 13.25 5.25V6.75C14.0784 6.75 14.75 7.42157 14.75 8.25L14.75 15C14.75 15.8284 14.0784 16.5 13.25 16.5H5.75C4.92157 16.5 4.25 15.8284 4.25 15L4.25 8.25C4.25 7.42157 4.92157 6.75 5.75 6.75L11.75 6.75V5.25C11.75 4.00736 10.7426 3 9.5 3C8.25736 3 7.25 4.00736 7.25 5.25C7.25 5.66421 6.91421 6 6.5 6C6.08579 6 5.75 5.66421 5.75 5.25C5.75 3.17893 7.42893 1.5 9.5 1.5ZM5.75 8.625C5.75 8.41789 5.91789 8.25 6.125 8.25H12.5C12.9142 8.25 13.25 8.58579 13.25 9L13.25 14.625C13.25 14.8321 13.0821 15 12.875 15L6.125 15C5.91789 15 5.75 14.8321 5.75 14.625L5.75 8.625Z" fill="black" />
+                                        </g>
+                                    </g>
+                                </svg>
+                                Unlock Full Details
+                            </button>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!--<p class="widget_view-detail-text" id="view-detail" (click)="displayVehicleDetails()">View Detailed Specs</p>
+ 
+   <div class="vehicleDtls_empty" *ngIf="detailspresent == 0 && showVehicleDetails">
+      <p>Detailed vehicle specs are currently not available, please call us for more information</p>
+      <div class="dealers_info--contact">
+          <mat-icon>call</mat-icon>
+          <a href="tel:{{phoneNumber}}" title="{{phoneNumber}}"
+              target="_blank">{{phoneNumber}}</a>
+      </div>
+  </div>-->
+    <div class="widget_vehicle_detailed_specs_section">
+        <div class="widget-row">
+            <div class="widget-col-12">
+                <div class="widget-accordion">
+                    <div class="widget-accordion-item">
+                        <input type="checkbox" id="accordion-toggle-1" class="accordion-toggle">
+                        <label for="accordion-toggle-1" class="widget-accordion-header">
+                            <p class="widget_view-detail-text" id="view-detail" (click)="displayVehicleDetails()">View
+                                Detailed Specs
+                                <svg *ngIf="!toggleDetailedSpec" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="ic:baseline-plus">
+                                        <path id="Vector" d="M19.7917 13.5396H13.5417V19.7896H11.4584V13.5396H5.20837V11.4563H11.4584V5.20625H13.5417V11.4563H19.7917V13.5396Z" fill="#f2b54a" />
+                                    </g>
+                                </svg>
+                                <svg *ngIf="toggleDetailedSpec" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="minus_icon">
+                                    <g id="ic:baseline-minus">
+                                        <path id="Vector" d="M41.9587 13.5394H11.042V11.4561H41.9587V13.5394Z" fill="#f2b54a" />
+                                    </g>
+                                </svg>
+                            </p>
+                        </label>
+                        <div class="widget-row">
+                            <div class="widget-col-12">
+                                <div class="vehicleDtls_empty" *ngIf="(detailspresent == 0 ||detailspresent == undefined  ) && showVehicleDetails">
+                                    <p>Detailed vehicle specs are currently not available, please call us for more
+                                        information</p>
+                                    <div class="dealers_info--contact" (click)="adobe_sdg_event('call-vehicle-detail-empty')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                            <path d="M13.3983 10.1265C13.2799 11.0263 12.838 11.8523 12.1551 12.4501C11.4722 13.0479 10.5951 13.3767 9.68751 13.3751C4.41485 13.3751 0.125006 9.08527 0.125006 3.81261C0.123379 2.90503 0.452181 2.02789 1.05 1.34502C1.64782 0.662143 2.47378 0.220235 3.3736 0.101829C3.60114 0.0740448 3.83157 0.120596 4.03048 0.234534C4.22939 0.348471 4.38612 0.523684 4.47727 0.734016L5.87977 3.86507V3.87304C5.94956 4.03404 5.97838 4.20983 5.96366 4.38468C5.94894 4.55954 5.89115 4.72803 5.79544 4.87511C5.78348 4.89304 5.77087 4.90964 5.75758 4.92624L4.37501 6.56515C4.87239 7.57585 5.92958 8.62374 6.95356 9.12245L8.56989 7.74718C8.58576 7.73384 8.60239 7.72142 8.61969 7.70999C8.76665 7.61198 8.93572 7.55215 9.11161 7.53592C9.2875 7.51968 9.46467 7.54756 9.62708 7.61702L9.63571 7.62101L12.7641 9.02284C12.9748 9.11367 13.1505 9.27026 13.2648 9.4692C13.3791 9.66814 13.4259 9.89874 13.3983 10.1265Z" fill="black" />
+                                        </svg> <a href="tel:{{phoneNumber}}" title="{{phoneNumber}}" target="_blank">{{phoneNumber}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <g id="ic:baseline-plus">
+                               <path id="Vector" d="M19.7917 13.5396H13.5417V19.7896H11.4584V13.5396H5.20837V11.4563H11.4584V5.20625H13.5417V11.4563H19.7917V13.5396Z" fill="black" />
+                           </g>
+                       </svg>-->
+                        <!-- <div class="accordion-content">
+                       <mat-accordion>
+                           <ng-container *ngFor="let item of specs; let i = index">
+                               <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)">
+                                   <mat-expansion-panel-header>
+                                       {{item['@attributes'].name}}
+                                   </mat-expansion-panel-header>
+                                   <ng-template matExpansionPanelContent *ngIf="item.line !== undefined">
+                                       <div id="" class="vd_specDetails" *ngFor="let subitem of item.line">
+                                           <div class="content-row">
+                                               <div class="vehicle-info-label-text">{{subitem['@attributes'].name}}</div>
+                                               <div class="vehicle-info-value">{{subitem.value}}</div>
+                                           </div>
+                                       </div>
+                                   </ng-template>
+                                   <ng-template matExpansionPanelContent *ngIf="item.line === undefined">
+                                       <div id="" class="vd_specDetails">
+                                           <div class="content-row">
+                                               <div class="widget-text-left vd_specVal">{{item['@attributes'].name}} is not available</div>
+                                           </div>
+                                       </div>
+                                   </ng-template>
+                               </mat-expansion-panel>
+                           </ng-container>
+                       </mat-accordion>
+                   </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="widget-row mt-4 ps-2" #expandVehicleDetails *ngIf="detailspresent > 0 && showVehicleDetails">
+        <mat-tab-group class="widget-col-md-4 d-md-block vehicleDtls pe-0" (selectedTabChange)="tabClick($event)">
+            <div *ngFor="let item of specs; let i = index">
+                <mat-tab label="i">
+                    <ng-template mat-tab-label>
+                        <div class="vehicleDtls_tab">
+                            <mat-icon class="">navigate_next</mat-icon>
+                            {{item['@attributes'].name}}
+                        </div>
+                    </ng-template>
+                </mat-tab>
+            </div>
+
+        </mat-tab-group>
+        <mat-accordion class="widget-col-md-8 vd_exPanel ps-0">
+            <ng-container *ngFor="let item of specs; let i = index">
+                <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)">
+                    <mat-expansion-panel-header>
+                        {{item['@attributes'].name}}
+                    </mat-expansion-panel-header>
+
+                    <ng-template matExpansionPanelContent>
+                        <div id="vd_specDetails" class="vd_specDetails" *ngFor="let subitem of item.line">
+                            <div class="vd_specRow">
+                                <div class="vd_specTitle">{{subitem['@attributes'].name}}</div>
+                                <div class="text-right vd_specVal">{{subitem.value}}</div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </mat-expansion-panel>
+            </ng-container>
+        </mat-accordion>
+    </div>
+</div>
+<!-- Desktop code Starts here -- Details page contect-->

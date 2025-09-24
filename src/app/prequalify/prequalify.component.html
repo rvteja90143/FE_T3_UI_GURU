@@ -1,0 +1,236 @@
+<!-- <div class="prequalify-container">
+<div class="widget_prequalify_today_container" id="estimate_wrapper">
+    <button mat-dialog-close="" type="button" role="Close" aria-label="Close" class="mD__close"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.2887 11.9617C13.4649 12.1379 13.5638 12.3767 13.5638 12.6258C13.5638 12.8749 13.4649 13.1137 13.2887 13.2899C13.1126 13.466 12.8737 13.5649 12.6247 13.5649C12.3756 13.5649 12.1367 13.466 11.9606 13.2899L7.00046 8.32814L2.03874 13.2883C1.86262 13.4644 1.62375 13.5634 1.37467 13.5634C1.1256 13.5634 0.886731 13.4644 0.710611 13.2883C0.53449 13.1122 0.435547 12.8733 0.435547 12.6242C0.435547 12.3752 0.53449 12.1363 0.710611 11.9602L5.67233 7.00002L0.712173 2.0383C0.536053 1.86218 0.437109 1.62331 0.437109 1.37423C0.437109 1.12516 0.536053 0.886291 0.712173 0.710171C0.888293 0.534051 1.12716 0.435107 1.37624 0.435107C1.62531 0.435107 1.86418 0.534051 2.0403 0.710171L7.00046 5.67189L11.9622 0.70939C12.1383 0.533269 12.3772 0.434326 12.6262 0.434326C12.8753 0.434326 13.1142 0.533269 13.2903 0.70939C13.4664 0.88551 13.5654 1.12438 13.5654 1.37345C13.5654 1.62252 13.4664 1.86139 13.2903 2.03752L8.32858 7.00002L13.2887 11.9617Z" fill="white"></path></svg></button>
+    <h3 class="widget_prequalify_text">PREQUALIFY TODAY</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="" [formGroup]="estimateForm" (ngSubmit)="onSubmit()">
+                <div class="widget-row">
+                    <div class="widget-col-4 widget_inputs_container">
+                    <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input formControlName="firstName" placeholder="First Name" class="form-control"
+                            (keypress)="startForm(); validateInput($event)"
+                            [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required matInput>
+                        <mat-error *ngIf="f.firstName.errors && f.firstName.errors?.['required']"
+                            class="invalid-feedback"> First Name is required</mat-error>
+                        <mat-error
+                            *ngIf="(f.firstName.errors?.['pattern'] || f.firstName.errors?.['atLeastOneAlphabet']) && f.firstName.errors?.['required'] != true"
+                            class="invalid-feedback">Enter valid First Name </mat-error>
+                    </mat-form-field>
+                </div>
+                    <div class="widget-col-4 widget_inputs_container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input formControlName="lastName" placeholder="Last Name" class="widget-form-control"
+                                (keypress)="startForm(); validateInput($event)" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                                matInput />
+                            <mat-error *ngIf="submitted && f.lastName.errors && f.lastName.errors?.required"
+                                class="invalid-feedback">Last Name is required</mat-error>
+                            <mat-error
+                                *ngIf="(f.lastName.errors?.pattern || f.lastName.errors?.atLeastOneAlphabet) &&  f.lastName.errors?.required != true"
+                                class="invalid-feedback">Enter a valid
+                                Last Name </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="widget-col-4 widget_inputs_container ">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input formControlName="email" placeholder="Email"
+                                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" class="widget-form-control" matInput>
+                            <mat-error *ngIf="submitted && f['email'].errors && f['email'].errors?.['required']"
+                                class="invalid-feedback">
+                                Email is required
+                            </mat-error>
+                            <mat-error *ngIf="f['email']?.errors?.['pattern']" class="invalid-feedback">Email must be a
+                                valid email address
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="widget-col-4 widget_inputs_container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Phone Number</mat-label>
+                            <input [ngClass]="{ 'is-invalid': submitted && f['phonenumber'].errors }" minlength="14"
+                                maxlength="14" formControlName="phonenumber" class="widget-form-control" matInput>
+                            <mat-error
+                                *ngIf="submitted && f['phonenumber'].errors && f['phonenumber'].errors?.['required']"
+                                class="invalid-feedback">
+                                Phone number is required
+                            </mat-error>
+                            <mat-error class="invalid-feedback"
+                                *ngIf="f['phonenumber'].errors?.['pattern'] || f['phonenumber'].errors?.['maxlength'] || f['phonenumber'].errors?.['minlength']">
+                                Phone number must be 10 numbers</mat-error>
+                            <mat-error *ngIf="f['phonenumber']?.errors?.['invalidFirstDigit']" class="invalid-feedback">
+                                Phone number must not be start with 0 and 1</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="widget-col-4 widget_inputs_container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Address</mat-label>
+                            <input formControlName="address" placeholder="Address" class="widget-form-control"
+                                (keypress)="startForm()" (keyup)="populateaddress($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
+                                oninput="value = value.replace(/[^a-zA-Z 0-9 #]/g, '').replace(/(\..*)\./g, '$1');"
+                                matInput>
+                            <div class="autoCompleteAddress" *ngIf="autoEnable == 1">
+                                <div class="autoCompleteAddress_list" *ngFor="let add of address">
+                                    <span (click)="selectaddress($event)">{{add}}</span>
+                                </div>
+                            </div>
+                            <mat-error *ngIf="submitted && f.address.errors && f.address.errors?.required"
+                                class="invalid-feedback">Address is required</mat-error>
+                            <mat-error *ngIf="f.address.errors?.pattern" class="invalid-feedback">Enter a valid Address
+                            </mat-error>
+                            <mat-error
+                                *ngIf="(f.address.errors?.pattern || f.address.errors?.invalidHashAddress) &&  f.address.errors?.required != true"
+                                class="invalid-feedback">Enter a valid address
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="widget-col-4 widget_inputs_container WidgetInputElement1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Apt</mat-label>
+                            <input formControlName="apt" (keypress)="startForm()" placeholder="Apt" class="widget-form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.apt.errors }" matInput>
+                            <mat-error *ngIf="submitted && f.apt.errors && f.apt.errors?.required"
+                                class="invalid-feedback">APT is required</mat-error>
+                            <mat-error *ngIf="f.apt.errors?.pattern" class="invalid-feedback">Enter a valid APT
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="widget-col-4 widget_inputs_container WidgetInputElement1">
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input formControlName="city" (keypress)="startForm()" placeholder="City"
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }"
+                                oninput="value = value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput>
+                            <mat-error *ngIf="submitted && f.city.errors && f.city.errors?.required"
+                                class="invalid-feedback">City is required</mat-error>
+                            <mat-error *ngIf="f.city.errors?.pattern" class="invalid-feedback">Enter a valid City
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="widget-col-4 widget_inputs_container WidgetInputElement1">
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>State</mat-label>
+                            <input formControlName="state" (keypress)="startForm()" placeholder="State"
+                                [ngClass]="{ 'is-invalid': submitted && f.state.errors }" class="form-control"
+                                oninput="value = value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" matInput>
+                            <mat-error *ngIf="submitted && f.state.errors && f.state.errors?.required"
+                                class="invalid-feedback">State is required</mat-error>
+                            <mat-error *ngIf="f.state.errors?.pattern" class="invalid-feedback">Enter a valid State
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="widget-col-4 widget_inputs_container WidgetInputElement1">
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Zip Code</mat-label>
+                            <input maxlength="5" minlength="5" (keypress)="startForm()"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                [ngClass]="{ 'is-invalid': submitted && f.zipcode.errors }" formControlName="zipcode"
+                                placeholder="Zip Code" class="form-control" matInput>
+                            <mat-error *ngIf="submitted && f.zipcode.errors && f.zipcode.errors?.required"
+                                class="invalid-feedback">Zip Code is required</mat-error>
+                            <mat-error class="invalid-feedback"
+                                *ngIf="f.zipcode.errors?.pattern || f.zipcode.errors?.maxlength || f.zipcode.errors?.minlength">
+                                Please enter valid Zip Code</mat-error>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="widget-col-12 widget_inputs_container widget-mb-2 WidgetInputElement1">
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Amount</mat-label>
+                            <input formControlName="amount" value="{{preTaxMonthlyIncome}}" id="amount"
+                                placeholder="Amount" class="form-control" (blur)="keyPressdn($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.amount.errors }" matInput>
+                            <mat-error *ngIf="submitted && f.amount.errors && f.amount.errors?.required"
+                                class="invalid-feedback">Income is required</mat-error>
+                            <mat-error
+                                *ngIf="f.amount.errors?.invalidFirstDigit_payment || f.amount.errors?.maxlength || f.amount.errors?.minlength"
+                                class="invalid-feedback">Enter a valid Income</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                </div>
+
+                <p class="widget_notification_text">{{ 'NOTE' | translate}}</p>
+                <div class="widget_checkbox_container">
+                    <mat-checkbox disableRipple  [checked]="accepted" formControlName="acceptTerms"
+                        [ngClass]="{ 'is-invalid': f.acceptTerms.errors }">
+                        <label for="checkboxInPrequalify">{{ 'CERTIFY_TEXT' | translate}}</label></mat-checkbox>
+                </div>
+                <button mat-button class="widget_see_my_estimates_button"
+                    [disabled]="(estimateForm.valid && !estimateForm.dirty) || estimatedisabled">See My Estimates
+                </button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="estimator_output">
+                <div *ngIf="showEstimate">
+                    <div class="credit-gauge-sucess">
+                        <ngx-gauge [thick]="gaugeThick" [value]="gridvalue" [thresholds]="gaugethresholds"
+                            [max]="gaugemax" [min]="gaugemin" [label]="gaugelabel">
+                        </ngx-gauge>
+                        <h6><b>{{ graphtext }}</b></h6>
+
+                    </div>
+
+                    <div class="estimator_output_values">
+                        <div class="">
+                            Est Max Monthly Payment :<label>${{maxMonthlyPayment }}/mo
+                                <i data-title="Estimated Maximum Monthly Payment.The maximum monthly payment approved by lenders typically averages less than 15% of your monthly gross income and is also dependent upon your credit score."
+                                    class="disclaimer_bubble">i</i>
+                            </label>
+                        </div>
+                        <div class="">
+                            Est Max Loan Amount:<label>${{ maxLoanAmount}}
+                                <i data-title="Estimated Maximum Loan Amount.The maximum loan amount typically averages less than 90% of your total annual gross income and is also dependent upon your credit score."
+                                    class="disclaimer_bubble">i</i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="estimate_score" *ngIf="showcreditestimator == 2">
+    <h3>Estimated Credit Score</h3>
+    <h6>What is your approximate credit score?</h6>
+    <div class="estimate_slider">
+        <div class="credit-gauge-sucess">
+            <ngx-gauge [thick]="gaugeThick" [value]="gridvalue" [thresholds]="gaugethresholds" [max]="gaugemax"
+                [min]="gaugemin" [label]="gaugelabel">
+            </ngx-gauge>
+            <div class="estimate_finalscore">
+                {{gridvalue}}<span>({{gridtext}})</span>
+            </div>
+           
+            <mat-slider min="300" max="850" discrete showTickMarks step="10" [(ngModel)]="gridvalue"
+                (change)="updateSetting($event)">
+                <input [(ngModel)]="gridvalue" matSliderThumb />
+            </mat-slider>
+            <ul class="estimate_slider_value">
+                <li *ngFor="let range of rangeArray"><span>{{range}}</span></li>
+            </ul>
+        </div>
+    </div>
+   
+    <div class="button-wrapper">
+    <button class="custom-black-btn estimate_continue mt-3" (click)="opencreditestimator()">Back</button>
+    <button class="custom-black-btn estimate_continue mt-3" (click)="closeestimate()">Submit</button>
+</div>
+</div> 
+</div> -->

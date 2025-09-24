@@ -1,0 +1,12 @@
+
+<owl-carousel-o *ngIf="imageUrls && imageUrls.length > 0; else noImages" [options]="customOptions" class="vehicleMainCarousel" #mainCarousel (click)="galleryMainCarousel($event)">
+    <ng-container *ngFor="let image of imageUrls; let i = index">
+            <ng-template carouselSlide [id]="'main-owl-slide-'+i">
+                    <img src="{{image}}" alt="{{make}} {{model}} gallery image {{i+1}}" onerror="this.className='';this.src='https://d11p9i1nddg3dz.cloudfront.net/jellybeans/noimage.png'">
+            </ng-template>
+    </ng-container>
+</owl-carousel-o>
+<ng-template #noImages>
+    <div class="no-images-message"><img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png" alt="image" onerror="className='';src='https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/Noimage.png'" class=""></div>
+</ng-template>
+ 

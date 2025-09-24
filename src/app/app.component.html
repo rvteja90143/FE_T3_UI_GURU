@@ -1,0 +1,22 @@
+  <div *ngIf="displayCta" [id]="vin+'_widgetCta'" >
+    <button mat-raised-button (click)="openDialog('')" [id]="vin+'_primaryCTA'" class="{{ctaData?.button_class}} {{ctaData?.defaultId}}">
+        <img [src]="ctaData?.button_image_url" alt="{{ctaData?.button_text}}" />
+    </button>
+
+    <div  *ngFor="let cta of secondaryCTAListSorted" class="SecondaryCTA_expressbtn">
+          <button  *ngIf="ctaData?.is_testDrive_flag.toLowerCase() =='y' && cta.toLowerCase()  =='take_a_test_drive'" class="Secondary_cta_size" mat-raised-button (click)="openDialog('testDrive')" [id]="vin+'_testDrive'"  >
+            <img [src]="ctaData.testdrive_img_url"  />
+        </button>
+        <button *ngIf="ctaData?.is_tradeIn_flag.toLowerCase() =='y' && cta.toLowerCase()  =='estimate_trade-in'" class="Secondary_cta_size" mat-raised-button (click)="openDialog('tradeIn')" [id]="vin+'_tradeIn'" >
+            <img   [src]="ctaData.tradein_img_url"  />
+        </button>
+         <button *ngIf="ctaData?.is_credit_flag.toLowerCase() =='y' && cta.toLowerCase()  =='apply_for_credit'" class="Secondary_cta_size"  mat-raised-button (click)="openDialog('applyCredit')" [id]="vin+'_creditApply'" >
+            <img   [src]="ctaData.creditapply_img_url"  />
+        </button>      
+        <button *ngIf="ctaData?.is_reservation_flag.toLowerCase() =='y' && vehicle_type.toLowerCase() =='new' && cta.toLowerCase()  =='reserve_now'" class="Secondary_cta_size" mat-raised-button (click)="openDialog('reserveNow')" [id]="vin+'_reserveNow'" >
+          <img  [src]="ctaData.reserve_img_url"  />
+        </button>
+    </div>
+  </div>
+
+ 

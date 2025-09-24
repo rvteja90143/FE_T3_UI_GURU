@@ -1,0 +1,536 @@
+@if(isMobileScreen){
+<!-- Mobile Code Starts-->
+<button mat-dialog-close type="button" class="mD__close position-absolute" style="z-index: 1; right:0px;" role="Close" (click)="closeDialog()" aria-label="Close" *ngIf="loaded != 1">
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8" fill="none">
+    <path d="M7.77295 6.97699C7.87862 7.08266 7.93799 7.22599 7.93799 7.37543C7.93799 7.52487 7.87862 7.66819 7.77295 7.77387C7.66728 7.87954 7.52395 7.9389 7.37451 7.9389C7.22507 7.93891 7.08175 7.87954 6.97607 7.77387L3.99998 4.79683L1.02295 7.77293C0.917276 7.8786 0.773954 7.93797 0.624511 7.93797C0.475068 7.93797 0.331746 7.8786 0.226073 7.77293C0.120401 7.66726 0.0610352 7.52393 0.0610352 7.37449C0.0610352 7.22505 0.120401 7.08173 0.226073 6.97605L3.2031 3.99996L0.227011 1.02293C0.121339 0.917256 0.0619727 0.773934 0.0619727 0.624491C0.0619727 0.475048 0.121339 0.331726 0.227011 0.226054C0.332683 0.120382 0.476005 0.0610155 0.625448 0.0610155C0.774891 0.0610155 0.918214 0.120382 1.02389 0.226054L3.99998 3.20309L6.97701 0.225585C7.08268 0.119913 7.226 0.0605469 7.37545 0.0605469C7.52489 0.0605469 7.66821 0.119913 7.77389 0.225585C7.87956 0.331257 7.93892 0.474579 7.93892 0.624022C7.93892 0.773466 7.87956 0.916788 7.77389 1.02246L4.79685 3.99996L7.77295 6.97699Z" fill="#000000" />
+  </svg>
+</button>
+
+
+<div class="preloadImage" *ngIf="loaded == 0">
+  <img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/eshop_new_loader.gif" alt="Pre loader Image" />
+</div>
+
+
+<div class="postloadImage noVehicleFound" *ngIf="loaded == -1">
+  <img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/pre_loader_banner.jpg" alt="No vehicles found" />
+  <div id="submitDealer_wrapper" style="margin: auto 40px !important;">
+    <div class="noVehicleFound_box">
+      <div class="inWidgetForm submitDealer__form" *ngIf="!submitted">
+        <p style="text-transform: uppercase;" *ngIf="no_inventory_message == '' || no_inventory_message == null">
+          Pricing details are not available online at this time for this vehicle.
+        </p>
+        <label *ngIf="no_inventory_message == '' || no_inventory_message == null" style="font-weight: 500 !important;">
+          Please leave your information and we will contact you shortly with more details on availability and price!
+        </label><br><br>
+        <div class="widget-row">
+          <div class="widget-offset-md-2 widget-col-md-8 widget-col-sm-12">
+            <form class="inWidgetForm submitDealer__form widget_form_container" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="widget-row">
+                <div class="widget-widget-col-md-6 widget_inputs_container">
+                  <mat-form-field class="widget_form_input_field" appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input formControlName="firstName" placeholder="First Name" class="  inputField" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" matInput>
+                    <mat-error *ngIf="f.firstName.errors?.required" class="invalid-feedback"> First Name is required </mat-error>
+                    <mat-error *ngIf="f.firstName.errors?.pattern" class="invalid-feedback"> Enter a valid First Name </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="widget-col-md-6 widget_inputs_container">
+                  <mat-form-field class="widget_form_input_field" appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input formControlName="lastName" placeholder="Last Name" class=" " [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" matInput />
+                    <mat-error *ngIf="f.lastName.errors?.required" class="invalid-feedback">
+                      Last Name is required
+                    </mat-error>
+                    <mat-error *ngIf="f.lastName.errors?.pattern" class="invalid-feedback">
+                      Enter a valid Last Name
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="widget-col-md-6 widget_inputs_container">
+                  <mat-form-field class="widget_form_input_field" appearance="outline">
+                    <mat-label>ZIP Code</mat-label>
+                    <input formControlName="zipCode" maxlength="5" minlength="5" placeholder="ZIP Code" class=" " [ngClass]="{ 'is-invalid': submitted && f.zipCode.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                    <mat-error *ngIf="f.zipCode.errors?.required" class="invalid-feedback">
+                      ZIP Code is required
+                    </mat-error>
+                    <mat-error *ngIf="f.zipCode.errors?.pattern || f.zipCode.errors?.maxlength || f.zipCode.errors?.minlength" class="invalid-feedback">
+                      Please enter a valid ZIP Code
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="widget-col-md-6 widget_inputs_container">
+                  <mat-form-field class="widget_text_input widget_form_input_field" appearance="outline">
+                    <mat-label>Phone</mat-label>
+                    <input aria-label="Phone Number" formControlName="phonenumber" class=" " maxlength="14" matInput (keydown)="keyPress($event)" (input)="onPhoneNumberInput($event)" />
+                     <mat-error *ngIf="submitted && f['phonenumber'].errors?.['required']" class="invalid-feedback">
+                            Enter a valid phone number.
+                        </mat-error>
+                        <mat-error class="invalid-feedback" *ngIf="f.phonenumber.hasError('exactLength')">
+                            Phone number must be 10 numbers
+                        </mat-error>
+                        <mat-error *ngIf="f['phonenumber']?.errors?.['invalidFirstDigit']" class="invalid-feedback">
+                            Phone number must not start with 0 or 1.
+                        </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="widget-col-md-12 widget_inputs_container">
+                  <mat-form-field class="widget_form_input_field" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" class=" " placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" pattern="^\w+([\.-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,3})+$" matInput />
+                    <mat-error *ngIf="f.email.errors?.required" class="invalid-feedback">
+                      Email is required
+                    </mat-error>
+                    <mat-error *ngIf="f.email.errors?.pattern" class="invalid-feedback">
+                      Email must be a valid email address
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="widget-row">
+                <div class="widget-col-md-12">
+                  <button class="widget-btn widget_primary_btn widget-btn-block" type="submit">SUBMIT</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="showThis" *ngIf="submitted">
+        <div id="submitDealerSuccess" class="showThis">
+          <div *ngIf="submitDealerSuccessFlag">
+            <h4>Thank you for your interest in acquiring one of our vehicles.</h4>
+            <p>Your submission has been received and a representative from the dealership will be calling you shortly to
+              confirm your preferences and vehicle availability. You will also receive an email confirmation with further
+              details.</p>
+            <p>{{appreciate_text}}</p>
+            <p>{{dealername}}</p>
+            <p>{{dealeraddress}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="postloadImage noVehicleFound" *ngIf="loaded == -3">
+  <img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/pre_loader_banner.jpg" alt="No vehicles found" />
+  <div class="noVehicleFound_box">
+    <h1 class="noVehicleFound_title">We apologize for the Inconvenience</h1>
+    <p *ngIf=" no_inventory_message == '' || no_inventory_message == null">This vehicle is currently unavailable to view online. </p>
+    <label *ngIf=" no_inventory_message == '' || no_inventory_message == null">Please feel free to view our other inventory options. </label><br>
+
+    <!-- FOR AUTONATION DEALERS ONLY  -->
+    <p *ngIf=" no_inventory_message != '' && no_inventory_message != null && is_phone_available == true  && dealer_phone != '' ">
+      {{no_inventory_message}}</p>
+    <span class="dealers_info--call no_inventory_call" *ngIf="dealer_phone != '' && is_phone_available == true">
+      <mat-icon>call</mat-icon>
+      <a href="tel:{{dealer_phone}}" title="{{dealer_phone}}" target="_blank">{{dealer_phone}}</a>
+    </span>
+
+  </div>
+</div>
+
+<div class="postloadImage noVehicleFound" *ngIf="loaded == -2">
+  <img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/pre_loader_banner.jpg" alt="No vehicles found" />
+  <div class="noVehicleFound_box">
+    <h1 class="noVehicleFound_title">We apologize for the Inconvenience</h1>
+    <p>Service is not available for this domain</p>
+    <label>Contact your support for more assistance</label>
+  </div>
+</div>
+
+<div *ngIf="loaded == 1">
+  <!-- <div style="top:50px" *ngIf="showoverlay" (click)="removeOverlay()" class="overlay-main-container"></div> -->
+
+  <div [ngClass]="{fullHide : showHideMainContent}" style="background:white;z-index:9999; position:relative;">
+    <div *ngIf="submitTab" class="widget_header widget-container-fluid">
+      <div class="widget_brand">
+        <img class="widget_eshop" [src]="eshopLogo" alt="E SHOP" (click)="adobe_sdg_event('logo-click')" />
+      </div>
+      <div class="widget_dealer">
+        <p class="widget_dealer_name">
+          <span>{{dealername}} </span>
+        </p>
+        <p class="widget_dealer_address">
+          {{dealerInfo?.dealerAddress1}}<br>
+          {{dealerInfo?.dealerCity}} , {{dealerInfo?.dealerState}} {{dealerInfo?.dealerZip}}
+        </p>
+        <p class="widget_dealer_contact">
+          {{dealerInfo?.phoneNumber}}
+        </p>
+      </div>
+      <button mat-dialog-close type="button" class="mD__close  position-absolute" style="margin-top: 15px !important; background:transparent !important;" role="Close" (click)="closeDialog()" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8" fill="none">
+          <path d="M7.77295 6.97699C7.87862 7.08266 7.93799 7.22599 7.93799 7.37543C7.93799 7.52487 7.87862 7.66819 7.77295 7.77387C7.66728 7.87954 7.52395 7.9389 7.37451 7.9389C7.22507 7.93891 7.08175 7.87954 6.97607 7.77387L3.99998 4.79683L1.02295 7.77293C0.917276 7.8786 0.773954 7.93797 0.624511 7.93797C0.475068 7.93797 0.331746 7.8786 0.226073 7.77293C0.120401 7.66726 0.0610352 7.52393 0.0610352 7.37449C0.0610352 7.22505 0.120401 7.08173 0.226073 6.97605L3.2031 3.99996L0.227011 1.02293C0.121339 0.917256 0.0619727 0.773934 0.0619727 0.624491C0.0619727 0.475048 0.121339 0.331726 0.227011 0.226054C0.332683 0.120382 0.476005 0.0610155 0.625448 0.0610155C0.774891 0.0610155 0.918214 0.120382 1.02389 0.226054L3.99998 3.20309L6.97701 0.225585C7.08268 0.119913 7.226 0.0605469 7.37545 0.0605469C7.52489 0.0605469 7.66821 0.119913 7.77389 0.225585C7.87956 0.331257 7.93892 0.474579 7.93892 0.624022C7.93892 0.773466 7.87956 0.916788 7.77389 1.02246L4.79685 3.99996L7.77295 6.97699Z"
+            fill="#ffffff" />
+        </svg>
+      </button>
+    </div>
+    <div style="background:white;z-index:9999;position:fixed;display:block;width:100%;">
+      <button *ngIf="!submitTab" mat-dialog-close type="button" class="mD__close position-fixed closeTb" role="Close" (click)="closeDialog()" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8" fill="none">
+          <path d="M7.77295 6.97699C7.87862 7.08266 7.93799 7.22599 7.93799 7.37543C7.93799 7.52487 7.87862 7.66819 7.77295 7.77387C7.66728 7.87954 7.52395 7.9389 7.37451 7.9389C7.22507 7.93891 7.08175 7.87954 6.97607 7.77387L3.99998 4.79683L1.02295 7.77293C0.917276 7.8786 0.773954 7.93797 0.624511 7.93797C0.475068 7.93797 0.331746 7.8786 0.226073 7.77293C0.120401 7.66726 0.0610352 7.52393 0.0610352 7.37449C0.0610352 7.22505 0.120401 7.08173 0.226073 6.97605L3.2031 3.99996L0.227011 1.02293C0.121339 0.917256 0.0619727 0.773934 0.0619727 0.624491C0.0619727 0.475048 0.121339 0.331726 0.227011 0.226054C0.332683 0.120382 0.476005 0.0610155 0.625448 0.0610155C0.774891 0.0610155 0.918214 0.120382 1.02389 0.226054L3.99998 3.20309L6.97701 0.225585C7.08268 0.119913 7.226 0.0605469 7.37545 0.0605469C7.52489 0.0605469 7.66821 0.119913 7.77389 0.225585C7.87956 0.331257 7.93892 0.474579 7.93892 0.624022C7.93892 0.773466 7.87956 0.916788 7.77389 1.02246L4.79685 3.99996L7.77295 6.97699Z"
+            fill="#000000" />
+        </svg>
+      </button>
+    </div>
+    <div class="empty" *ngIf="!submitTab" style="background-color: white;height: 50px; z-index: 999; position:sticky; top:0;"></div>
+
+    <div id="list-example" class="widget-list-group tab-navigation">
+      <!-- fragment="details-anchor" -->
+      <button type="button" (click)="onTabClick('Details')" class="widget-list-group-item widget-list-group-item-action" [ngbScrollSpyItem]="[spy, 'items-1']">
+        <span>Details</span>
+      </button>
+      <button type="button" (click)="onTabClick('Trade-In')" class="widget-list-group-item widget-list-group-item-action" [ngbScrollSpyItem]="spy" fragment="items-2">
+        <span>Trade</span>
+      </button>
+      <button *ngIf="((make_url != 'ALFA' && vehicle_type=='new') || (displaySP=='Y'  && vehicle_type =='used'))" type="button" (click)="onTabClick('Protection')" class="widget-list-group-item widget-list-group-item-action" [ngbScrollSpyItem]="spy" fragment="items-3">
+        <span>Protection</span>
+      </button>
+      <button *ngIf="(make_url == 'ALFA' && vehicle_type =='new')" type="button" (click)="onTabClick('Protection')" class="widget-list-group-item widget-list-group-item-action" [ngbScrollSpyItem]="spy" fragment="items-3">
+        <span>Protection & Accessories</span>
+      </button>
+      <button type="button" *ngIf="make_url != 'ALFA' && vehicle_type !== 'used' " (click)="onTabClick('Accessories')" class="widget-list-group-item widget-list-group-item-action widget_4th_btn" [ngbScrollSpyItem]="spy" fragment="items-4">
+        <span>Accessories</span>
+      </button>
+
+      <button type="button" (click)="onTabClick('Submit')" class="widget-list-group-item widget-list-group-item-action" [ngbScrollSpyItem]="spy" fragment="items-5">
+        <span>Review</span>
+      </button>
+    </div>
+
+    <div ngbScrollSpy #spy="ngbScrollSpy" [rootMargin]="'0px 0px -60% 0px'" (activeChange)="onScrollChange($event)" class="tab-content">
+      <!-- ngbScrollSpyFragment="details-anchor" -->
+      <section id="details" #detailsSection class="tab-section details-mobile-page" ngbScrollSpyFragment="items-1">
+        <header-template (showTestDrive)="openTestDrive()"></header-template>
+        <!-- isAccordionExpanding = $event-->
+        <detailspage-template (accordionExpanding)="setAccordionExpanding($event)" [ngStyle]="{ 'padding-bottom': '100px' }"></detailspage-template>
+        <div style="height: 50px;"></div>
+      </section>
+      <section id="trade" #tradeSection class="tab-section" ngbScrollSpyFragment="items-2">
+        <app-trade-in [tradeinpar]="tradeinpar"></app-trade-in>
+      </section>
+      <section id="protection" #protectionSection class="tab-section" *ngIf="((make_url != 'ALFA' && vehicle_type=='new') || (displaySP=='Y'  && vehicle_type =='used'))" ngbScrollSpyFragment="items-3">
+        <app-service-protection></app-service-protection>
+      </section>
+      <section id="protection-accessories" #protectionAccessoriesSection class="tab-section" *ngIf="(make_url == 'ALFA' && vehicle_type =='new')" [ngStyle]="{ 'padding-top': isAccessoriessScrolled ? '100px' : '40px' }" ngbScrollSpyFragment="items-3">
+        <app-service-protection></app-service-protection>
+        <h3 *ngIf="make_url == 'ALFA' && vehicle_type =='new'" style="border-bottom: 1px solid black; color: #676767;font-size: 18px;font-weight: bold; padding-bottom: 10px;">
+          Accessories</h3>
+        <app-accessories [acc_vin]="vin"></app-accessories>
+      </section>
+
+      <section id="accessories" #accessoriesSection class="tab-section" *ngIf="make_url != 'ALFA' && vehicle_type !== 'used' " ngbScrollSpyFragment="items-4" [ngStyle]="{ 'padding-top': isAccessoriessScrolled ? '100px' : '40px' }">
+        <app-accessories [acc_vin]="vin"></app-accessories>
+      </section>
+
+      <section id="submit" #submitSection class="tab-section" ngbScrollSpyFragment="items-5">
+        <app-submit-to-dealer [isSubmitMatTabActive]="isSubmitMatTabActive"></app-submit-to-dealer>
+      </section>
+    </div>
+
+    <button *ngIf="!hidePaymentCalc" class="floating_widget_popup_icon_btn" data-toggle="modal" (click)="openPaymentCalculator()" data-target="#widgetPaymentCalculator">
+      <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/icons/bxs_calculator.svg" class="widget_pay_calc_icon">
+    </button>
+    <div class="widget-bottom-cta widget-row widget-g-2">
+      <div class="widget-col-12">
+        <button type="button" class="widget-col-12 widgetSubmitToDealer widget_submit-button btn-block" (click)="!formSubmitted && openSubmitToDealerDialog()" [disabled]="formSubmitted">Submit to Dealer</button>
+      </div>
+      <div class="widget-col-12">
+
+        <button id="applyForCredit" *ngIf="(autofiEnable === 'rone' || autofiEnable == 'dt') && (selectedPaymentType != 'cash')" class="widgetApplyCreditBtn" (click)="applyCreditDialog(); applyCreditBtnClick();" mat-button>Apply
+          for Credit</button>
+
+      </div>
+      <div class="widget-col-12" *ngIf="vehicle_type == 'new' && customize_reservation === 'Y' && paypal_onboarding_status === '1' && is_reserve_button_enable ==='Y'">
+        <button  id="reserveNowBtn"  type="button" class="widget-col-12 widgetReserveBtn" [disabled]="reserveNowButtonStatus == 'disable'" (click)="displayReserveNow()">{{reserveNowButtonText}}</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showReserveNowComponent || showTestDrive " class="widget_header widget-container-fluid">
+    <div class="widget-row">
+      <div class="widget-col-lg-12">
+        <div class="widget_content_body widget_header_content_body">
+
+          <div class="widget_brand">
+
+            <div class="widget_e-shop">
+              <img (click)="adobe_sdg_event('logo-click')" src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/e-shop-logo 1.svg" alt="e-shop-logo" class="widget_e-shop-logo-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="widget_back_icon_section widget_content_body" *ngIf="!hidebackbutton">
+    <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/icons/formkit_arrowleft.svg" class="widget_back_icon" id="backBtn" (click)="goToPage($event)" />
+  </div>
+  <div *ngIf="showReserveNowComponent">
+    <app-reserve-now (closeReserveNow)="closeReserveNowHandler()"></app-reserve-now>
+  </div>
+  <app-apply-credit *ngIf="showApplyCreditComponent" />
+  <app-test-drive *ngIf="showTestDrive" />
+</div>
+<!-- Mobile Code Ends-->
+}@else{
+<!-- Desktop Code Starts-->
+<button mat-dialog-close type="button" class="mD__close widget_white_close loadClose position-absolute" style="margin-top: -4px;z-index: 1; right:0px;" role="Close" (click)="closeDialog()" aria-label="Close" *ngIf="loaded != 1">
+  Exit <span>&times;</span>
+</button>
+<div class="preloadImage" *ngIf="loaded == 0">
+  <img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/eshop_new_loader.gif" alt="Pre loader Image" />
+</div>
+
+<div class="postloadImage noVehicleFound" *ngIf="loaded == -1">
+  <img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/pre_loader_banner.jpg" alt="No vehicles found" />
+  <div id="submitDealer_wrapper" style="margin: auto 40px !important;">
+    <div class="noVehicleFound_box">
+      <div class="inWidgetForm submitDealer__form" *ngIf="!submitted">
+        <p class="para_bold" style="text-transform: uppercase;" *ngIf="no_inventory_message == '' || no_inventory_message == null">
+          Pricing details are not available online at this time for this vehicle.
+        </p>
+        <label *ngIf="no_inventory_message == '' || no_inventory_message == null" style="font-weight: 500 !important;">
+          Please leave your information and we will contact you shortly with more details on availability and price!
+        </label><br><br>
+        <div class="widget-row">
+          <div class="widget-offset-md-2 widget-col-md-8">
+            <form class="inWidgetForm submitDealer__form widget_form_container" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="widget-row">
+
+                <div class="widget-col-md-6 widget_inputs_container ">
+                  <mat-form-field class="widget_form_input_field" appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input formControlName="firstName" placeholder="First Name" class="  inputField" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" matInput>
+                    <mat-error *ngIf="f.firstName.errors?.required" class="invalid-feedback"> First Name is required </mat-error>
+                    <mat-error *ngIf="f.firstName.errors?.pattern" class="invalid-feedback"> Enter a valid First Name </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="widget-col-md-6 widget_inputs_container">
+                  <mat-form-field class="widget_form_input_field" appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input formControlName="lastName" placeholder="Last Name" class="  inputField" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" matInput />
+                    <mat-error *ngIf="f.lastName.errors?.required" class="invalid-feedback">
+                      Last Name is required
+                    </mat-error>
+                    <mat-error *ngIf="f.lastName.errors?.pattern" class="invalid-feedback">
+                      Enter a valid Last Name
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="widget-col-md-6 widget_inputs_container">
+                  <mat-form-field class="widget_form_input_field" appearance="outline">
+                    <mat-label>ZIP Code</mat-label>
+                    <input formControlName="zipCode" maxlength="5" minlength="5" placeholder="ZIP Code" class="  inputField" [ngClass]="{ 'is-invalid': submitted && f.zipCode.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput />
+                    <mat-error *ngIf="f.zipCode.errors?.required" class="invalid-feedback">
+                      ZIP Code is required
+                    </mat-error>
+                    <mat-error *ngIf="f.zipCode.errors?.pattern || f.zipCode.errors?.maxlength || f.zipCode.errors?.minlength" class="invalid-feedback">
+                      Please enter a valid ZIP Code
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="widget-col-md-6 widget_inputs_container">
+                  <mat-form-field class="widget_form_input_field widget_text_input" appearance="outline">
+                    <mat-label>Phone</mat-label>
+                    <input aria-label="Phone Number" formControlName="phonenumber" class="  inputField" maxlength="14" matInput (keydown)="keyPress($event)" (input)="onPhoneNumberInput($event)" />
+                     <mat-error *ngIf="submitted && f['phonenumber'].errors?.['required']" class="invalid-feedback">
+                            Enter a valid phone number.
+                        </mat-error>
+                        <mat-error class="invalid-feedback" *ngIf="f.phonenumber.hasError('exactLength')">
+                            Phone number must be 10 numbers
+                        </mat-error>
+                        <mat-error *ngIf="f['phonenumber']?.errors?.['invalidFirstDigit']" class="invalid-feedback">
+                            Phone number must not start with 0 or 1.
+                        </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-12 widget_inputs_container">
+                  <mat-form-field class="widget_form_input_field" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" class="  inputField" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" pattern="^\w+([\.-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,3})+$" matInput />
+                    <mat-error *ngIf="f.email.errors?.required" class="invalid-feedback">
+                      Email is required
+                    </mat-error>
+                    <mat-error *ngIf="f.email.errors?.pattern" class="invalid-feedback">
+                      Email must be a valid email address
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <button class="btn widget_primary_btn btn-block" type="submit">SUBMIT</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="showThis" *ngIf="submitted">
+        <div id="submitDealerSuccess" class="showThis">
+          <div *ngIf="submitDealerSuccessFlag">
+            <h4>Thank you for your interest in acquiring one of our vehicles.</h4>
+            <p>Your submission has been received and a representative from the dealership will be calling you shortly to
+              confirm your preferences and vehicle availability. You will also receive an email confirmation with further
+              details.</p>
+            <p>{{appreciate_text}}</p>
+            <p>{{dealername}}</p>
+            <p>{{dealeraddress}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="postloadImage noVehicleFound" *ngIf="loaded == -3">
+  <img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/pre_loader_banner.jpg" alt="No vehicles found" />
+  <div class="noVehicleFound_box">
+    <h1 class="noVehicleFound_title">We apologize for the Inconvenience</h1>
+    <p *ngIf=" no_inventory_message == '' || no_inventory_message == null">This vehicle is currently unavailable to view online. </p>
+    <label *ngIf=" no_inventory_message == '' || no_inventory_message == null">Please feel free to view our other inventory options. </label><br>
+
+    <!-- FOR AUTONATION DEALERS ONLY  -->
+    <p *ngIf=" no_inventory_message != '' && no_inventory_message != null && is_phone_available == true  && dealer_phone != '' ">
+      {{no_inventory_message}}</p>
+    <span class="dealers_info--call no_inventory_call" *ngIf="dealer_phone != '' && is_phone_available == true">
+      <mat-icon>call</mat-icon>
+      <a href="tel:{{dealer_phone}}" title="{{dealer_phone}}" target="_blank">{{dealer_phone}}</a>
+    </span>
+
+  </div>
+</div>
+
+<div class="postloadImage noVehicleFound" *ngIf="loaded == -2">
+  <img src="https://d1jougtdqdwy1v.cloudfront.net/inwidget/images/pre_loader_banner.jpg" alt="No vehicles found" />
+  <div class="noVehicleFound_box">
+    <h1 class="noVehicleFound_title">We apologize for the Inconvenience</h1>
+    <p>Service is not available for this domain</p>
+    <label>Contact your support for more assistance</label>
+  </div>
+</div>
+
+<div *ngIf="loaded == 1" style="position: relative;">
+  <!-- <div *ngIf="showoverlay" style="top:87px" (click)="removeOverlay()" class="overlay-main-container"></div> -->
+  <div>
+    <div class="widget_header widget-container-fluid">
+      <div class="widget-row">
+        <div class="widget-col-lg-12">
+          <div class="widget_content_body widget_header_content_body">
+            <div class="widget_brand">
+              <div class="widget_e-shop">
+                <img (click)="adobe_sdg_event('logo-click')" src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/e-shop-logo 1.svg" alt="e-shop-logo" class="widget_e-shop-logo-img">
+              </div>
+            </div>
+            <button id="mainwidgetCloseButton" *ngIf="widgetCloseBtn" mat-dialog-close type="button" class="mD__close widget_white_close posiiton-absolute exitBtn" role="Close" (click)="closeDialog()" aria-label="Close">
+              Exit <span>&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vdp-section widget_content_body widget-container-fluid">
+      <div class="widget-row">
+        <div class="widget_tab-container widget-col-lg-8" #accessaries1 [ngClass]="{fullHide : showHideMainContent}">
+          <mat-tab-group #tabGroup (selectedIndexChange)="selectedTabIndex = $event" mat-stretch-tabs="false" mat-align-tabs="start" (selectedTabChange)="tabClick($event); onTabChanges($event)" [(selectedIndex)]="selectedTabIndex">
+            <mat-tab label="Details">
+              <ng-template mat-tab-label>
+                <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/icons/vehicle_detail.svg" alt="vehicle details" class="stepTab__icon stepTab__icon_active">
+                <span>Details</span>
+              </ng-template>
+              <div class="tabHeight">
+                <payment-section-template />
+              </div>
+
+            </mat-tab>
+            <mat-tab label="Trade" (click)="tradeinbb()">
+              <ng-template mat-tab-label>
+                <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/icons/trade_in.svg" class="stepTab__icon stepTab__icon_active">
+                <span>Trade-In</span>
+              </ng-template>
+              <app-trade-in [tradeinpar]="tradeinpar" />
+            </mat-tab>
+            <mat-tab label="Protection" *ngIf="displaySP=='Y'  || vehicle_type =='new'">
+              <ng-template mat-tab-label>
+                <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/icons/protection.svg" alt="Service Protection" class="stepTab__icon stepTab__icon_active">
+                <span *ngIf="make_url != 'ALFA' || vehicle_type =='used' ">Protection</span>
+                <span *ngIf="make_url == 'ALFA' && vehicle_type =='new'">Protection <br> & <br> Accessories</span>
+              </ng-template>
+              <app-service-protection />
+              <div class="Widget_protection_section">
+                <div class="widget-row">
+                  <div class="widget-col-12">
+                    <h3 *ngIf="make_url == 'ALFA' && vehicle_type =='new'" style="border-bottom: 1px solid black; color: #676767;font-size: 18px;font-weight: bold; padding-bottom: 10px;">
+                      Accessories</h3>
+                    <p *ngIf="make_url == 'ALFA'"></p>
+                    <app-accessories [acc_vin]="vin" *ngIf="make_url == 'ALFA' && vehicle_type =='new'" />
+                  </div>
+                </div>
+              </div>
+
+
+            </mat-tab>
+            <mat-tab label="Accessories" *ngIf="vehicle_type =='new' &&  make_url != 'ALFA'">
+              <ng-template mat-tab-label>
+                <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/icons/accessories.svg" alt="accessories icon" class="stepTab__icon stepTab__icon_active">
+                <span>Accessories</span>
+              </ng-template>
+              <app-accessories [acc_vin]="vin" />
+            </mat-tab>
+            <mat-tab label="Submit" id="submitTab">
+              <ng-template mat-tab-label>
+                <svg class="submit_icon" width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.9939 24L5 14.5198L6.74847 12.1497L11.9939 19.2599L23.2515 4L25 6.37006L11.9939 24Z" fill="#F2B54A" />
+                </svg>
+
+                <!-- <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/icons/tick.svg" alt="delivery icon" class="stepTab__icon stepTab__icon_active"> -->
+                <span>Review</span>
+              </ng-template>
+              <app-submit-to-dealer />
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+        <div #elementBth class="widget-rightside-column widget-col-lg-4" [ngClass]="{fullHide : showHideMainContent}">
+          <app-payment-options (showTestDrive)="openTestDrive()" [isSubmitMatTabActive]="isSubmitMatTabActive" (showApplyCredit)="displayApplyCredit()" (showReserveNow)="displayReserveNow()" (navigateToSubmitTab)="navigateToSubmitTabs()" />
+        </div>
+      </div>
+      <div *ngIf="(showApplyCreditComponent || showTestDrive || showReserveNowComponent) && !hidebackbutton" class="widget_back_icon_section widget_content_body">
+        <img src="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/icons/formkit_arrowleft.svg" id="backBtn" class="widget_back_icon" (click)="goToPage($event)" />
+      </div>
+      <div style="width: 100%;" *ngIf="showApplyCreditComponent">
+        <app-apply-credit></app-apply-credit>
+      </div>
+      <div class="test-drive-style" *ngIf="showTestDrive">
+        <app-test-drive />
+      </div>
+      <div *ngIf="showReserveNowComponent">
+        <app-reserve-now (closeReserveNow)="closeReserveNowHandler()"></app-reserve-now>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Desktop Code Ends-->
+}
+
+<!-- <div id="vidBox" *ngIf="showHowItWorks==1">
+    <div id="videCont">
+      <video id="howitswork" poster="https://d1jougtdqdwy1v.cloudfront.net/t3-new-ui/assets/images/Screen_video.png" loop="" controls="" controlslist="nodownload">
+        <source *ngIf="make_video =='JEEP'" src="https://d1jougtdqdwy1v.cloudfront.net/e-shop/jeep/Jeep_E-Shop_60_FINAL.mp4" type="video/mp4">
+        <source *ngIf="make_video =='FIAT'" src="https://d1jougtdqdwy1v.cloudfront.net/e-shop/fiat/FIAT_E-Shop_60_FINAL.mp4" type="video/mp4">
+        <source *ngIf="make_video =='RAM'" src="https://d1jougtdqdwy1v.cloudfront.net/e-shop/ram/Ram_E-Shop_60_FINAL.mp4" type="video/mp4">
+        <source *ngIf="make_video =='DODGE'" src="https://d1jougtdqdwy1v.cloudfront.net/e-shop/dodge/Dodge_E-Shop_60_FINAL.mp4" type="video/mp4">
+        <source *ngIf="make_video =='CHRYSLER'" src="https://d1jougtdqdwy1v.cloudfront.net/e-shop/chrysler/Chrysler_E-Shop_60_FINAL.mp4" type="video/mp4">
+        <source *ngIf="make_video =='ALFA ROMEO'" src="https://d1jougtdqdwy1v.cloudfront.net/e-shop/alfa-romeo/Alfa_E-Shop_60_FINAL.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div id="opct"></div>
+    <div id="closer_videopopup" class="closer_videopopup_class" (click)="hideHowItWorks()">⊗</div>
+  </div> -->
