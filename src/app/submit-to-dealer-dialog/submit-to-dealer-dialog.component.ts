@@ -367,7 +367,7 @@ export class SubmitToDealerDialogComponent implements OnInit, AfterViewChecked {
         if (DataHandler.mandatory_phone == 'Y') {
             this.registerForm = this.formBuilder.group({
                 firstName: ['', [Validators.required, Validators.pattern("^[a-zA-Z-.']*$"), this.atLeastOneAlphabet]],
-                lastName: ['', [Validators.required, Validators.pattern("^[a-zA-Z-.']*$"), Validators.pattern(/^[a-zA-Z-.']{2,}$/), this.atLeastOneAlphabet]],
+                lastName: ['', [Validators.required, Validators.pattern("^[a-zA-Z-.']*$"), this.atLeastOneAlphabet]],
                 zipCode: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(4), Validators.maxLength(6)]],
                 phonenumber: ['', [Validators.required,Validators.maxLength(14), this.forbiddenFirstDigitValidator(), Validators.pattern(/^\(\d{3}\) \d{3}-\d{4}$/),
                 ]],
@@ -396,7 +396,7 @@ export class SubmitToDealerDialogComponent implements OnInit, AfterViewChecked {
         } else {
             this.registerForm = this.formBuilder.group({
                 firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z-.']*$/), this.atLeastOneAlphabet]],
-                lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z-.']*$/), Validators.pattern(/^[a-zA-Z-.']{2,}$/), this.atLeastOneAlphabet]],
+                lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z-.']*$/), this.atLeastOneAlphabet]],
                 zipCode: ['', [Validators.required, Validators.pattern(/^[0-9]*$/),
                 Validators.minLength(4), Validators.maxLength(6)]],
                 phonenumber: ['', [Validators.maxLength(14), this.forbiddenFirstDigitValidator(), Validators.pattern(/^\(\d{3}\) \d{3}-\d{4}$/),
