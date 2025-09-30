@@ -199,12 +199,9 @@ onCTA(buttonId: string, page: string) {
     }
 
     loadBootstrapScripts(): void {
-        this.loadScript(
-            'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap'
-        );
-        this.loadScript(
-            'https://fonts.googleapis.com/icon?family=Material+Icons',
-        );
+        // Load Google Fonts as stylesheets, not scripts (avoids MIME type errors)
+        this.loadMaterialCSS('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+        this.loadMaterialCSS('https://fonts.googleapis.com/icon?family=Material+Icons');
         // this.loadScript(
         //     'https://code.jquery.com/jquery-3.2.1.slim.min.js',
         //     'sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN',

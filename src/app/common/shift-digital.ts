@@ -1,75 +1,82 @@
 import { DataHandler } from '../common/data-handler';
 import { environment } from '../../environments/environment';
 
+// Provide minimal typings for global flags to prevent duplicate loads/initializations
+declare global {
+  interface Window {
+    __SD_SCRIPT_ADDED?: boolean;
+    __SD_CONTAINER_CREATED?: boolean;
+    sd?: any;
+    ShiftAnalyticsObject?: any;
+  }
+}
+
 export class ShiftDigitalHandler {
 	
-	public static load(callback:any, urls:any, i:any, s:any) {
-		(function (i: any, s, o, g, r, a?: any, m?: any) {
-			var date: any = new Date();
-			i['ShiftAnalyticsObject'] = r;
-			i[r] = i[r] || function () {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * date;
-			DataHandler.ShiftdigitalData = i;
-			a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			
-			m.parentNode.insertBefore(a, m);
-		})(window, document, 'script', environment.SHIFT_DIGITAL_LAUNCH_SCRIPT_URL, 'sd');
-	}
-
-	public static init(dealer_code: any) {
-		var callback:any = 'sd';
-		this.load(callback, environment.SHIFT_DIGITAL_LAUNCH_SCRIPT_URL, window, document);
-		DataHandler.ShiftdigitalData.sd('create', 'STELLANTIS', dealer_code, 'CARZATO');
-		DataHandler.ShiftdigitalData.sd('getSessionId', this.myTaggingFunction);
-
-	}
-	
-	public static pageload(section:any) {
-		var event = '';
-		if (section == 'widget open') {
-			event = 'pageview';
-		} else if (section == 'Reserve now') {
-			event = 'pageview';
-		}
-		DataHandler.ShiftdigitalData.sd('dataLayer', {
-			pageType: 'Digital Retailing',
-			digRet: {
-				dealId: DataHandler.current_session,
-				provider: 'CARZATO',
-				vehicleYear: DataHandler.year,
-				vehicleMake: DataHandler.make,
-				vehicleModel: DataHandler.model,
-				vehicleVin: DataHandler.vin,
-				priceUnlocked: DataHandler.price,
-			
-				vehicleStatus: 'New'
-			},
-			events: 'pageview'
-		});
-		DataHandler.ShiftdigitalData.sd('send', 'pageview');
-	}
-	public static myTaggingFunction(sessionId: any) {
-        DataHandler.sdSessionId  = sessionId;
+    public static load(callback:any, urls:any, i:any, s:any) {
+        // Guard: avoid injecting the sd.js script more than once
+        const scriptId = 'sd-script-STELLANTIS';
+        if (document.getElementById(scriptId) || (window as any).__SD_SCRIPT_ADDED) {
+            return;
+        }
+        (function (i: any, s, o, g, r, a?: any, m?: any) {
+            var date: any = new Date();
+            i['ShiftAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * date;
+            DataHandler.ShiftdigitalData = i;
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.id = scriptId; // help detect duplicates
+            m.parentNode.insertBefore(a, m);
+            (i as any).__SD_SCRIPT_ADDED = true;
+        })(window, document, 'script', environment.SHIFT_DIGITAL_LAUNCH_SCRIPT_URL, 'sd');
     }
 
-	public static generateUUID() { // Public Domain/MIT
-		var d = new Date().getTime();//Timestamp
-		var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
-		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-			var r = Math.random() * 16;//random number between 0 and 16
-			if (d > 0) {//Use timestamp until depleted
-				r = (d + r) % 16 | 0;
-				d = Math.floor(d / 16);
-			} else {//Use microseconds since page-load if supported
-				r = (d2 + r) % 16 | 0;
-				d2 = Math.floor(d2 / 16);
-			}
-			return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-		});
-	}
+    public static init(dealer_code: any) {
+        var callback:any = 'sd';
+        // Ensure script is present (once-only)
+        this.load(callback, environment.SHIFT_DIGITAL_LAUNCH_SCRIPT_URL, window, document);
+
+        // Create the container only once to avoid "Container already exists" errors
+        if (!(window as any).__SD_CONTAINER_CREATED) {
+            DataHandler.ShiftdigitalData.sd('create', 'STELLANTIS', dealer_code, 'CARZATO');
+            (window as any).__SD_CONTAINER_CREATED = true;
+        }
+
+        DataHandler.ShiftdigitalData.sd('getSessionId', this.myTaggingFunction);
+    }
+
+    public static pageload(section:any) {
+        var event = '';
+        if (section == 'widget open') {
+            event = 'pageview';
+        } else if (section == 'Reserve now') {
+            event = 'pageview';
+        }
+        DataHandler.ShiftdigitalData.sd('dataLayer', {
+            pageType: 'Digital Retailing',
+            digRet: {
+                dealId: DataHandler.current_session,
+                provider: 'CARZATO',
+                vehicleYear: DataHandler.year,
+                vehicleMake: DataHandler.make,
+                vehicleModel: DataHandler.model,
+                vehicleVin: DataHandler.vin,
+                priceUnlocked: DataHandler.price,
+            
+                vehicleStatus: 'New'
+            },
+            events: event
+        });
+        DataHandler.ShiftdigitalData.sd('send', event);
+    }
+
+    public static myTaggingFunction(sessionId: any) {
+        DataHandler.sdSessionId = sessionId;
+    }
 
 	public static generateFTID() {
 		var date = new Date();
