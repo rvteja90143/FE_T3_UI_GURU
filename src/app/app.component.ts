@@ -476,7 +476,7 @@ enableBackgroundElements() {
         }
     });
     
-    // Set a flag to indicate the wizard is closed
+    // Set a flag to indicate the wizard is closed and enable CTA buttons
     this.ctaClicked = false;
     this.clickedButtonId = null;
 }
@@ -488,8 +488,11 @@ enableBackgroundElements() {
             this.idealService.onClose();
             this.restService.setVisiblePopUp(false);
             this.enableBackgroundElements(); // Re-enable background elements
+            this.ctaClicked = false; // Explicitly reset ctaClicked flag
             this.dialogRef.close();
             this.dialogRef = null;
+            // Explicitly reset ctaClicked flag
+            this.ctaClicked = false;
             /* setTimeout(() => {
                  DataHandler.initialleasecall = false;
                  this.store.dispatch(resetPhotoGallery());
@@ -517,6 +520,12 @@ enableBackgroundElements() {
     var gtag_script = document.createElement('script');
     gtag_script.setAttribute('src', 'https://dealeradmin.drivefca.com/js/gtag_inwidget.js');
     document.head.appendChild(gtag_script);
+
+    // Guard against multiple rapid clicks opening multiple dialogs
+    if (this.ctaClicked) {
+        return;
+    }
+    this.ctaClicked = true;
 
     this.page = page;
     DataHandler.dealer_cta[this.dealercode] = this.ctaData;
@@ -618,6 +627,10 @@ enableBackgroundElements() {
             document.head.appendChild(gtag_script);
            
             this.dialogRef.afterClosed().subscribe((result) => {
+                // Always re-enable background interactions when dialog closes
+                this.enableBackgroundElements();
+                // Explicitly ensure ctaClicked is reset
+                this.ctaClicked = false;
                 if (DataHandler.form_submitted == 0) {
                     ShiftDigitalHandler.shiftdigitalexecutor('drop save');
                 }
