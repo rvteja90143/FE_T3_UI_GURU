@@ -127,6 +127,18 @@
                 display: block;
             }
         }
+
+        /* Make search field's box match Category select exactly */
+        .mat-mdc-text-field-wrapper {
+            border: 1px solid #000000 !important;
+            border-radius: 5px !important;
+            background: #ffffff !important;
+        }
+
+        /* Remove default notched outline to avoid double borders */
+        .mdc-notched-outline {
+            display: none !important;
+        }
     }
 }
 
@@ -367,7 +379,7 @@ label.widget-select-term-lable {
 .accessories_dropdown_row {
     display: flex;
     justify-content: space-between;
-    align-items: self-end;
+    align-items: center;
     margin-bottom: 10px;
 
     @media (min-width:997px) {
@@ -379,7 +391,14 @@ label.widget-select-term-lable {
 
 
     .widget_accesories_search {
-        margin-top: 30px !important;
+        @media (max-width:997px) {
+            margin-top: 30px !important;
+        }
+
+        @media (min-width:997px) {
+            margin-top: 10px !important;
+        }
+
     }
 
     .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--outlined.mdc-text-field--no-label {
@@ -392,12 +411,27 @@ label.widget-select-term-lable {
 
     .widget_accesories_search {
         .mdc-text-field {
-            padding-left: 5px !important;
+            padding-left: 0px !important;
         }
 
         .mat-mdc-form-field-input-control {
             font-size: 14px !important;
             padding: 0px !important;
+        }
+
+        /* Make search input match select: 48px tall, centered content */
+        .mat-mdc-form-field-flex {
+            height: 48px;
+        }
+
+        .mat-mdc-form-field-infix{
+            padding: 0 16px !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .mat-mdc-input-element {
+            line-height: 1.4;
         }
 
         .mat-mdc-form-field-icon-suffix {
@@ -414,11 +448,55 @@ label.widget-select-term-lable {
     .material-icons {
         line-height: 1.2 !important;
     }
+
+    /* Normalize Category select padding/height to match search input */
+    .WidgetDropdown {
+        position: relative;
+        width: 100%;
+    }
+
+    .WidgetDropdown .widget-select-term-dropdown {
+        display: block;
+        border: 1px solid #000000;
+        border-radius: 5px;
+    }
+
+    .WidgetDropdown .mat-mdc-select-trigger {
+        padding: 0 16px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Ensure select value text is vertically centered like the input */
+    .WidgetDropdown .mat-mdc-select-value,
+    .WidgetDropdown .mat-mdc-select-value-text {
+        display: flex;
+        align-items: center;
+    }
 }
 
 @media (max-width:996px) {
     .accessories_dropdown_row .WidgetDropdown {
         margin-bottom: 5px;
+    }
+
+    /* Vertically center Part Number text on mobile */
+    .widget_accesories_search {
+        .mat-mdc-form-field-flex {
+            height: 48px;
+        }
+
+        .mat-mdc-input-element {
+            height: 48px;
+            line-height: 48px;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .mat-mdc-input-element::placeholder {
+            line-height: 48px;
+        }
     }
 
     .widget_potential_disclaimer {
